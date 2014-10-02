@@ -1,0 +1,16 @@
+{
+    "name": "rybakdigital/ucc",
+    "description": "Universal Class Collection",
+    "authors": [
+        {
+            "name": "Kris Rybak",
+            "email": "kris.rybak@krisrybak.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-0": { "Ucc\\": "" }
+    }
+}
