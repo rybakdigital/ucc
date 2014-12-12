@@ -1,6 +1,6 @@
 <?php
 
-namespace Fundation;
+namespace Ucc\Fundation;
 
 class Config
 {
