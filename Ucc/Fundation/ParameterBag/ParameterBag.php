@@ -108,4 +108,15 @@ class ParameterBag
     {
         return $this->parameters;
     }
+
+    /**
+     * Returns true if a parameter name is defined.
+     *
+     * @param   string      $name       The parameter name
+     * @return  boolean     True if the parameter name is defined, otherwise false
+     */
+    public function has($name)
+    {
+        return array_key_exists(strtolower($name), $this->parameters);
+    }
 }

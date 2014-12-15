@@ -88,4 +88,21 @@ class ParameterBagTest extends TestCase
         // This should throw exception
         $moo = $parameterBag->get('moo');
     }
+
+    // Test ParameterBag->has()
+    public function testHas()
+    {
+        $param          = array('moo' => 'loo');
+        $parameterBag   = new ParameterBag($param);
+
+        $this->assertTrue($parameterBag->has('moo'));
+    }
+
+    // Test ParameterBag->has()
+    public function testHasFail()
+    {
+        $parameterBag   = new ParameterBag();
+
+        $this->assertFalse($parameterBag->has('moo'));
+    }
 }
