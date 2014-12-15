@@ -5,6 +5,7 @@ namespace Ucc\Fundation\ParameterBag;
 use Ucc\Exception\ParameterNotFoundException;
 
 /**
+ * Ucc\Fundation\ParameterBag\ParameterBag
  * This class provides utility methods for reading and storing parameters.
  *
  * @author Kris Rybak <kris@krisrybak.com>
@@ -107,5 +108,16 @@ class ParameterBag
     public function all()
     {
         return $this->parameters;
+    }
+
+    /**
+     * Returns true if a parameter name is defined.
+     *
+     * @param   string      $name       The parameter name
+     * @return  boolean     True if the parameter name is defined, otherwise false
+     */
+    public function has($name)
+    {
+        return array_key_exists(strtolower($name), $this->parameters);
     }
 }

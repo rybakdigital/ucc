@@ -2,6 +2,8 @@
 
 namespace Ucc\Fundation;
 
+use Ucc\Fundation\ParameterBag\ParameterBag;
+
 /**
  * This class provides utility methods for reading and storing configuration.
  *
@@ -13,6 +15,11 @@ class Config
      * @var ParameterBagInterface;
      */
     private $parameterBag;
+
+    public function __construct($parameterBag = null)
+    {
+        $this->parameterBag = $parameterBag ?: new ParameterBag();
+    }
 
     /**
      * Gets the parameter bag.
