@@ -5,6 +5,7 @@ namespace Ucc\Fundation\ParameterBag;
 use Ucc\Exception\ParameterNotFoundException;
 
 /**
+ * Ucc\Fundation\ParameterBag\ParameterBag
  * This class provides utility methods for reading and storing parameters.
  *
  * @author Kris Rybak <kris@krisrybak.com>
