@@ -3,6 +3,7 @@
 namespace Ucc\Config\ParameterBag;
 
 use Ucc\Exception\ParameterNotFoundException;
+use Ucc\Config\ParameterBag\ParameterBagInterface;
 
 /**
  * Ucc\Config\ParameterBag\ParameterBag
@@ -10,7 +11,7 @@ use Ucc\Exception\ParameterNotFoundException;
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
-class ParameterBag
+class ParameterBag implements ParameterBagInterface
 {
     /**
      * Array of parameters.
@@ -33,7 +34,7 @@ class ParameterBag
     /**
      * Clears all parameters.
      *
-     * @return  Ucc\Config\ParameterBag\ParameterBag
+     * @return  Ucc\Config\ParameterBag\ParameterBagInterface
      */
     public function clear()
     {
@@ -46,7 +47,7 @@ class ParameterBag
      * Adds parameters to the parameters list.
      *
      * @param   array   $parameters     An array of parameters
-     * @return  Ucc\Config\ParameterBag\ParameterBag
+     * @return  Ucc\Config\ParameterBag\ParameterBagInterface
      */
     public function add(array $parameters)
     {
@@ -62,7 +63,7 @@ class ParameterBag
      *
      * @param   string    $name           The parameter name
      * @param   mixed     $value          The parameter value
-     * @return  Ucc\Config\ParameterBag\ParameterBag
+     * @return  Ucc\Config\ParameterBag\ParameterBagInterface
      */
     public function set($name, $value)
     {
