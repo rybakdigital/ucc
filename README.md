@@ -14,6 +14,8 @@ The requirements for UCC are:
 
 ## Categories
 
+    * [Config](https://github.com/rybakdigital/ucc/blob/master/docs/Config.md)
+
 ## Usage and Installation
 
 Install as a vendor using `composer.phar`.
