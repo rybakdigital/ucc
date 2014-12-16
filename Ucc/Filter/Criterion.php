@@ -157,7 +157,7 @@ class Criterion
      */
     public function setLogic($logic)
     {
-        if ($logic != self::CRITERION_LOGIC_INTERSCTION || $logic != self::CRITERION_LOGIC_UNION) {
+        if  (!($logic == self::CRITERION_LOGIC_INTERSCTION || $logic == self::CRITERION_LOGIC_UNION)) {
             throw new InvalidArgumentException(
                 "Expected Criterion->logic to be one of: " . self::CRITERION_LOGIC_INTERSCTION . " or " . self::CRITERION_LOGIC_UNION . ". Got " . $logic . " instead."
             );
@@ -218,28 +218,28 @@ class Criterion
      */
     public function setOperand($operand)
     {
-        if (
-            $operand != self::CRITERION_OP_BOOL
-            || $operand != self::CRITERION_OP_EQ
-            || $operand != self::CRITERION_OP_EQI
-            || $operand != self::CRITERION_OP_NE
-            || $operand != self::CRITERION_OP_NEI
-            || $operand != self::CRITERION_OP_LT
-            || $operand != self::CRITERION_OP_GT
-            || $operand != self::CRITERION_OP_GE
-            || $operand != self::CRITERION_OP_LE
-            || $operand != self::CRITERION_OP_INC
-            || $operand != self::CRITERION_OP_INCI
-            || $operand != self::CRITERION_OP_NINC
-            || $operand != self::CRITERION_OP_NINCI
-            || $operand != self::CRITERION_OP_RE
-            || $operand != self::CRITERION_OP_BEGINS
-            || $operand != self::CRITERION_OP_BEGINSI
-            || $operand != self::CRITERION_OP_IN
-            || $operand != self::CRITERION_OP_INI
-            || $operand != self::CRITERION_OP_NIN
-            || $operand != self::CRITERION_OP_NINI
-            ) {
+        if  (!(
+            $operand == self::CRITERION_OP_BOOL
+            || $operand == self::CRITERION_OP_EQ
+            || $operand == self::CRITERION_OP_EQI
+            || $operand == self::CRITERION_OP_NE
+            || $operand == self::CRITERION_OP_NEI
+            || $operand == self::CRITERION_OP_LT
+            || $operand == self::CRITERION_OP_GT
+            || $operand == self::CRITERION_OP_GE
+            || $operand == self::CRITERION_OP_LE
+            || $operand == self::CRITERION_OP_INC
+            || $operand == self::CRITERION_OP_INCI
+            || $operand == self::CRITERION_OP_NINC
+            || $operand == self::CRITERION_OP_NINCI
+            || $operand == self::CRITERION_OP_RE
+            || $operand == self::CRITERION_OP_BEGINS
+            || $operand == self::CRITERION_OP_BEGINSI
+            || $operand == self::CRITERION_OP_IN
+            || $operand == self::CRITERION_OP_INI
+            || $operand == self::CRITERION_OP_NIN
+            || $operand == self::CRITERION_OP_NINI
+            )) {
             throw new InvalidArgumentException(
                 "Expected Criterion->operand to be one of: "
                     . self::CRITERION_OP_BOOL
@@ -262,11 +262,13 @@ class Criterion
                     . ", " . self::CRITERION_OP_INI
                     . ", " . self::CRITERION_OP_NIN
                     . ", " . self::CRITERION_OP_NINI
-                    . ". Got " . $operand . " instead."
+                    . ". Got '" . $operand . "' instead."
             );
         }
 
-        return $this->opernad = $operand;
+        $this->operand = $operand;
+
+        return $this;
     }
 
     /**
@@ -294,9 +296,9 @@ class Criterion
      */
     public function setType($type)
     {
-        if ($type != self::CRITERION_TYPE_FIELD || $type != self::CRITERION_TYPE_VALUE) {
+        if  (!($type == self::CRITERION_TYPE_FIELD || $type == self::CRITERION_TYPE_VALUE)) {
             throw new InvalidArgumentException(
-                "Expected Criterion->type to be one of: " . self::CRITERION_TYPE_FIELD . " or " . self::CRITERION_TYPE_VALUE . ". Got " . $type . " instead."
+                "Expected Criterion->type to be one of: " . self::CRITERION_TYPE_FIELD . " or " . self::CRITERION_TYPE_VALUE . ". Got '" . $type . "' instead."
             );
         }
 
@@ -327,7 +329,7 @@ class Criterion
      * @param   string  $value
      * @return  Ucc\Filter\Criterion
      */
-    public function setKey($value)
+    public function setValue($value)
     {
         $this->value = $value;
 
