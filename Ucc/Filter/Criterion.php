@@ -2,6 +2,8 @@
 
 namespace Ucc\Filter;
 
+use \InvalidArgumentException;
+
 /**
  * Ucc\Filter\Criterion
  * Allows to represent filter criteria in sting logic format
@@ -33,6 +35,9 @@ class Criterion
     const CRITERION_OP_INI      = 'ini';    // Comma delimited list of values to match (case insensitive).
     const CRITERION_OP_NIN      = 'nin';    // Comma delimited list of values to not match (case sensitive).
     const CRITERION_OP_NINI     = 'nini';   // Comma delimited list of values to not match (case insensitive).
+
+    const CRITERION_TYPE_FIELD  = 'field';  // Field type comparison
+    const CRITERION_TYPE_VALUE  = 'value';  // Value type comparison
 
     public static $operandTexts = array(
         'bool'      => 'is',
@@ -72,7 +77,7 @@ class Criterion
      *
      * @var     string
      */
-    public $logic = self::CRITERION_LOGIC_UNION;
+    private $logic = self::CRITERION_LOGIC_UNION;
 
     /**
      * Name of the key to apply Criterion to.
@@ -88,14 +93,14 @@ class Criterion
      *
      * @var     string
      */
-    public $key;
+    private $key;
 
     /**
      * String representation of logic operands.
      *
      * @var     string
      */
-    public $operand;
+    private $operand;
 
     /**
      * Criterion type. This can be either "field" or "value" (more common).
@@ -116,10 +121,216 @@ class Criterion
      *
      * @var     string
      */
-    public $type;
+    private $type;
 
     /**
      * Either value or the name of the filed to compare.
      */
-    public $value;
+    private $value;
+
+    /**
+     * Gets Logic.
+     *
+     * @return string
+     */
+    public function getLogic()
+    {
+        return $this->logic;
+    }
+
+    /**
+     * Alias of getLogic().
+     *
+     * @return string
+     */
+    public function logic()
+    {
+        return $this->getLogic();
+    }
+
+    /**
+     * Sets Logic.
+     *
+     * @param   string  $logic
+     * @return  Ucc\Filter\Criterion
+     * @throws  InvalidArgumentException
+     */
+    public function setLogic($logic)
+    {
+        if ($logic != self::CRITERION_LOGIC_INTERSCTION || $logic != self::CRITERION_LOGIC_UNION) {
+            throw new InvalidArgumentException(
+                "Expected Criterion->logic to be one of: " . self::CRITERION_LOGIC_INTERSCTION . " or " . self::CRITERION_LOGIC_UNION . ". Got " . $logic . " instead."
+            );
+        }
+
+        $this->logic = $logic;
+
+        return $this;
+    }
+
+    /**
+     * Gets key.
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Alias of getKey().
+     */
+    public function key()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Sets key.
+     *
+     * @param   string  $key
+     * @return  Ucc\Filter\Criterion
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    /**
+     * Gets operand.
+     */
+    public function getOperand()
+    {
+        return $this->operand;
+    }
+
+    /**
+     * Alias of getOperand().
+     */
+    public function op()
+    {
+        return $this->getOperand();
+    }
+
+    /**
+     * Sets operand.
+     */
+    public function setOperand($operand)
+    {
+        if (
+            $operand != self::CRITERION_OP_BOOL
+            || $operand != self::CRITERION_OP_EQ
+            || $operand != self::CRITERION_OP_EQI
+            || $operand != self::CRITERION_OP_NE
+            || $operand != self::CRITERION_OP_NEI
+            || $operand != self::CRITERION_OP_LT
+            || $operand != self::CRITERION_OP_GT
+            || $operand != self::CRITERION_OP_GE
+            || $operand != self::CRITERION_OP_LE
+            || $operand != self::CRITERION_OP_INC
+            || $operand != self::CRITERION_OP_INCI
+            || $operand != self::CRITERION_OP_NINC
+            || $operand != self::CRITERION_OP_NINCI
+            || $operand != self::CRITERION_OP_RE
+            || $operand != self::CRITERION_OP_BEGINS
+            || $operand != self::CRITERION_OP_BEGINSI
+            || $operand != self::CRITERION_OP_IN
+            || $operand != self::CRITERION_OP_INI
+            || $operand != self::CRITERION_OP_NIN
+            || $operand != self::CRITERION_OP_NINI
+            ) {
+            throw new InvalidArgumentException(
+                "Expected Criterion->operand to be one of: "
+                    . self::CRITERION_OP_BOOL
+                    . ", " . self::CRITERION_OP_EQ
+                    . ", " . self::CRITERION_OP_EQI
+                    . ", " . self::CRITERION_OP_NE
+                    . ", " . self::CRITERION_OP_NEI
+                    . ", " . self::CRITERION_OP_LT
+                    . ", " . self::CRITERION_OP_GT
+                    . ", " . self::CRITERION_OP_GE
+                    . ", " . self::CRITERION_OP_LE
+                    . ", " . self::CRITERION_OP_INC
+                    . ", " . self::CRITERION_OP_INCI
+                    . ", " . self::CRITERION_OP_NINC
+                    . ", " . self::CRITERION_OP_NINCI
+                    . ", " . self::CRITERION_OP_RE
+                    . ", " . self::CRITERION_OP_BEGINS
+                    . ", " . self::CRITERION_OP_BEGINSI
+                    . ", " . self::CRITERION_OP_IN
+                    . ", " . self::CRITERION_OP_INI
+                    . ", " . self::CRITERION_OP_NIN
+                    . ", " . self::CRITERION_OP_NINI
+                    . ". Got " . $operand . " instead."
+            );
+        }
+
+        return $this->opernad = $operand;
+    }
+
+    /**
+     * Gets type.
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Alias of getType().
+     */
+    public function type()
+    {
+        return $this->getType();
+    }
+
+    /**
+     * Sets type.
+     *
+     * @param   string  $type
+     * @return  Ucc\Filter\Criterion
+     * @throws  InvalidArgumentException
+     */
+    public function setType($type)
+    {
+        if ($type != self::CRITERION_TYPE_FIELD || $type != self::CRITERION_TYPE_VALUE) {
+            throw new InvalidArgumentException(
+                "Expected Criterion->type to be one of: " . self::CRITERION_TYPE_FIELD . " or " . self::CRITERION_TYPE_VALUE . ". Got " . $type . " instead."
+            );
+        }
+
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets value.
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Alias of getValue().
+     */
+    public function value()
+    {
+        return $this->getValue();
+    }
+
+    /**
+     * Sets value.
+     *
+     * @param   string  $value
+     * @return  Ucc\Filter\Criterion
+     */
+    public function setKey($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
 }
