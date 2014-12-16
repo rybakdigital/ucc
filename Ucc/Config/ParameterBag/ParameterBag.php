@@ -1,11 +1,11 @@
 <?php
 
-namespace Ucc\Fundation\ParameterBag;
+namespace Ucc\Config\ParameterBag;
 
 use Ucc\Exception\ParameterNotFoundException;
 
 /**
- * Ucc\Fundation\ParameterBag\ParameterBag
+ * Ucc\Config\ParameterBag\ParameterBag
  * This class provides utility methods for reading and storing parameters.
  *
  * @author Kris Rybak <kris@krisrybak.com>
@@ -33,7 +33,7 @@ class ParameterBag
     /**
      * Clears all parameters.
      *
-     * @return  Ucc\Fundation\ParameterBag\ParameterBag
+     * @return  Ucc\Config\ParameterBag\ParameterBag
      */
     public function clear()
     {
@@ -46,7 +46,7 @@ class ParameterBag
      * Adds parameters to the parameters list.
      *
      * @param   array   $parameters     An array of parameters
-     * @return  Ucc\Fundation\ParameterBag\ParameterBag
+     * @return  Ucc\Config\ParameterBag\ParameterBag
      */
     public function add(array $parameters)
     {
@@ -62,7 +62,7 @@ class ParameterBag
      *
      * @param   string    $name           The parameter name
      * @param   mixed     $value          The parameter value
-     * @return  Ucc\Fundation\ParameterBag\ParameterBag
+     * @return  Ucc\Config\ParameterBag\ParameterBag
      */
     public function set($name, $value)
     {

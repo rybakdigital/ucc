@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucc\Tests\Fundation;
+namespace Ucc\Tests\Config;
 
 use \PHPUnit_Framework_TestCase as TestCase;
-use Ucc\Fundation\Config;
+use Ucc\Config\Config;
 
 class ConfigTest extends TestCase
 {
@@ -46,6 +46,6 @@ class ConfigTest extends TestCase
     {
         $config = new Config();
 
-        $this->assertInstanceOf('Ucc\Fundation\ParameterBag\ParameterBag', $config->getParameterBag());
+        $this->assertInstanceOf('Ucc\Config\ParameterBag\ParameterBag', $config->getParameterBag());
     }
 }
