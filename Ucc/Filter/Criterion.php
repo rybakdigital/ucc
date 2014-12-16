@@ -30,9 +30,32 @@ class Criterion
     const CRITERION_OP_BEGINS   = 'begins'; // Begins (case sensitive).
     const CRITERION_OP_BEGINSI  = 'beginsi';// Begins (case insensitive).
     const CRITERION_OP_IN       = 'in';     // Comma delimited list of values to match (case sensitive).
-    const CRITERION_OP_NIN      = 'nin';    // Comma delimited list of values to not match (case sensitive).
     const CRITERION_OP_INI      = 'ini';    // Comma delimited list of values to match (case insensitive).
+    const CRITERION_OP_NIN      = 'nin';    // Comma delimited list of values to not match (case sensitive).
     const CRITERION_OP_NINI     = 'nini';   // Comma delimited list of values to not match (case insensitive).
+
+    public static $operandTexts = array(
+        'bool'      => 'is',
+        'eq'        => 'is equal (case sensitive) to',
+        'eqi'       => 'is equal (case insensitive) to',
+        'ne'        => 'is NOT equal (case sensitive) to',
+        'nei'       => 'is NOT equal (case insensitive) to',
+        'lt'        => 'is less than',
+        'gt'        => 'is greater than',
+        'ge'        => 'is greater than or equal to',
+        'le'        => 'is less than or equal to',
+        'inc'       => 'includes (case sensitive)',
+        'inci'      => 'includes (case insensitive)',
+        'ninc'      => 'NOT includes (case sensitive)',
+        'ninci'     => 'NOT includes (case insensitive)',
+        're'        => 'matches regular expression',
+        'begins'    => 'begins with (case sensitive)',
+        'beginsi'   => 'begins with (case insensitive)',
+        'in'        => 'is one of (case sensitive)',
+        'ini'       => 'is one of (case insensitive)',
+        'nin'       => 'is NOT one of (case sensitive)',
+        'nini'      => 'is NOT one of (case insensitive)',
+    );
 
     /**
      * Represents logic part of the criterion. Decides whether to apply "AND" (Intersection),
