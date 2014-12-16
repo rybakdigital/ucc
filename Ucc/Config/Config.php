@@ -1,10 +1,11 @@
 <?php
 
-namespace Ucc\Fundation;
+namespace Ucc\Config;
 
-use Ucc\Fundation\ParameterBag\ParameterBag;
+use Ucc\Config\ParameterBag\ParameterBag;
 
 /**
+ * Ucc\Config\Config
  * This class provides utility methods for reading and storing configuration.
  *
  * @author Kris Rybak <kris@krisrybak.com>

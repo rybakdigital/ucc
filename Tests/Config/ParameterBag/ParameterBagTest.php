@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucc\Tests\Fundation\ParameterBag;
+namespace Ucc\Tests\Config\ParameterBag;
 
 use \PHPUnit_Framework_TestCase as TestCase;
-use Ucc\Fundation\ParameterBag\ParameterBag;
+use Ucc\Config\ParameterBag\ParameterBag;
 
 class ParameterBagTest extends TestCase
 {
@@ -14,7 +14,7 @@ class ParameterBagTest extends TestCase
         $parameterBag = new ParameterBag(array('foo' => 'boo'));
 
         // Clean parameters and check if chain method is preserved
-        $this->assertInstanceOf('Ucc\Fundation\ParameterBag\ParameterBag', $parameterBag->clear());
+        $this->assertInstanceOf('Ucc\Config\ParameterBag\ParameterBag', $parameterBag->clear());
 
         // Check if result is empty
         $this->assertEmpty($parameterBag->getAll());
@@ -29,7 +29,7 @@ class ParameterBagTest extends TestCase
 
         // Add more parameters to ParameterBag and check if chain method is preserved
         $toBeAddedParams = array('moo' => 'soo');
-        $this->assertInstanceOf('Ucc\Fundation\ParameterBag\ParameterBag', $parameterBag->add($toBeAddedParams));
+        $this->assertInstanceOf('Ucc\Config\ParameterBag\ParameterBag', $parameterBag->add($toBeAddedParams));
 
         $expected   = array_merge($preExistingParams, $toBeAddedParams);
         $actual     = $parameterBag->getAll();
@@ -52,7 +52,7 @@ class ParameterBagTest extends TestCase
 
         foreach ($parameters as $parameter => $value) {
             // Set parameters and check if chain method is preserved
-            $this->assertInstanceOf('Ucc\Fundation\ParameterBag\ParameterBag', $parameterBag->set($parameter, $value));
+            $this->assertInstanceOf('Ucc\Config\ParameterBag\ParameterBag', $parameterBag->set($parameter, $value));
 
             // Build expected value array
             $expected[strtolower($parameter)] = $value;

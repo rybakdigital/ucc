@@ -15,5 +15,5 @@ set_include_path(get_include_path() .
 );
 
 // Load local classes
-require_once '/home/sites/ucc/Autoloader.php';
+require_once '/home/sites/ucc/Ucc/Autoloader.php';
 Autoloader::enable();
