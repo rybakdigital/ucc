@@ -14,7 +14,7 @@ The requirements for UCC are:
 
 ## Categories
 
-    * [Config](https://github.com/rybakdigital/ucc/blob/master/docs/Config.md)
+   * [Config](https://github.com/rybakdigital/ucc/blob/master/docs/Config.md)
 
 ## Usage and Installation
 
