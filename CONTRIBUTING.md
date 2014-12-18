@@ -50,7 +50,7 @@ If that is the case, then please paste the link to the todo item in your comment
 
 2) Only pull requests with passing tests are accepted, ensure your base is passing
 
-    phpunit -c app/
+    phpunit -c Tests/phpunit.xml .
 
 3) Add a test for your change. Only refactoring and documentation changes
 require no new tests. If you are adding functionality or fixing a bug, we need
