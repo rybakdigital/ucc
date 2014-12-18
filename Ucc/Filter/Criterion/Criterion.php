@@ -1,16 +1,17 @@
 <?php
 
-namespace Ucc\Filter;
+namespace Ucc\Filter\Criterion;
 
 use \InvalidArgumentException;
+use Ucc\Filter\Criterion\CriterionInterface;
 
 /**
- * Ucc\Filter\Criterion
+ * Ucc\Filter\Criterion\Criterion
  * Allows to represent filter criteria in sting logic format
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
-class Criterion
+class Criterion implements CriterionInterface
 {
     const CRITERION_LOGIC_INTERSCTION   = 'AND';    // Logic Intersection (AND A AND B AND C ...)
     const CRITERION_LOGIC_UNION         = 'OR';     // Logic Union (OR A OR B OR C ...)
