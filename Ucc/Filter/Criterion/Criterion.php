@@ -160,7 +160,9 @@ class Criterion implements CriterionInterface
     {
         if  (!($logic == self::CRITERION_LOGIC_INTERSCTION || $logic == self::CRITERION_LOGIC_UNION)) {
             throw new InvalidArgumentException(
-                "Expected Criterion->logic to be one of: " . self::CRITERION_LOGIC_INTERSCTION . " or " . self::CRITERION_LOGIC_UNION . ". Got " . $logic . " instead."
+                "Expected Criterion->logic to be one of: "
+                . self::CRITERION_LOGIC_INTERSCTION . " or "
+                . self::CRITERION_LOGIC_UNION . ". Got " . $logic . " instead."
             );
         }
 
@@ -299,7 +301,9 @@ class Criterion implements CriterionInterface
     {
         if  (!($type == self::CRITERION_TYPE_FIELD || $type == self::CRITERION_TYPE_VALUE)) {
             throw new InvalidArgumentException(
-                "Expected Criterion->type to be one of: " . self::CRITERION_TYPE_FIELD . " or " . self::CRITERION_TYPE_VALUE . ". Got '" . $type . "' instead."
+                "Expected Criterion->type to be one of: "
+                . self::CRITERION_TYPE_FIELD . " or "
+                . self::CRITERION_TYPE_VALUE . ". Got '" . $type . "' instead."
             );
         }
 
