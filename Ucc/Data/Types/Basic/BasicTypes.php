@@ -1,0 +1,27 @@
+<?php
+
+namespace Ucc\Data\Types\Basic;
+
+use Ucc\Data\Types\Basic\IntegerType;
+
+/**
+ * Ucc\Data\Types\Basic\BasicTypes
+ * Defines checks for basic types
+ *
+ * @author Kris Rybak <kris@krisrybak.com>
+ */
+class BasicTypes
+{
+    /**
+     * Checks if value is an integer
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  integer     Cleared value
+     * @throws  InvalidDataTypeException    If the value is not integer or fails constraints checks
+     */
+    public static function checkInteger($value, array $requirements = array())
+    {
+        return IntegerType::check($value, $requirements);
+    }
+}
