@@ -19,7 +19,7 @@ interface TypeInterface
 
     /**
      * Checks if the value is of a given type and
-     * passes the value the requirements specified.
+     * that the value passes requirements specified.
      *
      * @param   mixed   $value          Value to be checked
      * @param   array   $requirements   Additional constraints
@@ -27,4 +27,16 @@ interface TypeInterface
      * @throws  InvalidDataTypeException
      */
     public static function check($value, array $requirements = array());
+
+    /**
+     * Checks if the value is of a given type and
+     * that the value passes requirements specified.
+     *
+     * @param   mixed   $value          Value to be checked
+     * @param   array   $requirements   Additional constraints
+     * @return  boolean                 True if value is of a given type and
+     *                                  meets requirements
+     * @throws  InvalidDataTypeException
+     */
+    public static function is($value, array $requirements = array());
 }

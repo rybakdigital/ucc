@@ -93,6 +93,27 @@ class IntegerType implements TypeInterface
     }
 
     /**
+     * Checks if the value is of a given type and
+     * that the value passes requirements specified.
+     *
+     * @param   mixed   $value          Value to be checked
+     * @param   array   $requirements   Additional constraints
+     * @return  boolean                 True if value is of a given type and
+     *                                  meets requirements
+     * @throws  InvalidDataTypeException
+     */
+    public static function is($value, array $requirements = array())
+    {
+        try {
+            self::check($value, $requirements);
+        } catch (InvalidDataTypeException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Checks if number is odd
      *
      * @param   integer   $number     Number to check

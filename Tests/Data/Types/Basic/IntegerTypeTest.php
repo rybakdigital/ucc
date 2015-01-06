@@ -197,4 +197,20 @@ class IntegerTypeTest extends TestCase
         $requirements   = array('even' => true);
         $actual         = IntegerType::check($expected, $requirements);
     }
+
+    public function testIsPass()
+    {
+        $integerType    = new IntegerType();
+        $expected       = 3;
+
+        $this->assertTrue(IntegerType::is($expected));
+    }
+
+    public function testIsFail()
+    {
+        $integerType    = new IntegerType();
+        $expected       = 'abc';
+
+        $this->assertFalse(IntegerType::is($expected));
+    }
 }
