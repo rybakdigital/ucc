@@ -38,3 +38,36 @@ Checking if value is integer with requirements
   print(BasicTypes::checkInteger(4, requirements));
   // Throws: InvalidDataValueException:'value must be one of: 1, 3, 5, 7, 9'
 ```
+
+String
+====
+Checking if value is string
+```php
+  print(BasicTypes::checkString('foo'));
+  // Outputs: 'foo'
+
+  print(BasicTypes::checkString(array('foo')));
+  // Throws: InvalidDataTypeException: 'value must be a string'
+```
+Checking if value is integer with requirements
+```php
+  $requirements = array(
+    'min' => 2,
+    'max' => 5,
+  );
+
+  print(BasicTypes::checkString('foo', requirements));
+  // Outputs: 'foo'
+  print(BasicTypes::checkString('foobar', requirements));
+  // Throws: InvalidDataValueException:'value length is outside of allowed range (2 to 5)'
+  
+  // Specyfic values only
+  $requirements = array(
+    'values' => array('foo', 'bar');
+  );
+
+  print(BasicTypes::checkString('foo', requirements));
+  // Outputs: 'foo'
+  print(BasicTypes::checkString('loo', requirements));
+  // Throws: InvalidDataValueException:'value must be one of: foo, bar'
+```
