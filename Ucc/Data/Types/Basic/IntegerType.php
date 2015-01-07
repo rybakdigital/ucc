@@ -3,7 +3,9 @@
 namespace Ucc\Data\Types\Basic;
 
 use Ucc\Data\Types\TypeInterface;
-use Ucc\Exception\InvalidDataTypeException;
+use Ucc\Exception\Data\InvalidDataTypeException;
+use Ucc\Exception\Data\InvalidDataValueException;
+use Ucc\Exception\Data\InvalidDataException;
 
 /**
  * Ucc\Data\Types\Basic\IntegerType
@@ -39,7 +41,7 @@ class IntegerType implements TypeInterface
      * @param   mixed   $value          Value to be checked
      * @param   array   $requirements   Additional constraints
      * @return  mixed   Cleared value
-     * @throws  InvalidDataTypeException
+     * @throws  InvalidDataTypeException | InvalidDataValueException
      */
     public static function check($value, array $requirements = array())
     {
@@ -59,7 +61,7 @@ class IntegerType implements TypeInterface
                 $error .= ' and less than or equal to '.$requirements['max'];
             }
 
-            throw new InvalidDataTypeException($error);
+            throw new InvalidDataValueException($error);
         // Maximum value
         } elseif (isset($requirements['max']) && $value > $requirements['max']) {
             $error = 'value must be less than or equal to '.$requirements['max'];
@@ -68,24 +70,24 @@ class IntegerType implements TypeInterface
                 $error .= ' and greater than or equal to '.$requirements['min'];
             }
 
-            throw new InvalidDataTypeException($error);
+            throw new InvalidDataValueException($error);
         // In values
         } elseif (isset($requirements['values']) && is_array($requirements['values'])) {
             if (!in_array($value, $requirements['values'])) {
                 $error = 'value must be one of: '
                 .implode(', ', $requirements['values']);
 
-                throw new InvalidDataTypeException($error);
+                throw new InvalidDataValueException($error);
             }
         // Odd
         } elseif (isset($requirements['odd'])) {
             if (self::isOdd($value) === false) {
-                throw new InvalidDataTypeException("value must be an odd number");
+                throw new InvalidDataValueException("value must be an odd number");
             }
         // Even
         } elseif (isset($requirements['even'])) {
             if (self::isOdd($value) === true) {
-                throw new InvalidDataTypeException("value must be an even number");
+                throw new InvalidDataValueException("value must be an even number");
             }
         }
 
@@ -100,13 +102,12 @@ class IntegerType implements TypeInterface
      * @param   array   $requirements   Additional constraints
      * @return  boolean                 True if value is of a given type and
      *                                  meets requirements
-     * @throws  InvalidDataTypeException
      */
     public static function is($value, array $requirements = array())
     {
         try {
             self::check($value, $requirements);
-        } catch (InvalidDataTypeException $e) {
+        } catch (InvalidDataException $e) {
             return false;
         }
 
