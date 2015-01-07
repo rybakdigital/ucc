@@ -15,7 +15,7 @@ The requirements for UCC are:
 ## Categories
 
    * [Config](https://github.com/rybakdigital/ucc/blob/master/docs/Config.md) - provides utility methods for reading and storing configuration
-   * [Data/Types/BasicTypes](https://github.com/rybakdigital/ucc/blob/master/docs/BasicTypes.md) - provides method to validate basic types of data
+   * [Data/Types/BasicTypes](https://github.com/rybakdigital/ucc/blob/master/docs/BasicTypes.md) - provides methods to validate basic types of data and apply user define constraints
    * Filter/Criterion - Represents filter criteria in sting logic format
 
 ## Usage and Installation
