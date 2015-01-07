@@ -19,7 +19,7 @@ class BasicTypes
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints (OPTIONAL)
      * @return  integer     Cleared value
-     * @throws  InvalidDataTypeException    If the value is not integer or fails constraints checks
+     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
      */
     public static function checkInteger($value, array $requirements = array())
     {
@@ -32,7 +32,7 @@ class BasicTypes
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints (OPTIONAL)
      * @return  integer     Cleared value
-     * @throws  InvalidDataTypeException    If the value is not integer or fails constraints checks
+     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
      */
     public static function checkString($value, array $requirements = array())
     {
