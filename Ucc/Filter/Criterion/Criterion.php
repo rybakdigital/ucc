@@ -40,6 +40,34 @@ class Criterion implements CriterionInterface
     const CRITERION_TYPE_FIELD  = 'field';  // Field type comparison
     const CRITERION_TYPE_VALUE  = 'value';  // Value type comparison
 
+    public static $criterionLogic = array(
+        self::CRITERION_LOGIC_INTERSCTION,
+        self::CRITERION_LOGIC_UNION,
+    );
+
+    public static $criterionOperands = array(
+        self::CRITERION_OP_BOOL,
+        self::CRITERION_OP_EQ,
+        self::CRITERION_OP_EQI,
+        self::CRITERION_OP_NE,
+        self::CRITERION_OP_NEI,
+        self::CRITERION_OP_LT,
+        self::CRITERION_OP_GT,
+        self::CRITERION_OP_GE,
+        self::CRITERION_OP_LE,
+        self::CRITERION_OP_INC,
+        self::CRITERION_OP_INCI,
+        self::CRITERION_OP_NINC,
+        self::CRITERION_OP_NINCI,
+        self::CRITERION_OP_RE,
+        self::CRITERION_OP_BEGINS,
+        self::CRITERION_OP_BEGINSI,
+        self::CRITERION_OP_IN,
+        self::CRITERION_OP_INI,
+        self::CRITERION_OP_NIN,
+        self::CRITERION_OP_NINI,
+    );
+
     public static $operandTexts = array(
         'bool'      => 'is',
         'eq'        => 'is equal (case sensitive) to',
