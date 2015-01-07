@@ -2,7 +2,7 @@ PseudoTypes
 ===
 This class provides utility methods for checking pseudo types of data:
 
- * [filter](https://github.com/rybakdigital/ucc/blob/master/docs/BasicTypes.md#filter)
+ * [filter](https://github.com/rybakdigital/ucc/blob/master/docs/PseudoTypes.md#filter)
 
 Filter
 ====
