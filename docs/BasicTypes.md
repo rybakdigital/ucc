@@ -52,11 +52,11 @@ Checking if value is integer with requirements
 Available requirements options:
 ```php
     public static $requirementsOptions = array(
-        'min'       => 'Minimum allowable value',
-        'max'       => 'Maximum allowable value',
-        'values'    => 'List of allowable values',
-        'odd'       => 'Must be an odd number',
-        'even'      => 'Must be an even number',
+        'min'       => 'Minimum allowable value',       // Example: 1
+        'max'       => 'Maximum allowable value',       // Example: 999
+        'values'    => 'List of allowable values',      // Example: array(1,2,3)
+        'odd'       => 'Must be an odd number',         // Example: true
+        'even'      => 'Must be an even number',        // Example: true
     );
 ```
 
