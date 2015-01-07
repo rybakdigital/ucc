@@ -4,7 +4,7 @@ namespace Ucc\Data\Types\Pseudo;
 
 /**
  * Ucc\Data\Types\Pseudo\BasicTypes
- * Defines checks for basic types
+ * Defines checks for pseudo types
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
