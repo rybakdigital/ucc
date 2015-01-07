@@ -37,4 +37,33 @@ class BasicTypeTest extends TestCase
         // Compare actual and existing params
         $this->assertSame($expected, $actual);
     }
+
+    public function testCheckStringPass()
+    {
+        $expected       = "abc";
+        $actual         = BasicTypes::checkString($expected);
+
+        // Compare actual and existing params
+        $this->assertSame($expected, $actual);
+    }
+
+    /**
+     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedExceptionMessage value must be a string
+     */
+    public function testCheckStringFail()
+    {
+        $expected       = array('abc');
+        $actual         = BasicTypes::checkString($expected);
+    }
+
+    public function testCheckStringPassWithRequirements()
+    {
+        $expected       = "foo";
+        $requirements   = array('values' => array('foo', 'bar'));
+        $actual         = BasicTypes::checkString($expected, $requirements);
+
+        // Compare actual and existing params
+        $this->assertSame($expected, $actual);
+    }
 }
