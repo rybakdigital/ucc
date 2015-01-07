@@ -13,8 +13,8 @@ use Ucc\Filter\Criterion\CriterionInterface;
  */
 class Criterion implements CriterionInterface
 {
-    const CRITERION_LOGIC_INTERSCTION   = 'AND';    // Logic Intersection (AND A AND B AND C ...)
-    const CRITERION_LOGIC_UNION         = 'OR';     // Logic Union (OR A OR B OR C ...)
+    const CRITERION_LOGIC_INTERSCTION   = 'and';    // Logic Intersection (AND A AND B AND C ...)
+    const CRITERION_LOGIC_UNION         = 'or';     // Logic Union (OR A OR B OR C ...)
 
     const CRITERION_OP_BOOL     = 'bool';   // Boolean comparison, e.g. true or false.
     const CRITERION_OP_EQ       = 'eq';     // Equals comparison (case sensitive).
@@ -186,6 +186,9 @@ class Criterion implements CriterionInterface
      */
     public function setLogic($logic)
     {
+        // Make sure we use lower case only
+        $logic = strtolower($logic);
+
         if  (!($logic == self::CRITERION_LOGIC_INTERSCTION || $logic == self::CRITERION_LOGIC_UNION)) {
             throw new InvalidArgumentException(
                 "Expected Criterion->logic to be one of: "
@@ -249,6 +252,9 @@ class Criterion implements CriterionInterface
      */
     public function setOperand($operand)
     {
+        // Make sure we use lower case only
+        $operand = strtolower($operand);
+
         if  (!(
             $operand == self::CRITERION_OP_BOOL
             || $operand == self::CRITERION_OP_EQ
@@ -327,6 +333,9 @@ class Criterion implements CriterionInterface
      */
     public function setType($type)
     {
+        // Make sure we use lower case only
+        $type = strtolower($type);
+
         if  (!($type == self::CRITERION_TYPE_FIELD || $type == self::CRITERION_TYPE_VALUE)) {
             throw new InvalidArgumentException(
                 "Expected Criterion->type to be one of: "

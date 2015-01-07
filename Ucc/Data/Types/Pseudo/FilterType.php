@@ -7,6 +7,7 @@ use Ucc\Filter\Criterion\Criterion;
 use Ucc\Exception\Data\InvalidDataTypeException;
 use Ucc\Exception\Data\InvalidDataValueException;
 use Ucc\Exception\Data\InvalidDataException;
+use \InvalidArgumentException;
 
 /**
  * Ucc\Data\Types\Pseudo\FilterType
@@ -75,10 +76,10 @@ class FilterType implements TypeInterface
             // Example: and-id-eq-value-12
             $parts = explode('-', $filter, 5);
 
-            if (!count($parts) === 5
-                && !in_array($parts[0], Criterion::$criterionLogic)
-                && !in_array($parts[1], $requirements['fields'])
-                && !in_array($parts[2], Criterion::$criterionOperands)
+            if (!(count($parts) === 5)
+                || !in_array($parts[0], Criterion::$criterionLogic)
+                || !in_array($parts[1], $requirements['fields'])
+                || !in_array($parts[2], Criterion::$criterionOperands)
                 ){
 
                 // Filter pattern does not match standard
