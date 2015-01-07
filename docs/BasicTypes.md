@@ -49,6 +49,17 @@ Checking if value is integer with requirements
   // Throws: InvalidDataValueException:'value must be an odd number'
 ```
 
+Available requirements options:
+```php
+    public static $requirementsOptions = array(
+        'min'       => 'Minimum allowable value',
+        'max'       => 'Maximum allowable value',
+        'values'    => 'List of allowable values',
+        'odd'       => 'Must be an odd number',
+        'even'      => 'Must be an even number',
+    );
+```
+
 String
 ====
 Checking if value is string
@@ -80,4 +91,12 @@ Checking if value is string with requirements
   // Outputs: 'foo'
   print(BasicTypes::checkString('loo', requirements));
   // Throws: InvalidDataValueException:'value must be one of: foo, bar'
+```
+Available requirements options:
+```php
+  public static $requirementsOptions = array(
+      'min'       => 'Minimum length',
+      'max'       => 'Maximum length',
+      'values'    => 'List of allowable values',
+  );
 ```
