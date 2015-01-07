@@ -1,6 +1,6 @@
 <?php
 
-namespace Ucc\Exception;
+namespace Ucc\Exception\Data;
 
 use \Exception;
 
@@ -9,6 +9,6 @@ use \Exception;
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
-class InvalidDataTypeException extends Exception
+class InvalidDataException extends Exception
 {
 }

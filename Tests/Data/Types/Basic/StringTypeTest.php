@@ -22,7 +22,7 @@ class StringTypeTest extends TestCase
     }
 
     /**
-     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataTypeException
      * @expectedExceptionMessage value must be a string
      */
     public function testCheckFail()
@@ -42,7 +42,7 @@ class StringTypeTest extends TestCase
     }
 
     /**
-     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataValueException
      * @expectedExceptionMessage value must be one of:
      */
     public function testCheckWithValueRequirementsFail()
@@ -63,7 +63,7 @@ class StringTypeTest extends TestCase
     }
 
     /**
-     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataValueException
      * @expectedExceptionMessage value length is outside of allowed range
      */
     public function testCheckWithMinAndMaxRequirementsFail()
@@ -84,7 +84,7 @@ class StringTypeTest extends TestCase
     }
 
     /**
-     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataValueException
      * @expectedExceptionMessage value length must be greater than or
      */
     public function testCheckWithMinRequirementsFail()
@@ -105,7 +105,7 @@ class StringTypeTest extends TestCase
     }
 
     /**
-     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataValueException
      * @expectedExceptionMessage value length must be less than or
      */
     public function testCheckWithMaxRequirementsFail()

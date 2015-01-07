@@ -18,7 +18,7 @@ class BasicTypeTest extends TestCase
     }
 
     /**
-     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataTypeException
      * @expectedExceptionMessage value must be an integer
      */
     public function testCheckIntegerFail()
@@ -48,7 +48,7 @@ class BasicTypeTest extends TestCase
     }
 
     /**
-     * @expectedException Ucc\Exception\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataTypeException
      * @expectedExceptionMessage value must be a string
      */
     public function testCheckStringFail()
