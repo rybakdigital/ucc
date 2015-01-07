@@ -30,13 +30,23 @@ Checking if value is integer with requirements
   
   // Specyfic values only
   $requirements = array(
-    'values' => array(1,3,5,7,9);
+    'values' => array(1,3,5,7,9)
   );
 
   print(BasicTypes::checkInteger(3, requirements));
   // Outputs: 3(int)
   print(BasicTypes::checkInteger(4, requirements));
   // Throws: InvalidDataValueException:'value must be one of: 1, 3, 5, 7, 9'
+
+  // Odd number
+  $requirements = array(
+    'odd' => true
+  );
+
+  print(BasicTypes::checkInteger(3, requirements));
+  // Outputs: 3(int)
+  print(BasicTypes::checkInteger(4, requirements));
+  // Throws: InvalidDataValueException:'value must be an odd number'
 ```
 
 String
@@ -63,7 +73,7 @@ Checking if value is string with requirements
   
   // Specyfic values only
   $requirements = array(
-    'values' => array('foo', 'bar');
+    'values' => array('foo', 'bar'),
   );
 
   print(BasicTypes::checkString('foo', requirements));
