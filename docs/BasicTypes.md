@@ -2,8 +2,8 @@ BasicTypes
 ===
 This class provides utility methods for checking basic types of data:
 
- * integer
- * string
+ * [integer](https://github.com/rybakdigital/ucc/blob/master/docs/BasicTypes.md#integer)
+ * [string](https://github.com/rybakdigital/ucc/blob/master/docs/BasicTypes.md#string)
 
 Integer
 ====
