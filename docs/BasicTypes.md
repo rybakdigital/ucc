@@ -49,7 +49,7 @@ Checking if value is string
   print(BasicTypes::checkString(array('foo')));
   // Throws: InvalidDataTypeException: 'value must be a string'
 ```
-Checking if value is integer with requirements
+Checking if value is string with requirements
 ```php
   $requirements = array(
     'min' => 2,
