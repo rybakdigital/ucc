@@ -26,7 +26,7 @@ Checking if value is integer with requirements
   print(BasicTypes::checkInteger(3, requirements));
   // Outputs: 3(int)
   print(BasicTypes::checkInteger(7, requirements));
-  // Throws: InvalidDataTypeException:'value must be less than or equal to 5'
+  // Throws: InvalidDataValueException:'value must be less than or equal to 5'
   
   // Specyfic values only
   $requirements = array(
@@ -36,5 +36,5 @@ Checking if value is integer with requirements
   print(BasicTypes::checkInteger(3, requirements));
   // Outputs: 3(int)
   print(BasicTypes::checkInteger(4, requirements));
-  // Throws: InvalidDataTypeException:'value must be one of: 1, 3, 5, 7, 9'
+  // Throws: InvalidDataValueException:'value must be one of: 1, 3, 5, 7, 9'
 ```
