@@ -35,12 +35,7 @@ class Sort implements SortInterface
      *
      * @var     string
      */
-    private $direction;
-
-    public function __construct()
-    {
-        $this->direction = self::SORT_DIRECTION_ASC;
-    }
+    private $direction = self::SORT_DIRECTION_ASC;
 
     /**
      * Gets field.
@@ -69,7 +64,7 @@ class Sort implements SortInterface
      * @return  Ucc\Sortable\Sort\Sort
      * @throws  InvalidArgumentException
      */
-    public function setField($field);
+    public function setField($field)
     {
         // Make sure we use lower case only
         $field = strtolower($field);
@@ -94,7 +89,7 @@ class Sort implements SortInterface
      *
      * @return string
      */
-    public function direction();
+    public function direction()
     {
         return $this->getDirection();
     }
@@ -106,7 +101,7 @@ class Sort implements SortInterface
      * @return  Ucc\Sortable\Sort\Sort
      * @throws  InvalidArgumentException
      */
-    public function setDirection($direction);
+    public function setDirection($direction)
     {
         // Make sure we use lower case only
         $direction = strtolower($direction);
