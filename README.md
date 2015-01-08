@@ -18,6 +18,7 @@ The requirements for UCC are:
    * [Data/Types/BasicTypes](https://github.com/rybakdigital/ucc/blob/master/docs/BasicTypes.md) - provides methods to validate basic types of data and apply user defined constraints
    * [Data/Types/PseudoTypes](https://github.com/rybakdigital/ucc/blob/master/docs/PseudoTypes.md) - provides methods to validate pseudo types of data and apply user defined constraints
    * Filter/Criterion - Represents filter criteria in sting logic format
+   * Sortable/Sort - Represents sort definition
 
 ## Usage and Installation
 
