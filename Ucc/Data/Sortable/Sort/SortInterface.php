@@ -58,7 +58,7 @@ interface SortInterface
     /**
      * Turns Sort into string in the following format: {field}-{direction}
      *
-     * @return  Ucc\Filter\Criterion
+     * @return  Ucc\Sortable\Sort\Sort
      */
     public function toString();
 }
