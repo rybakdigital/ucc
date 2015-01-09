@@ -377,4 +377,18 @@ class Criterion implements CriterionInterface
 
         return $this;
     }
+
+    /**
+     * Turns Criterion into string in the following format: {logic}-{key}-{operand}-{type}-{value}
+     *
+     * @return  Ucc\Filter\Criterion
+     */
+    public function toString()
+    {
+        return $this->logic()
+            . '-' . $this->key()
+            . '-' . $this->op()
+            . '-' . $this->type()
+            . '-' . $this->value;
+    }
 }

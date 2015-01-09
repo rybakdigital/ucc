@@ -80,7 +80,37 @@ class CriterionTest extends TestCase
     {
         $criterion  = new Criterion();
         $expected   = 123;
-        $this->assertInstanceOf('Ucc\Filter\Criterion\Criterion', $criterion->setvalue($expected));
+        $this->assertInstanceOf('Ucc\Filter\Criterion\Criterion', $criterion->setValue($expected));
         $this->assertSame($expected, $criterion->value());
+    }
+
+    public function testToString()
+    {
+        $criterion  = new Criterion();
+        $expected   = 'and-make-eq-value-Audi';
+
+        $criterion
+            ->setLogic('and')
+            ->setKey('make')
+            ->setOperand('eq')
+            ->setType('value')
+            ->setValue('Audi');
+
+        $this->assertSame($expected, $criterion->toString());
+    }
+
+    public function testToStringFail()
+    {
+        $criterion  = new Criterion();
+        $expected   = 'and-make-eq-value-Audi';
+
+        $criterion
+            ->setLogic('and')
+            ->setKey('make')
+            ->setOperand('eq')
+            ->setType('value')
+            ->setValue('audi');
+
+        $this->assertNotSame($expected, $criterion->toString());
     }
 }

@@ -54,4 +54,11 @@ interface SortInterface
      * @throws  InvalidArgumentException
      */
     public function setDirection($direction);
+
+    /**
+     * Turns Sort into string in the following format: {field}-{direction}
+     *
+     * @return  Ucc\Filter\Criterion
+     */
+    public function toString();
 }
