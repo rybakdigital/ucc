@@ -97,6 +97,8 @@ class Display implements DisplayInterface
     public function setAlias($alias)
     {
         $this->alias = $alias;
+
+        return $this;
     }
 
     /**
