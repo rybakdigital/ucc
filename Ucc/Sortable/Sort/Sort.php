@@ -118,4 +118,14 @@ class Sort implements SortInterface
 
         return $this;
     }
+
+    /**
+     * Turns Sort into string in the following format: {field}-{direction}
+     *
+     * @return  Ucc\Filter\Criterion
+     */
+    public function toString()
+    {
+        return $this->field() . '-' . $this->direction();
+    }
 }

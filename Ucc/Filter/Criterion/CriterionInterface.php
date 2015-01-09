@@ -101,4 +101,11 @@ interface CriterionInterface
      * @return  Ucc\Filter\Criterion
      */
     public function setValue($value);
+
+    /**
+     * Turns Criterion into string in the following format: {logic}-{key}-{operand}-{type}-{value}
+     *
+     * @return  Ucc\Filter\Criterion
+     */
+    public function toString();
 }
