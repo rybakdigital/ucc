@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucc\Sortable\Sort;
+namespace Ucc\Data\Sortable\Sort;
 
 /**
- * Ucc\Sortable\Sort\SortInterface.
+ * Ucc\Data\Sortable\Sort\SortInterface.
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */

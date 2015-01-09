@@ -1,12 +1,12 @@
 <?php
 
-namespace Ucc\Filter\Criterion;
+namespace Ucc\Data\Filter\Criterion;
 
 use \InvalidArgumentException;
-use Ucc\Filter\Criterion\CriterionInterface;
+use Ucc\Data\Filter\Criterion\CriterionInterface;
 
 /**
- * Ucc\Filter\Criterion\Criterion
+ * Ucc\Data\Filter\Criterion\Criterion
  * Allows to represent filter criteria in sting logic format
  *
  * @author Kris Rybak <kris@krisrybak.com>

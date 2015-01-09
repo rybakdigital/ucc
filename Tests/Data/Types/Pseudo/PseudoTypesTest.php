@@ -4,8 +4,8 @@ namespace Ucc\Tests\Data\Types\Basic;
 
 use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Types\Pseudo\PseudoTypes;
-use Ucc\Filter\Criterion\Criterion;
-use Ucc\Sortable\Sort\Sort;
+use Ucc\Data\Filter\Criterion\Criterion;
+use Ucc\Data\Sortable\Sort\Sort;
 
 class PseudoTypesTest extends TestCase
 {
@@ -26,7 +26,7 @@ class PseudoTypesTest extends TestCase
 
         // Compare actual and existing params
         $this->assertInternalType('array', $actual);
-        $this->assertInstanceOf('Ucc\Filter\Criterion\Criterion', $actual[0]);
+        $this->assertInstanceOf(get_class($criterion), $actual[0]);
         $this->assertEquals($expected, $actual);
     }
 
@@ -44,7 +44,7 @@ class PseudoTypesTest extends TestCase
 
         // Compare actual and existing params
         $this->assertInternalType('array', $actual);
-        $this->assertInstanceOf('Ucc\Sortable\Sort\Sort', $actual[0]);
+        $this->assertInstanceOf(get_class($sort), $actual[0]);
         $this->assertEquals($expected, $actual);
     }
 }

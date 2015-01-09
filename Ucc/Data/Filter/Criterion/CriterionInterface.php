@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucc\Filter\Criterion;
+namespace Ucc\Data\Filter\Criterion;
 
 /**
- * Ucc\Filter\Criterion\CriterionInterface.
+ * Ucc\Data\Filter\Criterion\CriterionInterface.
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
