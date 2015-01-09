@@ -16,6 +16,11 @@ class Sort implements SortInterface
     const SORT_DIRECTION_ASC   = 'asc';     // Ascending order
     const SORT_DIRECTION_DESC  = 'desc';    // Descending order
 
+    public static $sortDirections = array(
+        self::SORT_DIRECTION_ASC,
+        self::SORT_DIRECTION_DESC,
+    );
+
     /**
      * Represents field part of the sort. Defines which field to apply sort to.
      * Example:
