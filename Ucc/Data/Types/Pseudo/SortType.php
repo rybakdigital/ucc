@@ -3,7 +3,7 @@
 namespace Ucc\Data\Types\Pseudo;
 
 use Ucc\Data\Types\TypeInterface;
-use Ucc\Filter\Sortable\Sort;
+use Ucc\Sortable\Sort\Sort;
 use Ucc\Exception\Data\InvalidDataTypeException;
 use Ucc\Exception\Data\InvalidDataValueException;
 use Ucc\Exception\Data\InvalidDataException;
@@ -61,7 +61,7 @@ class SortType implements TypeInterface
         // Iterate through the list of sorts and check each sort individually
         foreach ($value as $i => $sort) {
             // Detect sort settings
-            if (!is_string($filter)) {
+            if (!is_string($sort)) {
                 $error = 'value for index '.$i
                     .' must be string in format of'
                     .' {field}-{direction}'
@@ -74,11 +74,10 @@ class SortType implements TypeInterface
             // All sorts should follow standard pattern:
             // {field}-{direction}
             // Example: id-desc
-            $parts = explode('-', $filter, 2);
+            $parts = explode('-', $sort, 2);
 
             if (!(count($parts) === 2)
                 || !in_array($parts[0], $requirements['fields'])
-                || !in_array($parts[1], Sort::$sortDirections)
                 ){
 
                 // Sort pattern does not match standard

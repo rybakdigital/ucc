@@ -36,6 +36,6 @@ class PseudoTypes
      */
     public static function checkSort($value, array $requirements)
     {
-        return FilterType::check($value, $requirements);
+        return SortType::check($value, $requirements);
     }
 }
