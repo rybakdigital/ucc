@@ -1,13 +1,13 @@
 <?php
 
-namespace Ucc\Data\Sortable\Sort;
+namespace Ucc\Data\Format\Display;
 
 /**
- * Ucc\Data\Sortable\Sort\SortInterface.
+ * Ucc\Data\Format\Display\DisplayInterface
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
-interface SortInterface
+interface DisplayInterface
 {
     /**
      * Gets field.
@@ -27,38 +27,38 @@ interface SortInterface
      * Sets field.
      *
      * @param   string  $field
-     * @return  Ucc\Sortable\Sort\Sort
+     * @return  Ucc\Data\Format\Display\Display
      * @throws  InvalidArgumentException
      */
     public function setField($field);
 
     /**
-     * Gets direction.
+     * Gets alias.
      *
      * @return string
      */
-    public function getDirection();
+    public function getAlias();
 
     /**
-     * Alias of getDirection().
+     * Alias of getAlias().
      *
      * @return string
      */
-    public function direction();
+    public function alias();
 
     /**
-     * Sets direction.
+     * Sets alias.
      *
-     * @param   string  $direction
-     * @return  Ucc\Sortable\Sort\Sort
+     * @param   string  $alias
+     * @return  Ucc\Data\Format\Display\Display
      * @throws  InvalidArgumentException
      */
-    public function setDirection($direction);
+    public function setAlias($alias);
 
     /**
-     * Turns Sort into string in the following format: {field}-{direction}
+     * Turns Display into string in the following format: {field}-{alias}
      *
-     * @return  Ucc\Sortable\Sort\Sort
+     * @return  Ucc\Data\Format\Display\Display
      */
     public function toString();
 }
