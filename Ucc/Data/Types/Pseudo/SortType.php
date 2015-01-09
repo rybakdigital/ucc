@@ -3,7 +3,7 @@
 namespace Ucc\Data\Types\Pseudo;
 
 use Ucc\Data\Types\TypeInterface;
-use Ucc\Sortable\Sort\Sort;
+use Ucc\Data\Sortable\Sort\Sort;
 use Ucc\Exception\Data\InvalidDataTypeException;
 use Ucc\Exception\Data\InvalidDataValueException;
 use Ucc\Exception\Data\InvalidDataException;

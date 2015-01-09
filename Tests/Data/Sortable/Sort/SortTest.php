@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucc\Sortable\Sort;
+namespace Ucc\Data\Sortable\Sort;
 
 use \PHPUnit_Framework_TestCase as TestCase;
-use Ucc\Sortable\Sort\Sort;
+use Ucc\Data\Sortable\Sort\Sort;
 
 class SortTest extends TestCase
 {
@@ -11,7 +11,7 @@ class SortTest extends TestCase
     {
         $sort       = new Sort();
         $expected   = 'name';
-        $this->assertInstanceOf('Ucc\Sortable\Sort\Sort', $sort->setField($expected));
+        $this->assertInstanceOf(get_class($sort), $sort->setField($expected));
         $this->assertSame($expected, $sort->getField());
         $this->assertSame($expected, $sort->field());
     }
@@ -20,7 +20,7 @@ class SortTest extends TestCase
     {
         $sort       = new Sort();
         $expected   = 'asc';
-        $this->assertInstanceOf('Ucc\Sortable\Sort\Sort', $sort->setDirection($expected));
+        $this->assertInstanceOf(get_class($sort), $sort->setDirection($expected));
         $this->assertSame($expected, $sort->getDirection());
         $this->assertSame($expected, $sort->direction());
     }

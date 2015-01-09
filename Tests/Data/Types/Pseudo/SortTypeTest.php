@@ -4,7 +4,7 @@ namespace Ucc\Tests\Data\Types\Pseudo;
 
 use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Types\Pseudo\SortType;
-use Ucc\Sortable\Sort\Sort;
+use Ucc\Data\Sortable\Sort\Sort;
 
 class SortTypeTest extends TestCase
 {
@@ -43,7 +43,7 @@ class SortTypeTest extends TestCase
 
         // Compare actual and existing params
         $this->assertInternalType('array', $actual);
-        $this->assertInstanceOf('Ucc\Sortable\Sort\Sort', $actual[0]);
+        $this->assertInstanceOf(get_class($sort), $actual[0]);
         $this->assertEquals($expected, $actual);
     }
 

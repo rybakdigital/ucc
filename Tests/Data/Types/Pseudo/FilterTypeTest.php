@@ -4,7 +4,7 @@ namespace Ucc\Tests\Data\Types\Pseudo;
 
 use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Types\Pseudo\FilterType;
-use Ucc\Filter\Criterion\Criterion;
+use Ucc\Data\Filter\Criterion\Criterion;
 
 class FilterTypeTest extends TestCase
 {
@@ -30,7 +30,7 @@ class FilterTypeTest extends TestCase
 
         // Compare actual and existing params
         $this->assertInternalType('array', $actual);
-        $this->assertInstanceOf('Ucc\Filter\Criterion\Criterion', $actual[0]);
+        $this->assertInstanceOf(get_class($criterion), $actual[0]);
         $this->assertEquals($expected, $actual);
     }
 

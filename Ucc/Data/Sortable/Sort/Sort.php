@@ -1,12 +1,12 @@
 <?php
 
-namespace Ucc\Sortable\Sort;
+namespace Ucc\Data\Sortable\Sort;
 
 use \InvalidArgumentException;
-use Ucc\Sortable\Sort\SortInterface;
+use Ucc\Data\Sortable\Sort\SortInterface;
 
 /**
- * Ucc\Sortable\Sort\Sort
+ * Ucc\Data\Sortable\Sort\Sort
  * Allows to represent sort directive in sting logic format
  *
  * @author Kris Rybak <kris@krisrybak.com>
