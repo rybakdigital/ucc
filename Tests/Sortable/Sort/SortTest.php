@@ -35,4 +35,16 @@ class SortTest extends TestCase
         $expected   = 'dadasdas';
         $sort->setDirection($expected);
     }
+
+    public function testToString()
+    {
+        $sort  = new Sort();
+        $expected   = 'id-asc';
+
+        $sort
+            ->setField('id')
+            ->setDirection('asc');
+
+        $this->assertSame($expected, $sort->toString());
+    }
 }
