@@ -38,7 +38,7 @@ class DisplayType implements TypeInterface
      *
      * @param   mixed   $value          Value to be checked
      * @param   array   $requirements   Additional constraints
-     * @return  mixed   Cleared value
+     * @return  array   Cleared value
      * @throws  InvalidDataTypeException
      */
     public static function check($value, array $requirements = array())
