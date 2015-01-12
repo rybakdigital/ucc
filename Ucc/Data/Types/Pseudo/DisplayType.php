@@ -60,16 +60,24 @@ class DisplayType implements TypeInterface
         // Iterate through the list of fields and check each display
         foreach ($value as $i => $field) {
             // Detect display settings
+            if (!is_string($field)) {
+                $error = 'value for index '.$i
+                    .' must be a string in format of'
+                    .' {field}-{alias}';
+
+                throw new InvalidDataValueException($error);
+            }
+
             $parts = explode('-', $field, 2);
 
-            if (!empty($parts[0])) {
+            if (empty($parts[0])) {
                 $error = 'value for index '.$i
                     .' must contain valid field names';
 
                 throw new InvalidDataValueException($error);
             }
 
-            if (!in_array($parts[0], $requirements['fields']) {
+            if (!in_array($parts[0], $requirements['fields'])) {
                 $error = 'value for index '.$i
                     .' must be one of ('.implode(', ', $requirements['fields']).')';
 

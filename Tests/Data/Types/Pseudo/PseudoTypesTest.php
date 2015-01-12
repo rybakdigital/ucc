@@ -6,6 +6,7 @@ use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Types\Pseudo\PseudoTypes;
 use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Data\Sortable\Sort\Sort;
+use Ucc\Data\Format\Display\Display;
 
 class PseudoTypesTest extends TestCase
 {
@@ -45,6 +46,24 @@ class PseudoTypesTest extends TestCase
         // Compare actual and existing params
         $this->assertInternalType('array', $actual);
         $this->assertInstanceOf(get_class($sort), $actual[0]);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCheckDisplayPass()
+    {
+        $supplied       = array('product-id');
+        $display        = new Display;
+        $display
+            ->setField('product')
+            ->setAlias('id');
+
+        $expected       = array($display);
+        $requirements   = array('fields' => array('product'));
+        $actual         = PseudoTypes::checkDisplay($supplied, $requirements);
+
+        // Compare actual and existing params
+        $this->assertInternalType('array', $actual);
+        $this->assertInstanceOf(get_class($display), $actual[0]);
         $this->assertEquals($expected, $actual);
     }
 }
