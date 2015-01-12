@@ -2,6 +2,7 @@
 
 namespace Ucc\Data\Types\Pseudo;
 
+use Ucc\Data\Types\Pseudo\DisplayType;
 use Ucc\Data\Types\Pseudo\FilterType;
 use Ucc\Data\Types\Pseudo\SortType;
 
@@ -37,5 +38,18 @@ class PseudoTypes
     public static function checkSort($value, array $requirements)
     {
         return SortType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a Display
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints
+     * @return  array       Cleared value
+     * @throws  InvalidDataException        If the value is not a Display or fails constraints checks
+     */
+    public static function checkDisplay($value, array $requirements)
+    {
+        return DisplayType::check($value, $requirements);
     }
 }
