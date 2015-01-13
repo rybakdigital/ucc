@@ -30,4 +30,11 @@ interface FormatInterface
      * @return  Ucc\Data\Format\Format\Format
      */
     public function setFormat($format);
+
+    /**
+     * Turns Format into string in the following format: {format}
+     *
+     * @return string
+     */
+    public function toString();
 }

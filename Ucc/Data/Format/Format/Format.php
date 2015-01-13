@@ -50,4 +50,14 @@ class Format implements FormatInterface
 
         return $this;
     }
+
+    /**
+     * Turns Format into string in the following format: {format}
+     *
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->format();
+    }
 }
