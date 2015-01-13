@@ -28,7 +28,6 @@ interface FormatInterface
      *
      * @param   string  $format
      * @return  Ucc\Data\Format\Format\Format
-     * @throws  InvalidArgumentException
      */
     public function setFormat($format);
 }
