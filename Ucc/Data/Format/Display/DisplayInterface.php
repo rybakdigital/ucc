@@ -58,7 +58,7 @@ interface DisplayInterface
     /**
      * Turns Display into string in the following format: {field}-{alias}
      *
-     * @return  Ucc\Data\Format\Display\Display
+     * @return  string
      */
     public function toString();
 }
