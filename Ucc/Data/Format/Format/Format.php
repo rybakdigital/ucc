@@ -11,6 +11,18 @@ use Ucc\Data\Format\Format\FormatInterface;
  */
 class Format implements FormatInterface
 {
+    const FORMAT_JSON           = 'json';       // JSON array: [{"foo":1},{"bar":2}]
+    const FORMAT_JSONSTREAM     = 'jsonstream'; // JSON encoded objects, separated by newlines:
+                                                // {"foo":1}
+                                                // {"bar":2}
+    const FORMAT_DEBUG          = 'debug';      // human-readable format that JSON
+
+    public static $formatOptions = array(
+        self::FORMAT_JSON,
+        self::FORMAT_JSONSTREAM,
+        self::FORMAT_DEBUG,
+    );
+
     /**
      * Represents format part of the Format. Defines which format to use whet outputing data.
      *

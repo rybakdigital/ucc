@@ -7,6 +7,7 @@ use Ucc\Data\Types\Pseudo\PseudoTypes;
 use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Data\Sortable\Sort\Sort;
 use Ucc\Data\Format\Display\Display;
+use Ucc\Data\Format\Format\Format;
 
 class PseudoTypesTest extends TestCase
 {
@@ -64,6 +65,22 @@ class PseudoTypesTest extends TestCase
         // Compare actual and existing params
         $this->assertInternalType('array', $actual);
         $this->assertInstanceOf(get_class($display), $actual[0]);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCheckFormatPass()
+    {
+        $supplied       = 'json';
+        $format         = new Format;
+        $format
+            ->setFormat($supplied);
+
+        $expected       = $format;
+        $requirements   = array();
+        $actual         = PseudoTypes::checkFormat($supplied, $requirements);
+
+        // Compare actual and existing params
+        $this->assertInstanceOf(get_class($format), $actual);
         $this->assertEquals($expected, $actual);
     }
 }
