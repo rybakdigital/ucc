@@ -5,6 +5,7 @@ namespace Ucc\Data\Types\Pseudo;
 use Ucc\Data\Types\Pseudo\DisplayType;
 use Ucc\Data\Types\Pseudo\FilterType;
 use Ucc\Data\Types\Pseudo\SortType;
+use Ucc\Data\Types\Pseudo\FormatType;
 
 /**
  * Ucc\Data\Types\Pseudo\PseudoTypes
@@ -51,5 +52,18 @@ class PseudoTypes
     public static function checkDisplay($value, array $requirements)
     {
         return DisplayType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a Format
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints
+     * @return  array       Cleared value
+     * @throws  InvalidDataException        If the value is not a Format or fails constraints checks
+     */
+    public static function checkFormat($value, array $requirements)
+    {
+        return FormatType::check($value, $requirements);
     }
 }
