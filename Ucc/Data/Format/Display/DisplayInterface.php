@@ -28,7 +28,6 @@ interface DisplayInterface
      *
      * @param   string  $field
      * @return  Ucc\Data\Format\Display\Display
-     * @throws  InvalidArgumentException
      */
     public function setField($field);
 
@@ -51,7 +50,6 @@ interface DisplayInterface
      *
      * @param   string  $alias
      * @return  Ucc\Data\Format\Display\Display
-     * @throws  InvalidArgumentException
      */
     public function setAlias($alias);
 
