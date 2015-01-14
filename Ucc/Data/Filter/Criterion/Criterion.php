@@ -381,7 +381,7 @@ class Criterion implements CriterionInterface
     /**
      * Turns Criterion into string in the following format: {logic}-{key}-{operand}-{type}-{value}
      *
-     * @return  Ucc\Filter\Criterion
+     * @return  string
      */
     public function toString()
     {

@@ -58,7 +58,7 @@ interface SortInterface
     /**
      * Turns Sort into string in the following format: {field}-{direction}
      *
-     * @return  Ucc\Sortable\Sort\Sort
+     * @return  string
      */
     public function toString();
 }

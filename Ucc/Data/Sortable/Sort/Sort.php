@@ -127,7 +127,7 @@ class Sort implements SortInterface
     /**
      * Turns Sort into string in the following format: {field}-{direction}
      *
-     * @return  Ucc\Filter\Criterion
+     * @return  string
      */
     public function toString()
     {
