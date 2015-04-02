@@ -1,6 +1,6 @@
 #Criterion
 
-This class allows to represent filter criteria.
+This class allows to stor filter criteria.
 
 
 ![Criterion Image](https://docs.google.com/drawings/d/1RDHIMIekg2CteRAnKQmyMRkcud4IqtEzcTRbHVLsrbc/pub?w=480&amp;h=360)
