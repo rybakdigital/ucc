@@ -3,21 +3,29 @@
 This class allows to represent filter criteria.
 
 ## Definitions
+
 `logic` - Represents logic part of the criterion. Decides whether to apply "AND" (Intersection) or "OR" (Union) on subsets.
+
 `key` - Name of the key to apply Criterion to.
+
 `operand` - String representation of logic operands.
+
 `type` - Criterion type. This can be either "field" or "value" (more common). Tells whether to use value of a given field described by the key for comparison or another field.
+
 `value` - Either value or the name of the filed to compare.
 
-Example 1: 
+Example 1:
+
 {logic}-{key}-{operand}-{type}-{value} : "AND-make-eq-value-Audi"
 This tells Criterion to look for elemnts where `make` is equal (`eq`) to the value of `Audi`. `AND` means that this is an intersection of subsets (must match all conditions: AND Criterion1 AND Criterion2 AND Criterion3, ..., etc.)
 
 Example 2:
+
 {logic}-{key}-{operand}-{type}-{value} : "OR-make-eq-value-Audi"
 This tells Criterion to look for elemnts where `make` is equal (`eq`) to the value of `Audi`. `OR` means that this is an union of subsets (may match one or more of the conditions: OR Criterion1 OR Criterion2 OR Criterion3, ..., etc.)
 
-Example 2:
+Example 3:
+
 {logic}-{key}-{operand}-{type}-{value} : "AND-town-eq-field-city"
 This tells Criterion to look for elemnts where `town` is equal (`eq`) to the value of another property: `city`. In other words town and city must be equal. `OR` means that this is an union of subsets (may match one or more of the conditions: OR Criterion1 OR Criterion2 OR Criterion3, ..., etc.)
 
@@ -65,8 +73,10 @@ $criterion->logic();
 // Setting operand
 $criterion->setOperand('eq');
 
-// Getting logic
+// Getting operand
 $criterion->getOperand();
 // or simply
 $criterion->op();
+
+// Outputs `eq`
 ```
