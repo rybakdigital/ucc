@@ -2,6 +2,8 @@
 
 This class allows to represent filter criteria.
 
+
+![Criterion Image](https://docs.google.com/drawings/d/1RDHIMIekg2CteRAnKQmyMRkcud4IqtEzcTRbHVLsrbc/pub?w=480&amp;h=360)
 ## Definitions
 
 `logic` - Represents logic part of the criterion. Decides whether to apply "AND" (Intersection) or "OR" (Union) on subsets.
