@@ -181,7 +181,7 @@ class Criterion implements CriterionInterface
      * Sets Logic.
      *
      * @param   string  $logic
-     * @return  Ucc\Filter\Criterion
+     * @return  Ucc\Data\Filter\Criterion\Criterion
      * @throws  InvalidArgumentException
      */
     public function setLogic($logic)
@@ -222,7 +222,7 @@ class Criterion implements CriterionInterface
      * Sets key.
      *
      * @param   string  $key
-     * @return  Ucc\Filter\Criterion
+     * @return  Ucc\Data\Filter\Criterion\Criterion
      */
     public function setKey($key)
     {
@@ -249,6 +249,9 @@ class Criterion implements CriterionInterface
 
     /**
      * Sets operand.
+     * 
+     * @param   $operand string Operand to use
+     * @return  Ucc\Data\Filter\Criterion\Criterion
      */
     public function setOperand($operand)
     {
@@ -328,7 +331,7 @@ class Criterion implements CriterionInterface
      * Sets type.
      *
      * @param   string  $type
-     * @return  Ucc\Filter\Criterion
+     * @return  Ucc\Data\Filter\Criterion\Criterion
      * @throws  InvalidArgumentException
      */
     public function setType($type)
@@ -369,7 +372,7 @@ class Criterion implements CriterionInterface
      * Sets value.
      *
      * @param   string  $value
-     * @return  Ucc\Filter\Criterion
+     * @return  Ucc\Data\Filter\Criterion\Criterion
      */
     public function setValue($value)
     {
@@ -389,6 +392,6 @@ class Criterion implements CriterionInterface
             . '-' . $this->key()
             . '-' . $this->op()
             . '-' . $this->type()
-            . '-' . $this->value;
+            . '-' . $this->value();
     }
 }
