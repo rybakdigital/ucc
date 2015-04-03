@@ -2,7 +2,7 @@
 
 This class is a storage for filter criteria.
 
-![Criterion Image](https://docs.google.com/drawings/d/1RDHIMIekg2CteRAnKQmyMRkcud4IqtEzcTRbHVLsrbc/pub?w=480&amp;h=360)
+![Criterion Image](https://docs.google.com/drawings/d/1RDHIMIekg2CteRAnKQmyMRkcud4IqtEzcTRbHVLsrbc/pub?w=300&amp;h=225)
 ## Definitions
 
 `logic` - Represents logic part of the criterion. Decides whether to apply "AND" (Intersection) or "OR" (Union) on subsets.
