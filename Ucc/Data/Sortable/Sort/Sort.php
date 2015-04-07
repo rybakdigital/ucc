@@ -71,9 +71,6 @@ class Sort implements SortInterface
      */
     public function setField($field)
     {
-        // Make sure we use lower case only
-        $field = strtolower($field);
-
         $this->field = $field;
 
         return $this;
