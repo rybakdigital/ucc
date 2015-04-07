@@ -59,58 +59,8 @@ class FilterType implements TypeInterface
         $filters = array();
 
         // Iterate through the list of filters and check each filter individually
-        foreach ($value as $i => $filter) {
-            // Detect filter settings
-            if (!is_string($filter)) {
-                $error = 'value for index '.$i
-                    .' must be a string in format of'
-                    .' {logic}-{field}-{operand}-{type}-{value}'
-                    .' Example: and-name-eq-value-smith';
-
-                throw new InvalidDataValueException($error);
-            }
-
-            // Get filter setting from string
-            // All filters should follow standard pattern:
-            // {logic}-{field}-{operand}-{type}-{value}
-            // Example: and-id-eq-value-12
-            $parts = explode('-', $filter, 5);
-
-            if (!(count($parts) === 5)
-                || !in_array($parts[0], Criterion::$criterionLogic)
-                || !in_array($parts[1], $requirements['fields'])
-                || !in_array($parts[2], Criterion::$criterionOperands)
-                ){
-
-                // Filter pattern does not match standard
-                $error = 'value for index '.$i
-                .', and part 1 (logic) must be one of '
-                .'('.implode(', ', Criterion::$criterionLogic).')'
-                .', part 2 (field) must be one of '
-                .'('.implode(', ',$requirements['fields']).')'
-                .', and part 3 (operand) must be one of '
-                .'('.implode(', ', Criterion::$criterionOperands).')';
-
-                throw new InvalidDataValueException($error);
-            }
-
-            $filter = new Criterion();
-
-            try {
-                $filter
-                    ->setLogic($parts[0])
-                    ->setKey($parts[1])
-                    ->setOperand($parts[2])
-                    ->setType($parts[3])
-                    ->setValue($parts[4]);
-
-                $filters[] = $filter;
-            } catch (InvalidArgumentException $e) {
-                $error = 'value for filter index '.$i.', '
-                    .'part 4 (type) must be one of (field or value)';
-
-                throw new InvalidDataValueException($error);
-            }
+        foreach ($value as $index => $filter) {
+            $filters[] = self::filterToCriterion($filter, $requirements, $index);
         }
 
         return $filters;
@@ -134,5 +84,71 @@ class FilterType implements TypeInterface
         }
 
         return true;
+    }
+
+    public static function filterToCriterion($filter, $requirements = array(), $index = 0)
+    {
+        // Detect filter settings
+        if (!is_string($filter)) {
+            $error = 'value for index '.$index
+                .' must be a string in format of'
+                .' {logic}-{field}-{operand}-{type}-{value}'
+                .' Example: and-name-eq-value-smith';
+
+            throw new InvalidDataValueException($error);
+        }
+
+        // Get filter setting from string
+        // All filters should follow standard pattern:
+        // {logic}-{field}-{operand}-{type}-{value}
+        // Example: and-id-eq-value-12
+        $parts = explode('-', $filter, 5);
+
+        if (!(count($parts) === 5)
+            || !in_array($parts[0], Criterion::$criterionLogic)
+            || !in_array($parts[2], Criterion::$criterionOperands)
+            ){
+
+            // Filter pattern does not match standard
+            $error = 'value for index '.$index
+            .', and part 1 (logic) must be one of '
+            .'('.implode(', ', Criterion::$criterionLogic).')'
+            .', part 2 (field) must be one of '
+            .'('.implode(', ',$requirements['fields']).')'
+            .', and part 3 (operand) must be one of '
+            .'('.implode(', ', Criterion::$criterionOperands).')';
+
+            throw new InvalidDataValueException($error);
+        }
+
+        if (isset($requirements['fields'])) {
+            if (!in_array($parts[1], $requirements['fields'])) {
+                // Requirements miss match
+                $error = 'value for index '.$index
+                .', part 2 (field) must be one of '
+                .'('.implode(', ',$requirements['fields']).')';
+
+                throw new InvalidDataValueException($error);
+            }
+        }
+
+        $filter = new Criterion();
+
+        try {
+            $filter
+                ->setLogic($parts[0])
+                ->setKey($parts[1])
+                ->setOperand($parts[2])
+                ->setType($parts[3])
+                ->setValue($parts[4]);
+
+        } catch (InvalidArgumentException $e) {
+            $error = 'value for filter index '.$index.', '
+                .'part 4 (type) must be one of (field or value)';
+
+            throw new InvalidDataValueException($error);
+        }
+
+        return $filter;
     }
 }
