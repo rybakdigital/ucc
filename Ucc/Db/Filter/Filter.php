@@ -6,7 +6,7 @@ use Ucc\Exception\Data\InvalidDataTypeException;
 use Ucc\Exception\Data\InvalidDataException\InvalidDataValueException;
 use Ucc\Data\Types\Pseudo\FilterType;
 use Ucc\Data\Filter\Criterion\Criterion;
-use Ucc\Db\Filter\DQL;
+use Ucc\Db\Filter\Dql;
 
 /**
  * Ucc\Db\Filter\Filter
@@ -42,7 +42,7 @@ class Filter
     {
         $method = self::criterionOperandToMethod($criterion);
 
-        DQL::$method($criterion);
+        Dql::$method($criterion);
                 // // Methods modify the $clause object so no return value required.
                 // // Note no default method - keep default return values if the
                 // // method is invalid or unrecognised.
