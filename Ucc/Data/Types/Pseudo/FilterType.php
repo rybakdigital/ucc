@@ -104,32 +104,38 @@ class FilterType implements TypeInterface
         // Example: and-id-eq-value-12
         $parts = explode('-', $filter, 5);
 
+        // Reserve space for error message in regards to fileds
+        $filedsPatternMessage = '';
+
+        if (isset($requirements['fields'])) {
+            $filedsPatternMessage = ', part 2 (field) must be one of '
+                .'('.implode(', ',$requirements['fields']).')';
+
+            if (!in_array($parts[1], $requirements['fields'])) {
+                // Requirements miss match
+                $error = 'value for index '.$index
+                . $filedsPatternMessage;
+
+                throw new InvalidDataValueException($error);
+            }
+        }
+
+
         if (!(count($parts) === 5)
             || !in_array($parts[0], Criterion::$criterionLogic)
             || !in_array($parts[2], Criterion::$criterionOperands)
             ){
 
+
             // Filter pattern does not match standard
             $error = 'value for index '.$index
             .', and part 1 (logic) must be one of '
             .'('.implode(', ', Criterion::$criterionLogic).')'
-            .', part 2 (field) must be one of '
-            .'('.implode(', ',$requirements['fields']).')'
+            . $filedsPatternMessage
             .', and part 3 (operand) must be one of '
             .'('.implode(', ', Criterion::$criterionOperands).')';
 
             throw new InvalidDataValueException($error);
-        }
-
-        if (isset($requirements['fields'])) {
-            if (!in_array($parts[1], $requirements['fields'])) {
-                // Requirements miss match
-                $error = 'value for index '.$index
-                .', part 2 (field) must be one of '
-                .'('.implode(', ',$requirements['fields']).')';
-
-                throw new InvalidDataValueException($error);
-            }
         }
 
         $filter = new Criterion();
