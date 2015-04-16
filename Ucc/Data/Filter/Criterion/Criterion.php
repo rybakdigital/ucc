@@ -92,6 +92,114 @@ class Criterion implements CriterionInterface
     );
 
     /**
+     * Gets boolean type operands
+     *
+     * @return  array
+     */
+    public static function getBoolOperands()
+    {
+        return array(
+            self::CRITERION_OP_BOOL,
+        );
+    }
+
+    /**
+     * Gets direct type operands
+     * Returs list of operands used in direct comparison, for example:
+     * a = a, a != b, A = a, B != b
+     *
+     * @return  array
+     */
+    public static function getDirectOperands()
+    {
+        return array(
+            self::CRITERION_OP_EQ,
+            self::CRITERION_OP_EQI,
+            self::CRITERION_OP_NE,
+            self::CRITERION_OP_NEI,
+        );
+    }
+
+    /**
+     * Gets relative type operands
+     * Returs list of operands used in relative comparison, for example:
+     * a > b, b <= a, b < a, a >= b
+     *
+     * @return  array
+     */
+    public static function getRelativeOperands()
+    {
+        return array(
+            self::CRITERION_OP_LT,
+            self::CRITERION_OP_GT,
+            self::CRITERION_OP_GE,
+            self::CRITERION_OP_LE,
+        );
+    }
+
+    /**
+     * Gets contains type operands
+     * Returs list of operands used in wildcard comparison (contains/includes), for example:
+     * a = %b%, a like B
+     *
+     * @return  array
+     */
+    public static function getContainsOperands()
+    {
+        return array(
+            self::CRITERION_OP_INC,
+            self::CRITERION_OP_INCI,
+            self::CRITERION_OP_NINC,
+            self::CRITERION_OP_NINCI,
+        );
+    }
+
+    /**
+     * Gets begins type operands
+     * Returs list of operands used in wildcard comparison begins with.., for example:
+     * LIKE abc%, LIKE AbC%
+     *
+     * @return  array
+     */
+    public static function getBeginsOperands()
+    {
+        return array(
+            self::CRITERION_OP_BEGINS,
+            self::CRITERION_OP_BEGINSI,
+        );
+    }
+
+    /**
+     * Gets in type operands
+     * Returs list of operands used in "one of" comparison, for example:
+     * a IN (a,b,c)
+     *
+     * @return  array
+     */
+    public static function getInOperands()
+    {
+        return array(
+            self::CRITERION_OP_IN,
+            self::CRITERION_OP_INI,
+            self::CRITERION_OP_NIN,
+            self::CRITERION_OP_NINI,
+        );
+    }
+
+    /**
+     * Gets in regex operands
+     * Returs list of operands used in regular expresion comparison, for example.
+     *
+     * @return  array
+     */
+    public static function getRegexOperands()
+    {
+        return array(
+            self::CRITERION_OP_RE,
+        );
+    }
+
+    /**
      * Represents logic part of the criterion. Decides whether to apply "AND" (Intersection),
      * or "OR" (Union) on subsets.
      * Example:
