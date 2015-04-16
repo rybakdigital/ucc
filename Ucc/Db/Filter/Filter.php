@@ -6,7 +6,7 @@ use Ucc\Exception\Data\InvalidDataTypeException;
 use Ucc\Exception\Data\InvalidDataException\InvalidDataValueException;
 use Ucc\Data\Types\Pseudo\FilterType;
 use Ucc\Data\Filter\Criterion\Criterion;
-use Ucc\Db\Filter\Dql;
+use Ucc\Db\Filter\Sql;
 
 /**
  * Ucc\Db\Filter\Filter
@@ -15,7 +15,7 @@ use Ucc\Db\Filter\Dql;
  */
 class Filter
 {
-    public static function criteriaToDQL($criteria = array())
+    public static function criteriaToSql($criteria = array())
     {
         if (!is_array($criteria)) {
             $error = 'criteria must be an array of Criterion objects or list of filters (string type) in a format: {logic}-{field}-{operand}-{type}-{value}';
@@ -34,15 +34,15 @@ class Filter
                 throw new InvalidDataTypeException($error);
             }
 
-            $filter = self::criterionToDQL($criterion);
+            $filter = self::criterionToSQL($criterion);
         }
     }
 
-    public static function criterionToDQL(Criterion $criterion)
+    public static function criterionToSQL(Criterion $criterion)
     {
         $method = self::criterionOperandToMethod($criterion);
 
-        Dql::$method($criterion);
+        Sql::$method($criterion);
                 // // Methods modify the $clause object so no return value required.
                 // // Note no default method - keep default return values if the
                 // // method is invalid or unrecognised.

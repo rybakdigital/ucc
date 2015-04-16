@@ -15,7 +15,7 @@ class FilterTest extends TestCase
     {
         $criteria = 'abc';
 
-        Db_Filter::criteriaToDQL($criteria);
+        Db_Filter::criteriaToSql($criteria);
     }
 
     /**
@@ -25,7 +25,7 @@ class FilterTest extends TestCase
     {
         $criteria = 1;
 
-        Db_Filter::criteriaToDQL($criteria);
+        Db_Filter::criteriaToSql($criteria);
     }
 
     /**
@@ -35,7 +35,7 @@ class FilterTest extends TestCase
     {
         $criteria = 'abc';
 
-        Db_Filter::criteriaToDQL($criteria);
+        Db_Filter::criteriaToSql($criteria);
     }
 
     public function testCriterionOperandToDirectMethod()
@@ -438,10 +438,10 @@ class FilterTest extends TestCase
         }
     }
 
-    public function testCriteriaToDQLArrayCriterionAsString()
+    public function testCriteriaToSQLArrayCriterionAsString()
     {
         $criteria = array('and-name-eq-value-Jane');
 
-        Db_Filter::criteriaToDQL($criteria);
+        Db_Filter::criteriaToSql($criteria);
     }
 }
