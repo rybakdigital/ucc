@@ -104,7 +104,7 @@ class Filter
             // method is invalid or unrecognised.
             if ( method_exists( $this, $method ) )
             {
-                $this->$method( $clause, $criterion, $placeHolder, $fieldMap );
+                $this->$method( $clause, $criterion );
             }
     }
 }
