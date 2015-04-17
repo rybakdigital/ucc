@@ -27,6 +27,7 @@ interface ClauseInterface
      * Sets Statement.
      *
      * @param   string  $statement
+     * @return  ClauseInterface
      */
     public function setStatement($statement);
 
@@ -38,17 +39,26 @@ interface ClauseInterface
     public function getParameters();
 
     /**
-     * Sets Parameter
+     * Sets Parameters.
+     *
+     * @param   array  $parameters
+     * @return  ClauseInterface
+     */
+    public function setParameters($parameters = array());
+
+    /**
+     * Sets Parameter.
      *
      * @param   string  $name
      * @param   mixed   $value
+     * @return  ClauseInterface
      */
     public function setParameter($name, $value);
 
     /**
      * Gets Parameter.
      *
-     * @return mixed
+     * @return mixed    Returns parameter if exist, otherwise NULL
      */
     public function getParameter($parameter);
 
