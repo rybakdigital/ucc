@@ -3,6 +3,7 @@
 namespace Ucc\Db\Filter;
 
 use Ucc\Data\Filter\Criterion\Criterion;
+use Ucc\Data\Filter\Clause\Clause;
 
 /**
  * Ucc\Db\Filter\Sql
