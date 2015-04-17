@@ -15,7 +15,7 @@ use Ucc\Db\Filter\Sql;
  */
 class Filter
 {
-    public static function criteriaToSql($criteria = array())
+    public static function criteriaToSql($criteria = array(), $fieldMap = array(), $namespace = 'filter')
     {
         if (!is_array($criteria)) {
             $error = 'criteria must be an array of Criterion objects or list of filters (string type) in a format: {logic}-{field}-{operand}-{type}-{value}';
@@ -34,22 +34,20 @@ class Filter
                 throw new InvalidDataTypeException($error);
             }
 
-            $filter = self::criterionToSQL($criterion);
+            // Placeholder name for query binding
+            $placeHolder = $namespace . '_' . $i;
+
+            $filter = self::criterionToSQL($criterion, $placeHolder, $fieldMap);
         }
     }
 
-    public static function criterionToSQL(Criterion $criterion)
+    public static function criterionToSQL(Criterion $criterion, $placeHolder = 'filter', $fieldMap = array())
     {
         $method = self::criterionOperandToMethod($criterion);
 
-        Sql::$method($criterion);
-                // // Methods modify the $clause object so no return value required.
-                // // Note no default method - keep default return values if the
-                // // method is invalid or unrecognised.
-                // if ( method_exists( 'Ucc\Db\Filter\Filter', $method ) )
-                // {
-                //     Ucc\Db\Filter\Filter::$method;
-                // }
+        if (method_exists('Ucc\Db\Filter\Sql', $method)) {
+            Sql::$method($criterion, $placeHolder, $fieldMap);
+        }
     }
 
     public static function criterionOperandToMethod(Criterion $criterion)
