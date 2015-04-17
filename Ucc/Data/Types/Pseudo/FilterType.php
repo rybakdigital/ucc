@@ -141,7 +141,7 @@ class FilterType implements TypeInterface
         if (in_array($parts[2], Criterion::getBoolOperands())) {
             // Now that we know that this is boolean operand
             // let's check value is one of boolean type
-            if (!in_array($parts[4], Criterion::$criterionBooleanValues)) {
+            if (!in_array(strtolower($parts[4]), Criterion::$criterionBooleanValues)) {
                 $error = 'value for index '.$index
                 .', and part 5 (value) must be one of '
                 .'('.implode(', ', Criterion::$criterionBooleanValues).')'
