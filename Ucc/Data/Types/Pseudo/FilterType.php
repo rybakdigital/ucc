@@ -104,9 +104,10 @@ class FilterType implements TypeInterface
         // Example: and-id-eq-value-12
         $parts = explode('-', $filter, 5);
 
-        // Reserve space for error message in regards to fileds
+        // Reserve space for error message in regards to fields
         $filedsPatternMessage = '';
 
+        // Check for fields prerequisites if defined
         if (isset($requirements['fields'])) {
             $filedsPatternMessage = ', part 2 (field) must be one of '
                 .'('.implode(', ',$requirements['fields']).')';
@@ -120,12 +121,10 @@ class FilterType implements TypeInterface
             }
         }
 
-
         if (!(count($parts) === 5)
             || !in_array($parts[0], Criterion::$criterionLogic)
             || !in_array($parts[2], Criterion::$criterionOperands)
             ){
-
 
             // Filter pattern does not match standard
             $error = 'value for index '.$index
@@ -136,6 +135,20 @@ class FilterType implements TypeInterface
             .'('.implode(', ', Criterion::$criterionOperands).')';
 
             throw new InvalidDataValueException($error);
+        }
+
+        // Check value for boolean operand is one of true ore false
+        if (in_array($parts[2], Criterion::getBoolOperands())) {
+            // Now that we know that this is boolean operand
+            // let's check value is one of boolean type
+            if (!in_array($parts[4], Criterion::$criterionBooleanValues)) {
+                $error = 'value for index '.$index
+                .', and part 5 (value) must be one of '
+                .'('.implode(', ', Criterion::$criterionBooleanValues).')'
+                .' when using boolean operand';
+
+                throw new InvalidDataValueException($error);
+            }
         }
 
         $filter = new Criterion();

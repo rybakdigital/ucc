@@ -91,6 +91,10 @@ class Criterion implements CriterionInterface
         'nini'      => 'is NOT one of (case insensitive)',
     );
 
+    public static $criterionBooleanValues = array(
+        'true', 'false', '1', '0'
+    );
+
     /**
      * Gets boolean type operands
      *
