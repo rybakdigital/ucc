@@ -1,6 +1,6 @@
 <?php
 
-namespace Ucc\Tests\Data\Filter;
+namespace Ucc\Tests\Data\Filter\Criterion;
 
 use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Filter\Criterion\Criterion;
