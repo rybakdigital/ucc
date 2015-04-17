@@ -440,7 +440,7 @@ class FilterTest extends TestCase
 
     public function testCriteriaToSQLArrayCriterionAsString()
     {
-        $criteria = array('and-name-eq-value-Jane');
+        $criteria = array('and-name-re-value-Jane,John,Sam', 'and-surname-re-value-Doe', 'and-dob-re-field-age', 'and-dob-re-field-age');
 
         Db_Filter::criteriaToSql($criteria);
     }
