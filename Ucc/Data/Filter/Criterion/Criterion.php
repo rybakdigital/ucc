@@ -32,6 +32,8 @@ class Criterion implements CriterionInterface
     const CRITERION_OP_RE       = 're';     // Regular expression.
     const CRITERION_OP_BEGINS   = 'begins'; // Begins (case sensitive).
     const CRITERION_OP_BEGINSI  = 'beginsi';// Begins (case insensitive).
+    const CRITERION_OP_NBEGINS  = 'nbegins'; // Not Begins (case sensitive).
+    const CRITERION_OP_NBEGINSI = 'nbeginsi';// Not Begins (case insensitive).
     const CRITERION_OP_IN       = 'in';     // Comma delimited list of values to match (case sensitive).
     const CRITERION_OP_INI      = 'ini';    // Comma delimited list of values to match (case insensitive).
     const CRITERION_OP_NIN      = 'nin';    // Comma delimited list of values to not match (case sensitive).
@@ -62,6 +64,8 @@ class Criterion implements CriterionInterface
         self::CRITERION_OP_RE,
         self::CRITERION_OP_BEGINS,
         self::CRITERION_OP_BEGINSI,
+        self::CRITERION_OP_NBEGINS,
+        self::CRITERION_OP_NBEGINSI,
         self::CRITERION_OP_IN,
         self::CRITERION_OP_INI,
         self::CRITERION_OP_NIN,
@@ -85,6 +89,8 @@ class Criterion implements CriterionInterface
         're'        => 'matches regular expression',
         'begins'    => 'begins with (case sensitive)',
         'beginsi'   => 'begins with (case insensitive)',
+        'nbegins'   => 'not begins with (case sensitive)',
+        'nbeginsi'  => 'not begins with (case insensitive)',
         'in'        => 'is one of (case sensitive)',
         'ini'       => 'is one of (case insensitive)',
         'nin'       => 'is NOT one of (case sensitive)',
@@ -170,6 +176,8 @@ class Criterion implements CriterionInterface
         return array(
             self::CRITERION_OP_BEGINS,
             self::CRITERION_OP_BEGINSI,
+            self::CRITERION_OP_NBEGINS,
+            self::CRITERION_OP_NBEGINSI,
         );
     }
 
@@ -387,6 +395,8 @@ class Criterion implements CriterionInterface
             || $operand == self::CRITERION_OP_RE
             || $operand == self::CRITERION_OP_BEGINS
             || $operand == self::CRITERION_OP_BEGINSI
+            || $operand == self::CRITERION_OP_NBEGINS
+            || $operand == self::CRITERION_OP_NBEGINSI
             || $operand == self::CRITERION_OP_IN
             || $operand == self::CRITERION_OP_INI
             || $operand == self::CRITERION_OP_NIN
@@ -410,6 +420,8 @@ class Criterion implements CriterionInterface
                     . ", " . self::CRITERION_OP_RE
                     . ", " . self::CRITERION_OP_BEGINS
                     . ", " . self::CRITERION_OP_BEGINSI
+                    . ", " . self::CRITERION_OP_NBEGINS
+                    . ", " . self::CRITERION_OP_NBEGINSI
                     . ", " . self::CRITERION_OP_IN
                     . ", " . self::CRITERION_OP_INI
                     . ", " . self::CRITERION_OP_NIN
