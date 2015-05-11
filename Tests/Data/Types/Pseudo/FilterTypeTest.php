@@ -91,7 +91,7 @@ class FilterTypeTest extends TestCase
 
     /**
      * @expectedException Ucc\Exception\Data\InvalidDataValueException
-     * @expectedExceptionMessage and part 1 (logic) must be one of
+     * @expectedExceptionMessage part 2 (field) must be one of
      */
     public function testCheckFailWrongField()
     {

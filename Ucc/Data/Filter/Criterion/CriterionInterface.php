@@ -3,7 +3,7 @@
 namespace Ucc\Data\Filter\Criterion;
 
 /**
- * Ucc\Data\Filter\Criterion\CriterionInterface.
+ * Ucc\Data\Filter\Criterion\CriterionInterface
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
