@@ -12,6 +12,9 @@ use Ucc\Data\Filter\Clause\Clause;
  */
 class Sql
 {
+    /**
+     * Turns Criterion into Sql Clause
+     */
     public static function criterionToBool(Criterion $criterion, $placeHolder, $fieldMap = array())
     {
         // Escape, quote and qualify the field name for security.
