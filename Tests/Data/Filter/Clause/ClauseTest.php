@@ -32,9 +32,10 @@ class ClauseTest extends TestCase
 
     public function testClauseStatement()
     {
-        $clause = new Clause();
+        $clause     = new Clause();
+        $statement  = $clause->getStatement();
 
-        $this->assertTrue(empty($clause->getStatement()));
+        $this->assertTrue(empty($statement));
         $this->assertInstanceOf(get_class($clause), $clause->setStatement('abc'));
         $this->assertEquals('abc', $clause->getStatement('abc'));
         $this->assertEquals('abc', $clause->statement('abc'));
