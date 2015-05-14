@@ -10,4 +10,4 @@ php:
 before_script:
   cd Tests
 script:
-  - phpunit .
+  - phpunit --configuration ./Tests/phpunit.xml .
