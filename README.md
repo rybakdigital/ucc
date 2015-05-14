@@ -1,6 +1,7 @@
 UCC
 ===
 [![Build Status](https://travis-ci.org/rybakdigital/ucc.svg?branch=master)](https://travis-ci.org/rybakdigital/ucc)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rybakdigital/ucc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Universal Class Collection
 
