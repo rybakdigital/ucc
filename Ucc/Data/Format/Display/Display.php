@@ -106,7 +106,9 @@ class Display implements DisplayInterface
      */
     public function toString()
     {
-        if (empty($this->alias())) {
+        $alias = $this->alias();
+
+        if (empty($alias)) {
             return $this->field;
         }
 
