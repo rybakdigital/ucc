@@ -14,7 +14,7 @@
          syntaxCheck="true"
          strict="true"
          verbose="true"
-         bootstrap="/home/sites/ucc/Tests/bootstrap.php">
+         bootstrap="bootstrap.php">
   <logging>
         <log type="coverage-html" target="/var/www/html/test/reports" charset="UTF-8"
              yui="true" highlight="false"
