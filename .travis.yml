@@ -6,5 +6,8 @@ php:
   - 5.4
   - 5.3
   - hhvm
+  
+before_script:
+  cd Tests
 script:
-  - phpunit --configuration ../travis.phpunit.xml.dist
+  - phpunit .
