@@ -1,5 +1,6 @@
 UCC
 ===
+[![Build Status](https://travis-ci.org/rybakdigital/ucc.svg?branch=master)](https://travis-ci.org/rybakdigital/ucc)
 
 Universal Class Collection
 
