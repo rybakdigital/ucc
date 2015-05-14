@@ -35,7 +35,7 @@ class Sql
         }
     }
 
-    public static function criterionToDirect(Criterion $criterion, $placeHolder, $fieldMap = array())
+    public static function criterionToDirectClause(Criterion $criterion, $placeHolder, $fieldMap = array())
     {
         // Create local operand and collate
         $op         = false;
@@ -79,9 +79,11 @@ class Sql
             // use the relevant collation for the comparison.
             // Testing shows this doesn't affect use of keys on integer
             // fields, if they are used as part of a case sensitive filter
-            $clause->setStatement($field . ' ' . $op . ' '
+            $clause->setStatement(' ' . $criterion->logic(). ' ' . $field . ' ' . $op . ' '
                 . 'CAST(' . $comparand . ' AS CHAR)' . ' COLLATE ' . $collate);
         }
+
+        return $clause;
     }
 
     public static function criterionToRelative(Criterion $criterion, $placeHolder, $fieldMap = array())
