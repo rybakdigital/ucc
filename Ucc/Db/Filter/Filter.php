@@ -17,6 +17,10 @@ class Filter
 {
     public static function criteriaToSql($criteria = array(), $fieldMap = array(), $namespace = 'filter')
     {
+        // Default return values
+        $sql    = '';
+        $params = array();
+
         if (!is_array($criteria)) {
             $error = 'criteria must be an array of Criterion objects or list of filters (string type) in a format: {logic}-{field}-{operand}-{type}-{value}';
 
@@ -38,16 +42,27 @@ class Filter
             $placeHolder = $namespace . '_' . $i;
 
             $filter = self::criterionToSQL($criterion, $placeHolder, $fieldMap);
+
+            $sql .= $filter->getStatement();
         }
+
+        var_dump($sql);
     }
 
+    /**
+     * Returns Ucc\Data\Filter\Clause\Clause for successful Criterion translations, otherwise false
+     *
+     * @return Ucc\Data\Filter\Clause\Clause | false
+     */
     public static function criterionToSQL(Criterion $criterion, $placeHolder = 'filter', $fieldMap = array())
     {
-        $method = self::criterionOperandToMethod($criterion);
+        $method = self::criterionOperandToMethod($criterion) . 'Clause';
 
         if (method_exists('Ucc\Db\Filter\Sql', $method)) {
-            Sql::$method($criterion, $placeHolder, $fieldMap);
+            return Sql::$method($criterion, $placeHolder, $fieldMap);
         }
+
+        return false;
     }
 
     public static function criterionOperandToMethod(Criterion $criterion)
