@@ -8,4 +8,4 @@ php:
   - hhvm
 
 script:
-  - phpunit --configuration ./Tests/phpunit.xml .
+  - phpunit --configuration travis.phpunit.xml.dist .
