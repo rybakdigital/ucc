@@ -14,5 +14,5 @@
          syntaxCheck="true"
          strict="true"
          verbose="true"
-         bootstrap="Tests/bootstrap.php">
+         bootstrap="bootstrap.php">
 </phpunit>
