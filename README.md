@@ -14,6 +14,8 @@ The UCC contains pure PHP classes that are not dependent on any other 3rd party 
 The requirements for UCC are:
 
 * PHP 5.4
+* PHP 5.5
+* PHP 5.6
 
 ## Categories
 
