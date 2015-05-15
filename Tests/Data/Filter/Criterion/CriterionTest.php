@@ -113,4 +113,97 @@ class CriterionTest extends TestCase
 
         $this->assertNotSame($expected, $criterion->toString());
     }
+
+    public function testGetDirectOperands()
+    {
+        $criterion  = new Criterion();
+        $this->assertTrue(is_array($criterion->getDirectOperands()));
+        $this->assertNotEmpty($criterion->getDirectOperands());
+
+        $expected = array(
+            Criterion::CRITERION_OP_EQ,
+            Criterion::CRITERION_OP_EQI,
+            Criterion::CRITERION_OP_NE,
+            Criterion::CRITERION_OP_NEI
+        );
+
+        $this->assertEquals($expected, $criterion->getDirectOperands());
+    }
+
+    public function testGetRelativeOperands()
+    {
+        $criterion  = new Criterion();
+        $this->assertTrue(is_array($criterion->getRelativeOperands()));
+        $this->assertNotEmpty($criterion->getRelativeOperands());
+
+        $expected = array(
+            Criterion::CRITERION_OP_LT,
+            Criterion::CRITERION_OP_GT,
+            Criterion::CRITERION_OP_GE,
+            Criterion::CRITERION_OP_LE
+        );
+
+        $this->assertEquals($expected, $criterion->getRelativeOperands());
+    }
+
+    public function testGetContainsOperands()
+    {
+        $criterion  = new Criterion();
+        $this->assertTrue(is_array($criterion->getContainsOperands()));
+        $this->assertNotEmpty($criterion->getContainsOperands());
+
+        $expected = array(
+            Criterion::CRITERION_OP_INC,
+            Criterion::CRITERION_OP_INCI,
+            Criterion::CRITERION_OP_NINC,
+            Criterion::CRITERION_OP_NINCI
+        );
+
+        $this->assertEquals($expected, $criterion->getContainsOperands());
+    }
+
+    public function testGetBeginsOperands()
+    {
+        $criterion  = new Criterion();
+        $this->assertTrue(is_array($criterion->getBeginsOperands()));
+        $this->assertNotEmpty($criterion->getBeginsOperands());
+
+        $expected = array(
+            Criterion::CRITERION_OP_BEGINS,
+            Criterion::CRITERION_OP_BEGINSI,
+            Criterion::CRITERION_OP_NBEGINS,
+            Criterion::CRITERION_OP_NBEGINSI
+        );
+
+        $this->assertEquals($expected, $criterion->getBeginsOperands());
+    }
+
+    public function testGetInOperands()
+    {
+        $criterion  = new Criterion();
+        $this->assertTrue(is_array($criterion->getInOperands()));
+        $this->assertNotEmpty($criterion->getInOperands());
+
+        $expected = array(
+            Criterion::CRITERION_OP_IN,
+            Criterion::CRITERION_OP_INI,
+            Criterion::CRITERION_OP_NIN,
+            Criterion::CRITERION_OP_NINI
+        );
+
+        $this->assertEquals($expected, $criterion->getInOperands());
+    }
+
+    public function testGetRegexOperands()
+    {
+        $criterion  = new Criterion();
+        $this->assertTrue(is_array($criterion->getRegexOperands()));
+        $this->assertNotEmpty($criterion->getRegexOperands());
+
+        $expected = array(
+            Criterion::CRITERION_OP_RE
+        );
+
+        $this->assertEquals($expected, $criterion->getRegexOperands());
+    }
 }

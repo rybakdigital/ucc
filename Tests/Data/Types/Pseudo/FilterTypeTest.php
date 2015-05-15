@@ -137,4 +137,23 @@ class FilterTypeTest extends TestCase
 
         $this->assertFalse(FilterType::is($supplied, $requirements));
     }
+
+    /**
+     * @expectedException Ucc\Exception\Data\InvalidDataValueException
+     * @expectedExceptionMessage and part 5 (value) must be one of
+     */
+    public function testFilterToCriterionFailWrongBooleanType()
+    {
+        $filter = 'and-id-bool-value-nottrue';
+        FilterType::filterToCriterion($filter);
+    }
+
+    public function testFilterToCriterionPassBooleanType()
+    {
+        $filter = 'and-id-bool-value-true';
+        $this->assertInstanceOf('Ucc\Data\Filter\Criterion\Criterion', FilterType::filterToCriterion($filter));
+
+        $filter = 'and-id-bool-value-false';
+        $this->assertInstanceOf('Ucc\Data\Filter\Criterion\Criterion', FilterType::filterToCriterion($filter));
+    }
 }
