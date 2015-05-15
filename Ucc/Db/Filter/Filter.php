@@ -15,7 +15,14 @@ use Ucc\Db\Filter\Sql;
  */
 class Filter
 {
-    public static function criteriaToSql($criteria = array(), $fieldMap = array(), $namespace = 'filter')
+    /**
+     * Turns array of Ucc\Data\Filter\Filter objects (also known as criteria) into SQL
+     *
+     * @param array     $criteria   Array of Ucc\Data\Filter\Filter objects
+     * @param array     $fieldMap   Array of field names and tables
+     * @param string    $namespace  Prefix for query placeholders
+     */
+    public static function filterToSql($criteria = array(), $fieldMap = array(), $namespace = 'filter')
     {
         // Default return values
         $sql    = '';
@@ -45,8 +52,6 @@ class Filter
 
             $sql .= $filter->getStatement();
         }
-
-        var_dump($sql);
     }
 
     /**
@@ -65,6 +70,12 @@ class Filter
         return false;
     }
 
+    /**
+     * Decides which transformation method use for given operand
+     *
+     * @param   Criterion   $criterion
+     * @return  string
+     */
     public static function criterionOperandToMethod(Criterion $criterion)
     {
         switch ($criterion->op())
