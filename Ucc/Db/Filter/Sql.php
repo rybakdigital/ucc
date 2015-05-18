@@ -327,7 +327,7 @@ class Sql
      * @param   string  $string Unescaped string
      * @return  mixed   Escaped string, false on failure
      */
-    public function escape($string) {
+    public static function escape($string) {
         if (is_string($string)) {
             return str_replace(
                     array('\\', "\0", "\n", "\r", "'", '"', "\x1a"),
@@ -344,7 +344,7 @@ class Sql
      * @param   string  $string Unquoted string
      * @return  mixed   Quoted string, false on failure
      */
-    public function quote($string)
+    public static function quote($string)
     {
         if (is_string($string)) {
             return '`' . str_replace('`', '', $string) . '`';
