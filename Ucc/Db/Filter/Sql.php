@@ -88,7 +88,7 @@ class Sql
         return $clause;
     }
 
-    public static function criterionToRelative(Criterion $criterion, $placeHolder, $fieldMap = array())
+    public static function criterionToRelative(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand
         $op         = false;
@@ -123,7 +123,7 @@ class Sql
             $field = self::getSafeFieldName($criterion->key(), $fieldMap);
 
             // Build the final clause.
-            $clause->setStatement($field . ' ' . $op . ' ' . $comparand);
+            $clause->setStatement($criterion->logic(). ' ' .$field . ' ' . $op . ' ' . $comparand);
         }
 
         return $clause;

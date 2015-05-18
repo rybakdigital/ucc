@@ -307,6 +307,66 @@ class SqlTest extends TestCase
         );
     }
 
+    public function relativeGtCriterionsProvider()
+    {
+        $directNeiValueCriterion = new Criterion;
+        $directNeiValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('gt')
+            ->setType('value')
+            ->setValue('abc');
+
+        $directNeiValueClause = new Clause;
+        $directNeiValueClause
+            ->setStatement('and `foo` > :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $directNeiValueOrCriterion = new Criterion;
+        $directNeiValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('gt')
+            ->setType('value')
+            ->setValue('abc');
+
+        $directNeiValueOrClause = new Clause;
+        $directNeiValueOrClause
+            ->setStatement('or `loo` > :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $directNeiFieldCriterion = new Criterion;
+        $directNeiFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('gt')
+            ->setType('field')
+            ->setValue('abc');
+
+        $directNeiFieldClause = new Clause;
+        $directNeiFieldClause
+            ->setStatement('and `bar` > `abc`');
+
+        $directNeiFieldOrCriterion = new Criterion;
+        $directNeiFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('gt')
+            ->setType('field')
+            ->setValue('loo');
+
+        $directNeiFieldOrClause = new Clause;
+        $directNeiFieldOrClause
+            ->setStatement('or `bar` > `loo`');
+
+        return array(
+            array($directNeiValueCriterion, $directNeiValueClause),
+            array($directNeiValueOrCriterion, $directNeiValueOrClause),
+            array($directNeiFieldCriterion, $directNeiFieldClause),
+            array($directNeiFieldOrCriterion, $directNeiFieldOrClause),
+        );
+    }
+
     /**
      * @dataProvider boolCriterionsProvider
      */
@@ -357,6 +417,17 @@ class SqlTest extends TestCase
     public function testCriterionToDirectNeiPass($criterion, $expected)
     {
         $sqlClause = Sql::criterionToDirectClause($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider relativeGtCriterionsProvider
+     */
+    public function testCriterionToRelativeGtPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToRelative($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
