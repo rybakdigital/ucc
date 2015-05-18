@@ -81,7 +81,7 @@ class Sql
             // use the relevant collation for the comparison.
             // Testing shows this doesn't affect use of keys on integer
             // fields, if they are used as part of a case sensitive filter
-            $clause->setStatement(' ' . $criterion->logic(). ' ' . $field . ' ' . $op . ' '
+            $clause->setStatement($criterion->logic(). ' ' . $field . ' ' . $op . ' '
                 . 'CAST(' . $comparand . ' AS CHAR)' . ' COLLATE ' . $collate);
         }
 
