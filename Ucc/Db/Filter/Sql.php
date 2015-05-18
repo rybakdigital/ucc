@@ -15,7 +15,7 @@ class Sql
     /**
      * Turns Criterion into Sql Clause
      */
-    public static function criterionToBool(Criterion $criterion, $placeHolder, $fieldMap = array())
+    public static function criterionToBool(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Escape, quote and qualify the field name for security.
         $field  = self::getSafeFieldName($criterion->key(), $fieldMap);
@@ -33,9 +33,11 @@ class Sql
             ) {
             $clause->setStatement('(' . $field . ' IS NULL OR ' . $field . ' = "")');
         }
+
+        return $clause;
     }
 
-    public static function criterionToDirectClause(Criterion $criterion, $placeHolder, $fieldMap = array())
+    public static function criterionToDirectClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
         $op         = false;
@@ -123,6 +125,8 @@ class Sql
             // Build the final clause.
             $clause->setStatement($field . ' ' . $op . ' ' . $comparand);
         }
+
+        return $clause;
     }
 
     public static function criterionToContains(Criterion $criterion, $placeHolder, $fieldMap = array())
@@ -170,6 +174,8 @@ class Sql
                     . 'CONCAT("%", ' . $comparand . ', "%")'
                     . ' COLLATE ' . $collate);
         }
+
+        return $clause;
     }
 
     public static function criterionToBegins(Criterion $criterion, $placeHolder, $fieldMap = array())
@@ -217,6 +223,8 @@ class Sql
                     . 'CONCAT(' . $comparand . ', "%")'
                     . ' COLLATE ' . $collate);
         }
+
+        return $clause;
     }
 
     public static function criterionToRegex(Criterion $criterion, $placeHolder, $fieldMap = array())
@@ -237,6 +245,8 @@ class Sql
         // Build the final clause.
         // Use end wild-card character for "begins with".
         $clause->setStatement($field . ' REGEXP ' . $comparand);
+
+        return $clause;
     }
 
     public static function criterionToIn(Criterion $criterion, $placeHolder, $fieldMap = array())
@@ -303,6 +313,8 @@ class Sql
             // Use end wild-card character for "begins with".
             $clause->setStatement($field . ' ' . $op . ' ' . $comparand);
         }
+
+        return $clause;
     }
 
     /**
