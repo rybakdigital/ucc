@@ -309,61 +309,241 @@ class SqlTest extends TestCase
 
     public function relativeGtCriterionsProvider()
     {
-        $directNeiValueCriterion = new Criterion;
-        $directNeiValueCriterion
+        $relativeGtValueCriterion = new Criterion;
+        $relativeGtValueCriterion
             ->setLogic('and')
             ->setKey('foo')
             ->setOperand('gt')
             ->setType('value')
             ->setValue('abc');
 
-        $directNeiValueClause = new Clause;
-        $directNeiValueClause
+        $relativeGtValueClause = new Clause;
+        $relativeGtValueClause
             ->setStatement('and `foo` > :filter_0')
             ->setParameter('filter_0', 'abc');
 
-        $directNeiValueOrCriterion = new Criterion;
-        $directNeiValueOrCriterion
+        $relativeGtValueOrCriterion = new Criterion;
+        $relativeGtValueOrCriterion
             ->setLogic('or')
             ->setKey('loo')
             ->setOperand('gt')
             ->setType('value')
             ->setValue('abc');
 
-        $directNeiValueOrClause = new Clause;
-        $directNeiValueOrClause
+        $relativeGtValueOrClause = new Clause;
+        $relativeGtValueOrClause
             ->setStatement('or `loo` > :filter_0')
             ->setParameter('filter_0', 'abc');
 
-        $directNeiFieldCriterion = new Criterion;
-        $directNeiFieldCriterion
+        $relativeGtFieldCriterion = new Criterion;
+        $relativeGtFieldCriterion
             ->setLogic('and')
             ->setKey('bar')
             ->setOperand('gt')
             ->setType('field')
             ->setValue('abc');
 
-        $directNeiFieldClause = new Clause;
-        $directNeiFieldClause
+        $relativeGtFieldClause = new Clause;
+        $relativeGtFieldClause
             ->setStatement('and `bar` > `abc`');
 
-        $directNeiFieldOrCriterion = new Criterion;
-        $directNeiFieldOrCriterion
+        $relativeGtFieldOrCriterion = new Criterion;
+        $relativeGtFieldOrCriterion
             ->setLogic('or')
             ->setKey('bar')
             ->setOperand('gt')
             ->setType('field')
             ->setValue('loo');
 
-        $directNeiFieldOrClause = new Clause;
-        $directNeiFieldOrClause
+        $relativeGtFieldOrClause = new Clause;
+        $relativeGtFieldOrClause
             ->setStatement('or `bar` > `loo`');
 
         return array(
-            array($directNeiValueCriterion, $directNeiValueClause),
-            array($directNeiValueOrCriterion, $directNeiValueOrClause),
-            array($directNeiFieldCriterion, $directNeiFieldClause),
-            array($directNeiFieldOrCriterion, $directNeiFieldOrClause),
+            array($relativeGtValueCriterion, $relativeGtValueClause),
+            array($relativeGtValueOrCriterion, $relativeGtValueOrClause),
+            array($relativeGtFieldCriterion, $relativeGtFieldClause),
+            array($relativeGtFieldOrCriterion, $relativeGtFieldOrClause),
+        );
+    }
+
+    public function relativeGeCriterionsProvider()
+    {
+        $relativeGeValueCriterion = new Criterion;
+        $relativeGeValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('ge')
+            ->setType('value')
+            ->setValue('abc');
+
+        $relativeGeValueClause = new Clause;
+        $relativeGeValueClause
+            ->setStatement('and `foo` >= :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $relativeGeValueOrCriterion = new Criterion;
+        $relativeGeValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('ge')
+            ->setType('value')
+            ->setValue('abc');
+
+        $relativeGeValueOrClause = new Clause;
+        $relativeGeValueOrClause
+            ->setStatement('or `loo` >= :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $relativeGeFieldCriterion = new Criterion;
+        $relativeGeFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('ge')
+            ->setType('field')
+            ->setValue('abc');
+
+        $relativeGeFieldClause = new Clause;
+        $relativeGeFieldClause
+            ->setStatement('and `bar` >= `abc`');
+
+        $relativeGeFieldOrCriterion = new Criterion;
+        $relativeGeFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('ge')
+            ->setType('field')
+            ->setValue('loo');
+
+        $relativeGeFieldOrClause = new Clause;
+        $relativeGeFieldOrClause
+            ->setStatement('or `bar` >= `loo`');
+
+        return array(
+            array($relativeGeValueCriterion, $relativeGeValueClause),
+            array($relativeGeValueOrCriterion, $relativeGeValueOrClause),
+            array($relativeGeFieldCriterion, $relativeGeFieldClause),
+            array($relativeGeFieldOrCriterion, $relativeGeFieldOrClause),
+        );
+    }
+
+    public function relativeLtCriterionsProvider()
+    {
+        $relativeLtValueCriterion = new Criterion;
+        $relativeLtValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('lt')
+            ->setType('value')
+            ->setValue('abc');
+
+        $relativeLtValueClause = new Clause;
+        $relativeLtValueClause
+            ->setStatement('and `foo` < :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $relativeLtValueOrCriterion = new Criterion;
+        $relativeLtValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('lt')
+            ->setType('value')
+            ->setValue('abc');
+
+        $relativeLtValueOrClause = new Clause;
+        $relativeLtValueOrClause
+            ->setStatement('or `loo` < :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $relativeLtFieldCriterion = new Criterion;
+        $relativeLtFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('lt')
+            ->setType('field')
+            ->setValue('abc');
+
+        $relativeLtFieldClause = new Clause;
+        $relativeLtFieldClause
+            ->setStatement('and `bar` < `abc`');
+
+        $relativeLtFieldOrCriterion = new Criterion;
+        $relativeLtFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('lt')
+            ->setType('field')
+            ->setValue('loo');
+
+        $relativeLtFieldOrClause = new Clause;
+        $relativeLtFieldOrClause
+            ->setStatement('or `bar` < `loo`');
+
+        return array(
+            array($relativeLtValueCriterion, $relativeLtValueClause),
+            array($relativeLtValueOrCriterion, $relativeLtValueOrClause),
+            array($relativeLtFieldCriterion, $relativeLtFieldClause),
+            array($relativeLtFieldOrCriterion, $relativeLtFieldOrClause),
+        );
+    }
+
+    public function relativeLeCriterionsProvider()
+    {
+        $relativeLeValueCriterion = new Criterion;
+        $relativeLeValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('le')
+            ->setType('value')
+            ->setValue('abc');
+
+        $relativeLeValueClause = new Clause;
+        $relativeLeValueClause
+            ->setStatement('and `foo` <= :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $relativeLeValueOrCriterion = new Criterion;
+        $relativeLeValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('le')
+            ->setType('value')
+            ->setValue('abc');
+
+        $relativeLeValueOrClause = new Clause;
+        $relativeLeValueOrClause
+            ->setStatement('or `loo` <= :filter_0')
+            ->setParameter('filter_0', 'abc');
+
+        $relativeLeFieldCriterion = new Criterion;
+        $relativeLeFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('le')
+            ->setType('field')
+            ->setValue('abc');
+
+        $relativeLeFieldClause = new Clause;
+        $relativeLeFieldClause
+            ->setStatement('and `bar` <= `abc`');
+
+        $relativeLeFieldOrCriterion = new Criterion;
+        $relativeLeFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('le')
+            ->setType('field')
+            ->setValue('loo');
+
+        $relativeLeFieldOrClause = new Clause;
+        $relativeLeFieldOrClause
+            ->setStatement('or `bar` <= `loo`');
+
+        return array(
+            array($relativeLeValueCriterion, $relativeLeValueClause),
+            array($relativeLeValueOrCriterion, $relativeLeValueOrClause),
+            array($relativeLeFieldCriterion, $relativeLeFieldClause),
+            array($relativeLeFieldOrCriterion, $relativeLeFieldOrClause),
         );
     }
 
@@ -426,6 +606,39 @@ class SqlTest extends TestCase
      * @dataProvider relativeGtCriterionsProvider
      */
     public function testCriterionToRelativeGtPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToRelative($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider relativeGeCriterionsProvider
+     */
+    public function testCriterionToRelativeGePass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToRelative($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider relativeLtCriterionsProvider
+     */
+    public function testCriterionToRelativeLtPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToRelative($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider relativeLeCriterionsProvider
+     */
+    public function testCriterionToLelativeGePass($criterion, $expected)
     {
         $sqlClause = Sql::criterionToRelative($criterion);
 
