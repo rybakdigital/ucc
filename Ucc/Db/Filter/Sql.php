@@ -244,7 +244,7 @@ class Sql
 
         // Build the final clause.
         // Use end wild-card character for "begins with".
-        $clause->setStatement($field . ' REGEXP ' . $comparand);
+        $clause->setStatement($criterion->logic() . ' ' . $field . ' REGEXP ' . $comparand);
 
         return $clause;
     }
