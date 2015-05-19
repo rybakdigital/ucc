@@ -387,7 +387,7 @@ class Sql
      * @param   array Field map.
      * @return  mixed Escaped and Quoted table name or false on failure.
      */
-    public function getSafeTableName($field, array $fieldMap)
+    public static function getSafeTableName($field, array $fieldMap)
     {
         if (is_string($field)) {
             // Find the correct table for this field according to the field map.
