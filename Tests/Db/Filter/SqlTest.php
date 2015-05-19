@@ -787,6 +787,246 @@ class SqlTest extends TestCase
         );
     }
 
+    public function beginsBeginsCriterionsProvider()
+    {
+        $beginsBeginsValueCriterion = new Criterion;
+        $beginsBeginsValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('begins')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsBeginsValueClause = new Clause;
+        $beginsBeginsValueClause
+            ->setStatement('and `foo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsBeginsValueOrCriterion = new Criterion;
+        $beginsBeginsValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('begins')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsBeginsValueOrClause = new Clause;
+        $beginsBeginsValueOrClause
+            ->setStatement('or `loo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsBeginsFieldCriterion = new Criterion;
+        $beginsBeginsFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('begins')
+            ->setType('field')
+            ->setValue('abc');
+
+        $beginsBeginsFieldClause = new Clause;
+        $beginsBeginsFieldClause
+            ->setStatement('and `bar` LIKE CONCAT(`abc`, "%") COLLATE utf8_bin');
+
+        $beginsBeginsFieldOrCriterion = new Criterion;
+        $beginsBeginsFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('begins')
+            ->setType('field')
+            ->setValue('loo');
+
+        $beginsBeginsFieldOrClause = new Clause;
+        $beginsBeginsFieldOrClause
+            ->setStatement('or `bar` LIKE CONCAT(`loo`, "%") COLLATE utf8_bin');
+
+        return array(
+            array($beginsBeginsValueCriterion, $beginsBeginsValueClause),
+            array($beginsBeginsValueOrCriterion, $beginsBeginsValueOrClause),
+            array($beginsBeginsFieldCriterion, $beginsBeginsFieldClause),
+            array($beginsBeginsFieldOrCriterion, $beginsBeginsFieldOrClause),
+        );
+    }
+
+    public function beginsNbeginsCriterionsProvider()
+    {
+        $beginsNbeginsValueCriterion = new Criterion;
+        $beginsNbeginsValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nbegins')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsNbeginsValueClause = new Clause;
+        $beginsNbeginsValueClause
+            ->setStatement('and `foo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsNbeginsValueOrCriterion = new Criterion;
+        $beginsNbeginsValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('nbegins')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsNbeginsValueOrClause = new Clause;
+        $beginsNbeginsValueOrClause
+            ->setStatement('or `loo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsNbeginsFieldCriterion = new Criterion;
+        $beginsNbeginsFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('nbegins')
+            ->setType('field')
+            ->setValue('abc');
+
+        $beginsNbeginsFieldClause = new Clause;
+        $beginsNbeginsFieldClause
+            ->setStatement('and `bar` NOT LIKE CONCAT(`abc`, "%") COLLATE utf8_bin');
+
+        $beginsNbeginsFieldOrCriterion = new Criterion;
+        $beginsNbeginsFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('nbegins')
+            ->setType('field')
+            ->setValue('loo');
+
+        $beginsNbeginsFieldOrClause = new Clause;
+        $beginsNbeginsFieldOrClause
+            ->setStatement('or `bar` NOT LIKE CONCAT(`loo`, "%") COLLATE utf8_bin');
+
+        return array(
+            array($beginsNbeginsValueCriterion, $beginsNbeginsValueClause),
+            array($beginsNbeginsValueOrCriterion, $beginsNbeginsValueOrClause),
+            array($beginsNbeginsFieldCriterion, $beginsNbeginsFieldClause),
+            array($beginsNbeginsFieldOrCriterion, $beginsNbeginsFieldOrClause),
+        );
+    }
+
+    public function beginsbeginsiCriterionsProvider()
+    {
+        $beginsbeginsiValueCriterion = new Criterion;
+        $beginsbeginsiValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('beginsi')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsbeginsiValueClause = new Clause;
+        $beginsbeginsiValueClause
+            ->setStatement('and `foo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsbeginsiValueOrCriterion = new Criterion;
+        $beginsbeginsiValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('beginsi')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsbeginsiValueOrClause = new Clause;
+        $beginsbeginsiValueOrClause
+            ->setStatement('or `loo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsbeginsiFieldCriterion = new Criterion;
+        $beginsbeginsiFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('beginsi')
+            ->setType('field')
+            ->setValue('abc');
+
+        $beginsbeginsiFieldClause = new Clause;
+        $beginsbeginsiFieldClause
+            ->setStatement('and `bar` LIKE CONCAT(`abc`, "%") COLLATE utf8_general_ci');
+
+        $beginsbeginsiFieldOrCriterion = new Criterion;
+        $beginsbeginsiFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('beginsi')
+            ->setType('field')
+            ->setValue('loo');
+
+        $beginsbeginsiFieldOrClause = new Clause;
+        $beginsbeginsiFieldOrClause
+            ->setStatement('or `bar` LIKE CONCAT(`loo`, "%") COLLATE utf8_general_ci');
+
+        return array(
+            array($beginsbeginsiValueCriterion, $beginsbeginsiValueClause),
+            array($beginsbeginsiValueOrCriterion, $beginsbeginsiValueOrClause),
+            array($beginsbeginsiFieldCriterion, $beginsbeginsiFieldClause),
+            array($beginsbeginsiFieldOrCriterion, $beginsbeginsiFieldOrClause),
+        );
+    }
+
+    public function beginsNbeginsiCriterionsProvider()
+    {
+        $beginsNbeginsiValueCriterion = new Criterion;
+        $beginsNbeginsiValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nbeginsi')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsNbeginsiValueClause = new Clause;
+        $beginsNbeginsiValueClause
+            ->setStatement('and `foo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsNbeginsiValueOrCriterion = new Criterion;
+        $beginsNbeginsiValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('nbeginsi')
+            ->setType('value')
+            ->setValue('abc');
+
+        $beginsNbeginsiValueOrClause = new Clause;
+        $beginsNbeginsiValueOrClause
+            ->setStatement('or `loo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $beginsNbeginsiFieldCriterion = new Criterion;
+        $beginsNbeginsiFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('nbeginsi')
+            ->setType('field')
+            ->setValue('abc');
+
+        $beginsNbeginsiFieldClause = new Clause;
+        $beginsNbeginsiFieldClause
+            ->setStatement('and `bar` NOT LIKE CONCAT(`abc`, "%") COLLATE utf8_general_ci');
+
+        $beginsNbeginsiFieldOrCriterion = new Criterion;
+        $beginsNbeginsiFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('nbeginsi')
+            ->setType('field')
+            ->setValue('loo');
+
+        $beginsNbeginsiFieldOrClause = new Clause;
+        $beginsNbeginsiFieldOrClause
+            ->setStatement('or `bar` NOT LIKE CONCAT(`loo`, "%") COLLATE utf8_general_ci');
+
+        return array(
+            array($beginsNbeginsiValueCriterion, $beginsNbeginsiValueClause),
+            array($beginsNbeginsiValueOrCriterion, $beginsNbeginsiValueOrClause),
+            array($beginsNbeginsiFieldCriterion, $beginsNbeginsiFieldClause),
+            array($beginsNbeginsiFieldOrCriterion, $beginsNbeginsiFieldOrClause),
+        );
+    }
+
     /**
      * @dataProvider boolCriterionsProvider
      */
@@ -925,6 +1165,50 @@ class SqlTest extends TestCase
     public function testCriterionToContainsNinciPass($criterion, $expected)
     {
         $sqlClause = Sql::criterionToContains($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider beginsBeginsCriterionsProvider
+     */
+    public function testCriterionToBeginsBeginsPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToBegins($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider beginsNbeginsCriterionsProvider
+     */
+    public function testCriterionToNbeginsBeginsPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToBegins($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider beginsbeginsiCriterionsProvider
+     */
+    public function testCriterionToBeginsiBeginsPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToBegins($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider beginsNbeginsiCriterionsProvider
+     */
+    public function testCriterionToNbeginsiBeginsPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToBegins($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
