@@ -1055,9 +1055,302 @@ class SqlTest extends TestCase
             ->setStatement('or `loo` REGEXP :filter_0')
             ->setParameter('filter_0', '\d+');
 
+        $regexFieldCriterion = new Criterion;
+        $regexFieldCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('re')
+            ->setType('field')
+            ->setValue('loo');
+
+        $regexFieldClause = new Clause;
+        $regexFieldClause
+            ->setStatement('and `foo` REGEXP `loo`');
+
         return array(
             array($regexValueCriterion, $regexValueClause),
             array($regexValueOrCriterion, $regexValueOrClause),
+            array($regexFieldCriterion, $regexFieldClause),
+        );
+    }
+
+    public function inInCriterionsProvider()
+    {
+        $inInValueAndCriterion = new Criterion;
+        $inInValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inInValueAndClause = new Clause;
+        $inInValueAndClause
+            ->setStatement('and `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inInValueOrCriterion = new Criterion;
+        $inInValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inInValueOrClause = new Clause;
+        $inInValueOrClause
+            ->setStatement('or `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inInTypeAndCriterion = new Criterion;
+        $inInTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inInTypeAndClause = new Clause;
+        $inInTypeAndClause
+            ->setStatement('and `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        $inInTypeOrCriterion = new Criterion;
+        $inInTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inInTypeOrClause = new Clause;
+        $inInTypeOrClause
+            ->setStatement('or `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        return array(
+            array($inInValueAndCriterion, $inInValueAndClause),
+            array($inInValueOrCriterion, $inInValueOrClause),
+            array($inInTypeAndCriterion, $inInTypeAndClause),
+            array($inInTypeOrCriterion, $inInTypeOrClause),
+        );
+    }
+
+    public function inNinCriterionsProvider()
+    {
+        $inNinValueAndCriterion = new Criterion;
+        $inNinValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNinValueAndClause = new Clause;
+        $inNinValueAndClause
+            ->setStatement('and `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNinValueOrCriterion = new Criterion;
+        $inNinValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNinValueOrClause = new Clause;
+        $inNinValueOrClause
+            ->setStatement('or `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNinTypeAndCriterion = new Criterion;
+        $inNinTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNinTypeAndClause = new Clause;
+        $inNinTypeAndClause
+            ->setStatement('and `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        $inNinTypeOrCriterion = new Criterion;
+        $inNinTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNinTypeOrClause = new Clause;
+        $inNinTypeOrClause
+            ->setStatement('or `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        return array(
+            array($inNinValueAndCriterion, $inNinValueAndClause),
+            array($inNinValueOrCriterion, $inNinValueOrClause),
+            array($inNinTypeAndCriterion, $inNinTypeAndClause),
+            array($inNinTypeOrCriterion, $inNinTypeOrClause),
+        );
+    }
+
+    public function inIniCriterionsProvider()
+    {
+        $inIniValueAndCriterion = new Criterion;
+        $inIniValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inIniValueAndClause = new Clause;
+        $inIniValueAndClause
+            ->setStatement('and `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inIniValueOrCriterion = new Criterion;
+        $inIniValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inIniValueOrClause = new Clause;
+        $inIniValueOrClause
+            ->setStatement('or `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inIniTypeAndCriterion = new Criterion;
+        $inIniTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inIniTypeAndClause = new Clause;
+        $inIniTypeAndClause
+            ->setStatement('and `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        $inIniTypeOrCriterion = new Criterion;
+        $inIniTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inIniTypeOrClause = new Clause;
+        $inIniTypeOrClause
+            ->setStatement('or `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        return array(
+            array($inIniValueAndCriterion, $inIniValueAndClause),
+            array($inIniValueOrCriterion, $inIniValueOrClause),
+            array($inIniTypeAndCriterion, $inIniTypeAndClause),
+            array($inIniTypeOrCriterion, $inIniTypeOrClause),
+        );
+    }
+
+    public function inNiniCriterionsProvider()
+    {
+        $inNiniValueAndCriterion = new Criterion;
+        $inNiniValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNiniValueAndClause = new Clause;
+        $inNiniValueAndClause
+            ->setStatement('and `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNiniValueOrCriterion = new Criterion;
+        $inNiniValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNiniValueOrClause = new Clause;
+        $inNiniValueOrClause
+            ->setStatement('or `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNiniTypeAndCriterion = new Criterion;
+        $inNiniTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNiniTypeAndClause = new Clause;
+        $inNiniTypeAndClause
+            ->setStatement('and `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        $inNiniTypeOrCriterion = new Criterion;
+        $inNiniTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNiniTypeOrClause = new Clause;
+        $inNiniTypeOrClause
+            ->setStatement('or `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        return array(
+            array($inNiniValueAndCriterion, $inNiniValueAndClause),
+            array($inNiniValueOrCriterion, $inNiniValueOrClause),
+            array($inNiniTypeAndCriterion, $inNiniTypeAndClause),
+            array($inNiniTypeOrCriterion, $inNiniTypeOrClause),
         );
     }
 
@@ -1257,5 +1550,225 @@ class SqlTest extends TestCase
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inInCriterionsProvider
+     */
+    public function testCriterionToInInPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inNinCriterionsProvider
+     */
+    public function testCriterionToInNinPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inIniCriterionsProvider
+     */
+    public function testCriterionToInIniPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inNiniCriterionsProvider
+     */
+    public function testCriterionToInNiniPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    public function safeFieldNameProvider()
+    {
+        $data = array();
+
+        $field      = 'test';
+        $fieldMap   = array();
+        $expected   = '`test`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        $field      = 'test';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2');
+        $expected   = '`tbl1`.`test`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        $field      = 'test3';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2', 'test3' => 'having');
+        $expected   = '`test3`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        $field      = 'test5';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2', 'test3' => 'having', '*' => 'tbl4');
+        $expected   = '`tbl4`.`test5`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider safeFieldNameProvider
+     */
+    public function testgetSafeFieldName($field, $fieldMap, $expected)
+    {
+        $result = Sql::getSafeFieldName($field, $fieldMap);
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function escapeProvider()
+    {
+        $data = array();
+
+        $string     = 1;
+        $expected   = false;
+        $data[] = array($string, $expected);
+
+        $string     = '';
+        $expected   = '';
+        $data[] = array($string, $expected);
+
+        $string     = 'regular string';
+        $expected   = 'regular string';
+        $data[] = array($string, $expected);
+
+        $string     = '`quoted string`';
+        $expected   = '`quoted string`';
+        $data[] = array($string, $expected);
+
+        $string     = "escape \\ character";
+        $expected   = "escape \\\\ character";
+        $data[] = array($string, $expected);
+
+        $string     = "null \x00 character";
+        $expected   = "null \\0 character";
+        $data[] = array($string, $expected);
+
+        $string     = "null \0 character";
+        $expected   = "null \\0 character";
+        $data[] = array($string, $expected);
+
+        $string     = "line \n break";
+        $expected   = "line \\n break";
+        $data[] = array($string, $expected);
+
+        $string     = "carriage \r return";
+        $expected   = "carriage \\r return";
+        $data[] = array($string, $expected);
+
+        $string     = "DOS \r\n line break";
+        $expected   = "DOS \\r\\n line break";
+        $data[] = array($string, $expected);
+
+        $string     = "'single quotes'";
+        $expected   = "\\'single quotes\\'";
+        $data[] = array($string, $expected);
+
+        $string     = '"double quotes"';
+        $expected   = '\\"double quotes\\"';
+        $data[] = array($string, $expected);
+
+        $string     = "\x1a question mark";
+        $expected   = "\\Z question mark";
+        $data[] = array($string, $expected);
+
+        $string     = "multiple % wildcard";
+        $expected   = "multiple % wildcard";
+        $data[] = array($string, $expected);
+
+        $string     = "single _ wildcard";
+        $expected   = "single _ wildcard";
+        $data[] = array($string, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider escapeProvider
+     */
+    public function testEscape($string, $expected)
+    {
+        $result = Sql::escape($string);
+        $this->assertSame($expected, $result);
+    }
+
+    public function quoteProvider()
+    {
+        $data = array();
+
+        $string     = 1;
+        $expected   = false;
+        $data[]     = array($string, $expected);
+
+        $string     = 'string';
+        $expected   = '`string`';
+        $data[]     = array($string, $expected);
+
+        $string     = '`quoted string`';
+        $expected   = '`quoted string`';
+        $data[]     = array($string, $expected);
+
+        $string     = '`multi` `quoted` `string`';
+        $expected   = '`multi quoted string`';
+        $data[]     = array($string, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider quoteProvider
+     */
+    public function testQuote($string, $expected)
+    {
+        $result = Sql::quote($string);
+        $this->assertSame($expected, $result);
+    }
+
+    public function safeTaleNameProviderProvider()
+    {
+        $data = array();
+
+        $field      = 1;
+        $fieldMap   = array();
+        $expected   = false;
+        $data[]     = array($field, $fieldMap, $expected);
+
+        $field      = 'test';
+        $fieldMap   = array();
+        $expected   = '';
+        $data[]     = array($field, $fieldMap, $expected);
+
+        $field      = 'test0';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2', 'test3' => 'having', '*' => 'tbl4');
+        $expected   = '`tbl1`';
+        $data[]     = array($field, $fieldMap, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider safeTaleNameProviderProvider
+     */
+    public function testGetSafeTableName($field, $fieldMap, $expected)
+    {
+        $result = Sql::getSafeTableName($field, $fieldMap);
+        $this->assertSame($expected, $result);
     }
 }
