@@ -1061,6 +1061,286 @@ class SqlTest extends TestCase
         );
     }
 
+    public function inInCriterionsProvider()
+    {
+        $inInValueAndCriterion = new Criterion;
+        $inInValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inInValueAndClause = new Clause;
+        $inInValueAndClause
+            ->setStatement('and `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inInValueOrCriterion = new Criterion;
+        $inInValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inInValueOrClause = new Clause;
+        $inInValueOrClause
+            ->setStatement('or `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inInTypeAndCriterion = new Criterion;
+        $inInTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inInTypeAndClause = new Clause;
+        $inInTypeAndClause
+            ->setStatement('and `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        $inInTypeOrCriterion = new Criterion;
+        $inInTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('in')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inInTypeOrClause = new Clause;
+        $inInTypeOrClause
+            ->setStatement('or `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        return array(
+            array($inInValueAndCriterion, $inInValueAndClause),
+            array($inInValueOrCriterion, $inInValueOrClause),
+            array($inInTypeAndCriterion, $inInTypeAndClause),
+            array($inInTypeOrCriterion, $inInTypeOrClause),
+        );
+    }
+
+    public function inNinCriterionsProvider()
+    {
+        $inNinValueAndCriterion = new Criterion;
+        $inNinValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNinValueAndClause = new Clause;
+        $inNinValueAndClause
+            ->setStatement('and `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNinValueOrCriterion = new Criterion;
+        $inNinValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNinValueOrClause = new Clause;
+        $inNinValueOrClause
+            ->setStatement('or `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNinTypeAndCriterion = new Criterion;
+        $inNinTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNinTypeAndClause = new Clause;
+        $inNinTypeAndClause
+            ->setStatement('and `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        $inNinTypeOrCriterion = new Criterion;
+        $inNinTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nin')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNinTypeOrClause = new Clause;
+        $inNinTypeOrClause
+            ->setStatement('or `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+
+        return array(
+            array($inNinValueAndCriterion, $inNinValueAndClause),
+            array($inNinValueOrCriterion, $inNinValueOrClause),
+            array($inNinTypeAndCriterion, $inNinTypeAndClause),
+            array($inNinTypeOrCriterion, $inNinTypeOrClause),
+        );
+    }
+
+    public function inIniCriterionsProvider()
+    {
+        $inIniValueAndCriterion = new Criterion;
+        $inIniValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inIniValueAndClause = new Clause;
+        $inIniValueAndClause
+            ->setStatement('and `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inIniValueOrCriterion = new Criterion;
+        $inIniValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inIniValueOrClause = new Clause;
+        $inIniValueOrClause
+            ->setStatement('or `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inIniTypeAndCriterion = new Criterion;
+        $inIniTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inIniTypeAndClause = new Clause;
+        $inIniTypeAndClause
+            ->setStatement('and `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        $inIniTypeOrCriterion = new Criterion;
+        $inIniTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('ini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inIniTypeOrClause = new Clause;
+        $inIniTypeOrClause
+            ->setStatement('or `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        return array(
+            array($inIniValueAndCriterion, $inIniValueAndClause),
+            array($inIniValueOrCriterion, $inIniValueOrClause),
+            array($inIniTypeAndCriterion, $inIniTypeAndClause),
+            array($inIniTypeOrCriterion, $inIniTypeOrClause),
+        );
+    }
+
+    public function inNiniCriterionsProvider()
+    {
+        $inNiniValueAndCriterion = new Criterion;
+        $inNiniValueAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNiniValueAndClause = new Clause;
+        $inNiniValueAndClause
+            ->setStatement('and `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNiniValueOrCriterion = new Criterion;
+        $inNiniValueOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('value')
+            ->setValue('abc,def,xyz,123');
+
+        $inNiniValueOrClause = new Clause;
+        $inNiniValueOrClause
+            ->setStatement('or `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setParameters(array(
+                    'filter_0_0' => 'abc',
+                    'filter_0_1' => 'def',
+                    'filter_0_2' => 'xyz',
+                    'filter_0_3' => '123',
+                ));
+
+        $inNiniTypeAndCriterion = new Criterion;
+        $inNiniTypeAndCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNiniTypeAndClause = new Clause;
+        $inNiniTypeAndClause
+            ->setStatement('and `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        $inNiniTypeOrCriterion = new Criterion;
+        $inNiniTypeOrCriterion
+            ->setLogic('or')
+            ->setKey('foo')
+            ->setOperand('nini')
+            ->setType('field')
+            ->setValue('bar,loo,foo');
+
+        $inNiniTypeOrClause = new Clause;
+        $inNiniTypeOrClause
+            ->setStatement('or `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+
+        return array(
+            array($inNiniValueAndCriterion, $inNiniValueAndClause),
+            array($inNiniValueOrCriterion, $inNiniValueOrClause),
+            array($inNiniTypeAndCriterion, $inNiniTypeAndClause),
+            array($inNiniTypeOrCriterion, $inNiniTypeOrClause),
+        );
+    }
+
     /**
      * @dataProvider boolCriterionsProvider
      */
@@ -1254,6 +1534,50 @@ class SqlTest extends TestCase
     public function testCriterionToRegexpPass($criterion, $expected)
     {
         $sqlClause = Sql::criterionToRegex($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inInCriterionsProvider
+     */
+    public function testCriterionToInInPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inNinCriterionsProvider
+     */
+    public function testCriterionToInNinPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inIniCriterionsProvider
+     */
+    public function testCriterionToInIniPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider inNiniCriterionsProvider
+     */
+    public function testCriterionToInNiniPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToIn($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);

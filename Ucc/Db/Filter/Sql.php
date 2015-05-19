@@ -249,7 +249,7 @@ class Sql
         return $clause;
     }
 
-    public static function criterionToIn(Criterion $criterion, $placeHolder, $fieldMap = array())
+    public static function criterionToIn(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
         $op         = false;
@@ -311,7 +311,7 @@ class Sql
 
             // Build the final clause.
             // Use end wild-card character for "begins with".
-            $clause->setStatement($field . ' ' . $op . ' ' . $comparand);
+            $clause->setStatement($criterion->logic() . ' ' .  $field . ' ' . $op . ' ' . $comparand);
         }
 
         return $clause;
