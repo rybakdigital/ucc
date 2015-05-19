@@ -1027,6 +1027,40 @@ class SqlTest extends TestCase
         );
     }
 
+    public function regexpCriterionsProvider()
+    {
+        $regexValueCriterion = new Criterion;
+        $regexValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('re')
+            ->setType('value')
+            ->setValue('\d+');
+
+        $regexValueClause = new Clause;
+        $regexValueClause
+            ->setStatement('and `foo` REGEXP :filter_0')
+            ->setParameter('filter_0', '\d+');
+
+        $regexValueOrCriterion = new Criterion;
+        $regexValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('re')
+            ->setType('value')
+            ->setValue('\d+');
+
+        $regexValueOrClause = new Clause;
+        $regexValueOrClause
+            ->setStatement('or `loo` REGEXP :filter_0')
+            ->setParameter('filter_0', '\d+');
+
+        return array(
+            array($regexValueCriterion, $regexValueClause),
+            array($regexValueOrCriterion, $regexValueOrClause),
+        );
+    }
+
     /**
      * @dataProvider boolCriterionsProvider
      */
@@ -1209,6 +1243,17 @@ class SqlTest extends TestCase
     public function testCriterionToNbeginsiBeginsPass($criterion, $expected)
     {
         $sqlClause = Sql::criterionToBegins($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider regexpCriterionsProvider
+     */
+    public function testCriterionToRegexpPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToRegex($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
