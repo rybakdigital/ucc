@@ -1055,9 +1055,22 @@ class SqlTest extends TestCase
             ->setStatement('or `loo` REGEXP :filter_0')
             ->setParameter('filter_0', '\d+');
 
+        $regexFieldCriterion = new Criterion;
+        $regexFieldCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('re')
+            ->setType('field')
+            ->setValue('loo');
+
+        $regexFieldClause = new Clause;
+        $regexFieldClause
+            ->setStatement('and `foo` REGEXP `loo`');
+
         return array(
             array($regexValueCriterion, $regexValueClause),
             array($regexValueOrCriterion, $regexValueOrClause),
+            array($regexFieldCriterion, $regexFieldClause),
         );
     }
 
