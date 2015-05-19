@@ -1595,4 +1595,180 @@ class SqlTest extends TestCase
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
     }
+
+    public function safeFieldNameProvider()
+    {
+        $data = array();
+
+        $field      = 'test';
+        $fieldMap   = array();
+        $expected   = '`test`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        $field      = 'test';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2');
+        $expected   = '`tbl1`.`test`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        $field      = 'test3';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2', 'test3' => 'having');
+        $expected   = '`test3`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        $field      = 'test5';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2', 'test3' => 'having', '*' => 'tbl4');
+        $expected   = '`tbl4`.`test5`';
+        $data[] = array($field, $fieldMap, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider safeFieldNameProvider
+     */
+    public function testgetSafeFieldName($field, $fieldMap, $expected)
+    {
+        $result = Sql::getSafeFieldName($field, $fieldMap);
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function escapeProvider()
+    {
+        $data = array();
+
+        $string     = 1;
+        $expected   = false;
+        $data[] = array($string, $expected);
+
+        $string     = '';
+        $expected   = '';
+        $data[] = array($string, $expected);
+
+        $string     = 'regular string';
+        $expected   = 'regular string';
+        $data[] = array($string, $expected);
+
+        $string     = '`quoted string`';
+        $expected   = '`quoted string`';
+        $data[] = array($string, $expected);
+
+        $string     = "escape \\ character";
+        $expected   = "escape \\\\ character";
+        $data[] = array($string, $expected);
+
+        $string     = "null \x00 character";
+        $expected   = "null \\0 character";
+        $data[] = array($string, $expected);
+
+        $string     = "null \0 character";
+        $expected   = "null \\0 character";
+        $data[] = array($string, $expected);
+
+        $string     = "line \n break";
+        $expected   = "line \\n break";
+        $data[] = array($string, $expected);
+
+        $string     = "carriage \r return";
+        $expected   = "carriage \\r return";
+        $data[] = array($string, $expected);
+
+        $string     = "DOS \r\n line break";
+        $expected   = "DOS \\r\\n line break";
+        $data[] = array($string, $expected);
+
+        $string     = "'single quotes'";
+        $expected   = "\\'single quotes\\'";
+        $data[] = array($string, $expected);
+
+        $string     = '"double quotes"';
+        $expected   = '\\"double quotes\\"';
+        $data[] = array($string, $expected);
+
+        $string     = "\x1a question mark";
+        $expected   = "\\Z question mark";
+        $data[] = array($string, $expected);
+
+        $string     = "multiple % wildcard";
+        $expected   = "multiple % wildcard";
+        $data[] = array($string, $expected);
+
+        $string     = "single _ wildcard";
+        $expected   = "single _ wildcard";
+        $data[] = array($string, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider escapeProvider
+     */
+    public function testEscape($string, $expected)
+    {
+        $result = Sql::escape($string);
+        $this->assertSame($expected, $result);
+    }
+
+    public function quoteProvider()
+    {
+        $data = array();
+
+        $string     = 1;
+        $expected   = false;
+        $data[]     = array($string, $expected);
+
+        $string     = 'string';
+        $expected   = '`string`';
+        $data[]     = array($string, $expected);
+
+        $string     = '`quoted string`';
+        $expected   = '`quoted string`';
+        $data[]     = array($string, $expected);
+
+        $string     = '`multi` `quoted` `string`';
+        $expected   = '`multi quoted string`';
+        $data[]     = array($string, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider quoteProvider
+     */
+    public function testQuote($string, $expected)
+    {
+        $result = Sql::quote($string);
+        $this->assertSame($expected, $result);
+    }
+
+    public function safeTaleNameProviderProvider()
+    {
+        $data = array();
+
+        $field      = 1;
+        $fieldMap   = array();
+        $expected   = false;
+        $data[]     = array($field, $fieldMap, $expected);
+
+        $field      = 'test';
+        $fieldMap   = array();
+        $expected   = '';
+        $data[]     = array($field, $fieldMap, $expected);
+
+        $field      = 'test0';
+        $fieldMap   = array('test0' => 'tbl1', 'test' => 'tbl1', 'test2' => 'tbl2', 'test3' => 'having', '*' => 'tbl4');
+        $expected   = '`tbl1`';
+        $data[]     = array($field, $fieldMap, $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider safeTaleNameProviderProvider
+     */
+    public function testGetSafeTableName($field, $fieldMap, $expected)
+    {
+        $result = Sql::getSafeTableName($field, $fieldMap);
+        $this->assertSame($expected, $result);
+    }
 }
