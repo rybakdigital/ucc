@@ -547,6 +547,246 @@ class SqlTest extends TestCase
         );
     }
 
+    public function containsIncCriterionsProvider()
+    {
+        $containsIncValueCriterion = new Criterion;
+        $containsIncValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('inc')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsIncValueClause = new Clause;
+        $containsIncValueClause
+            ->setStatement('and `foo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $containsIncValueOrCriterion = new Criterion;
+        $containsIncValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('inc')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsIncValueOrClause = new Clause;
+        $containsIncValueOrClause
+            ->setStatement('or `loo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $containsIncFieldCriterion = new Criterion;
+        $containsIncFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('inc')
+            ->setType('field')
+            ->setValue('abc');
+
+        $containsIncFieldClause = new Clause;
+        $containsIncFieldClause
+            ->setStatement('and `bar` LIKE CONCAT("%", `abc`, "%") COLLATE utf8_bin');
+
+        $containsIncFieldOrCriterion = new Criterion;
+        $containsIncFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('inc')
+            ->setType('field')
+            ->setValue('loo');
+
+        $containsIncFieldOrClause = new Clause;
+        $containsIncFieldOrClause
+            ->setStatement('or `bar` LIKE CONCAT("%", `loo`, "%") COLLATE utf8_bin');
+
+        return array(
+            array($containsIncValueCriterion, $containsIncValueClause),
+            array($containsIncValueOrCriterion, $containsIncValueOrClause),
+            array($containsIncFieldCriterion, $containsIncFieldClause),
+            array($containsIncFieldOrCriterion, $containsIncFieldOrClause),
+        );
+    }
+
+    public function containsNincCriterionsProvider()
+    {
+        $containsNincValueCriterion = new Criterion;
+        $containsNincValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('ninc')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsNincValueClause = new Clause;
+        $containsNincValueClause
+            ->setStatement('and `foo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $containsNincValueOrCriterion = new Criterion;
+        $containsNincValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('ninc')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsNincValueOrClause = new Clause;
+        $containsNincValueOrClause
+            ->setStatement('or `loo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setParameter('filter_0', 'abc');
+
+        $containsNincFieldCriterion = new Criterion;
+        $containsNincFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('ninc')
+            ->setType('field')
+            ->setValue('abc');
+
+        $containsNincFieldClause = new Clause;
+        $containsNincFieldClause
+            ->setStatement('and `bar` NOT LIKE CONCAT("%", `abc`, "%") COLLATE utf8_bin');
+
+        $containsNincFieldOrCriterion = new Criterion;
+        $containsNincFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('ninc')
+            ->setType('field')
+            ->setValue('loo');
+
+        $containsNincFieldOrClause = new Clause;
+        $containsNincFieldOrClause
+            ->setStatement('or `bar` NOT LIKE CONCAT("%", `loo`, "%") COLLATE utf8_bin');
+
+        return array(
+            array($containsNincValueCriterion, $containsNincValueClause),
+            array($containsNincValueOrCriterion, $containsNincValueOrClause),
+            array($containsNincFieldCriterion, $containsNincFieldClause),
+            array($containsNincFieldOrCriterion, $containsNincFieldOrClause),
+        );
+    }
+
+    public function containsInciCriterionsProvider()
+    {
+        $containsInciValueCriterion = new Criterion;
+        $containsInciValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('inci')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsInciValueClause = new Clause;
+        $containsInciValueClause
+            ->setStatement('and `foo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $containsInciValueOrCriterion = new Criterion;
+        $containsInciValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('inci')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsInciValueOrClause = new Clause;
+        $containsInciValueOrClause
+            ->setStatement('or `loo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $containsInciFieldCriterion = new Criterion;
+        $containsInciFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('inci')
+            ->setType('field')
+            ->setValue('abc');
+
+        $containsInciFieldClause = new Clause;
+        $containsInciFieldClause
+            ->setStatement('and `bar` LIKE CONCAT("%", `abc`, "%") COLLATE utf8_general_ci');
+
+        $containsInciFieldOrCriterion = new Criterion;
+        $containsInciFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('inci')
+            ->setType('field')
+            ->setValue('loo');
+
+        $containsInciFieldOrClause = new Clause;
+        $containsInciFieldOrClause
+            ->setStatement('or `bar` LIKE CONCAT("%", `loo`, "%") COLLATE utf8_general_ci');
+
+        return array(
+            array($containsInciValueCriterion, $containsInciValueClause),
+            array($containsInciValueOrCriterion, $containsInciValueOrClause),
+            array($containsInciFieldCriterion, $containsInciFieldClause),
+            array($containsInciFieldOrCriterion, $containsInciFieldOrClause),
+        );
+    }
+
+    public function containsNinciCriterionsProvider()
+    {
+        $containsNinciValueCriterion = new Criterion;
+        $containsNinciValueCriterion
+            ->setLogic('and')
+            ->setKey('foo')
+            ->setOperand('ninci')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsNinciValueClause = new Clause;
+        $containsNinciValueClause
+            ->setStatement('and `foo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $containsNinciValueOrCriterion = new Criterion;
+        $containsNinciValueOrCriterion
+            ->setLogic('or')
+            ->setKey('loo')
+            ->setOperand('ninci')
+            ->setType('value')
+            ->setValue('abc');
+
+        $containsNinciValueOrClause = new Clause;
+        $containsNinciValueOrClause
+            ->setStatement('or `loo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setParameter('filter_0', 'abc');
+
+        $containsNinciFieldCriterion = new Criterion;
+        $containsNinciFieldCriterion
+            ->setLogic('and')
+            ->setKey('bar')
+            ->setOperand('ninci')
+            ->setType('field')
+            ->setValue('abc');
+
+        $containsNinciFieldClause = new Clause;
+        $containsNinciFieldClause
+            ->setStatement('and `bar` NOT LIKE CONCAT("%", `abc`, "%") COLLATE utf8_general_ci');
+
+        $containsNinciFieldOrCriterion = new Criterion;
+        $containsNinciFieldOrCriterion
+            ->setLogic('or')
+            ->setKey('bar')
+            ->setOperand('ninci')
+            ->setType('field')
+            ->setValue('loo');
+
+        $containsNinciFieldOrClause = new Clause;
+        $containsNinciFieldOrClause
+            ->setStatement('or `bar` NOT LIKE CONCAT("%", `loo`, "%") COLLATE utf8_general_ci');
+
+        return array(
+            array($containsNinciValueCriterion, $containsNinciValueClause),
+            array($containsNinciValueOrCriterion, $containsNinciValueOrClause),
+            array($containsNinciFieldCriterion, $containsNinciFieldClause),
+            array($containsNinciFieldOrCriterion, $containsNinciFieldOrClause),
+        );
+    }
+
     /**
      * @dataProvider boolCriterionsProvider
      */
@@ -641,6 +881,50 @@ class SqlTest extends TestCase
     public function testCriterionToLelativeGePass($criterion, $expected)
     {
         $sqlClause = Sql::criterionToRelative($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider containsIncCriterionsProvider
+     */
+    public function testCriterionToContainsIncPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToContains($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider containsNincCriterionsProvider
+     */
+    public function testCriterionToContainsNincPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToContains($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider containsInciCriterionsProvider
+     */
+    public function testCriterionToContainsInciPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToContains($criterion);
+
+        $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
+        $this->assertEquals($expected, $sqlClause);
+    }
+
+    /**
+     * @dataProvider containsNinciCriterionsProvider
+     */
+    public function testCriterionToContainsNinciPass($criterion, $expected)
+    {
+        $sqlClause = Sql::criterionToContains($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);

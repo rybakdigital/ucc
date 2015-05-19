@@ -129,7 +129,7 @@ class Sql
         return $clause;
     }
 
-    public static function criterionToContains(Criterion $criterion, $placeHolder, $fieldMap = array())
+    public static function criterionToContains(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
         $op         = false;
@@ -170,7 +170,7 @@ class Sql
 
             // Build the final clause.
             // Use wild-card characters for "contains".
-            $clause->setStatement($field . ' ' . $op . ' '
+            $clause->setStatement($criterion->logic(). ' ' . $field . ' ' . $op . ' '
                     . 'CONCAT("%", ' . $comparand . ', "%")'
                     . ' COLLATE ' . $collate);
         }
