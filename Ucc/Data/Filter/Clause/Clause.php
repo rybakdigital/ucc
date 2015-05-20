@@ -123,4 +123,27 @@ class Clause implements ClauseInterface
     {
         return $this->getParameter($parameter);
     }
+
+    /**
+     * Removes logic from SQL statement.
+     * Example:
+     * 'AND `name` IS NOT NULL' will remove "AND " from the statement: '`name` IS NOT NULL'
+     *
+     * @return ClauseInterface
+     */
+    public function removeLogicFromStatement()
+    {
+        $statement = $this->getStatement();
+
+        // The 'AND' or 'OR' should be somewhere at the very beginning of the statement
+        $logicArea    = substr($statement, 0, 4);
+
+        if (stripos($logicArea, 'and') !== false) {
+            $this->setStatement(substr($statement, 4));
+        } elseif (stripos($logicArea, 'or') !== false) {
+            $this->setStatement(substr($statement, 3));
+        }
+
+        return $this;
+    }
 }

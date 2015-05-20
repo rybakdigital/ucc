@@ -21,7 +21,7 @@ class SqlTest extends TestCase
 
         $boolTrueClause = new Clause;
         $boolTrueClause
-            ->setStatement('(`foo` IS NOT NULL AND `foo` != "")');
+            ->setStatement('AND (`foo` IS NOT NULL AND `foo` != "")');
 
         $boolOneCriterion = new Criterion;
         $boolOneCriterion
@@ -33,7 +33,7 @@ class SqlTest extends TestCase
 
         $boolOneClause = new Clause;
         $boolOneClause
-            ->setStatement('(`foo` IS NOT NULL AND `foo` != "")');
+            ->setStatement('AND (`foo` IS NOT NULL AND `foo` != "")');
 
         $boolFalseCriterion = new Criterion;
         $boolFalseCriterion
@@ -45,7 +45,7 @@ class SqlTest extends TestCase
 
         $boolFalseClause = new Clause;
         $boolFalseClause
-            ->setStatement('(`foo` IS NULL OR `foo` = "")');
+            ->setStatement('AND (`foo` IS NULL OR `foo` = "")');
 
         $boolZeroCriterion = new Criterion;
         $boolZeroCriterion
@@ -57,7 +57,7 @@ class SqlTest extends TestCase
 
         $boolZeroClause = new Clause;
         $boolZeroClause
-            ->setStatement('(`foo` IS NULL OR `foo` = "")');
+            ->setStatement('AND (`foo` IS NULL OR `foo` = "")');
 
         return array(
             array($boolTrueCriterion, $boolTrueClause),
@@ -79,7 +79,7 @@ class SqlTest extends TestCase
 
         $directEqValueClause = new Clause;
         $directEqValueClause
-            ->setStatement('and `foo` = CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
+            ->setStatement('AND `foo` = CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $directEqValueOrCriterion = new Criterion;
@@ -92,7 +92,7 @@ class SqlTest extends TestCase
 
         $directEqValueOrClause = new Clause;
         $directEqValueOrClause
-            ->setStatement('or `loo` = CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
+            ->setStatement('OR `loo` = CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $directEqFieldCriterion = new Criterion;
@@ -105,7 +105,7 @@ class SqlTest extends TestCase
 
         $directEqFieldClause = new Clause;
         $directEqFieldClause
-            ->setStatement('and `bar` = CAST(`abc` AS CHAR) COLLATE utf8_bin');
+            ->setStatement('AND `bar` = CAST(`abc` AS CHAR) COLLATE utf8_bin');
 
         $directEqFieldOrCriterion = new Criterion;
         $directEqFieldOrCriterion
@@ -117,7 +117,7 @@ class SqlTest extends TestCase
 
         $directEqFieldOrClause = new Clause;
         $directEqFieldOrClause
-            ->setStatement('or `bar` = CAST(`loo` AS CHAR) COLLATE utf8_bin');
+            ->setStatement('OR `bar` = CAST(`loo` AS CHAR) COLLATE utf8_bin');
 
         return array(
             array($directEqValueCriterion, $directEqValueClause),
@@ -139,7 +139,7 @@ class SqlTest extends TestCase
 
         $directNeValueClause = new Clause;
         $directNeValueClause
-            ->setStatement('and `foo` != CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
+            ->setStatement('AND `foo` != CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $directNeValueOrCriterion = new Criterion;
@@ -152,7 +152,7 @@ class SqlTest extends TestCase
 
         $directNeValueOrClause = new Clause;
         $directNeValueOrClause
-            ->setStatement('or `loo` != CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
+            ->setStatement('OR `loo` != CAST(:filter_0 AS CHAR) COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $directNeFieldCriterion = new Criterion;
@@ -165,7 +165,7 @@ class SqlTest extends TestCase
 
         $directNeFieldClause = new Clause;
         $directNeFieldClause
-            ->setStatement('and `bar` != CAST(`abc` AS CHAR) COLLATE utf8_bin');
+            ->setStatement('AND `bar` != CAST(`abc` AS CHAR) COLLATE utf8_bin');
 
         $directNeFieldOrCriterion = new Criterion;
         $directNeFieldOrCriterion
@@ -177,7 +177,7 @@ class SqlTest extends TestCase
 
         $directNeFieldOrClause = new Clause;
         $directNeFieldOrClause
-            ->setStatement('or `bar` != CAST(`loo` AS CHAR) COLLATE utf8_bin');
+            ->setStatement('OR `bar` != CAST(`loo` AS CHAR) COLLATE utf8_bin');
 
         return array(
             array($directNeValueCriterion, $directNeValueClause),
@@ -199,7 +199,7 @@ class SqlTest extends TestCase
 
         $directEqiValueClause = new Clause;
         $directEqiValueClause
-            ->setStatement('and `foo` = CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
+            ->setStatement('AND `foo` = CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $directEqiValueOrCriterion = new Criterion;
@@ -212,7 +212,7 @@ class SqlTest extends TestCase
 
         $directEqiValueOrClause = new Clause;
         $directEqiValueOrClause
-            ->setStatement('or `loo` = CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
+            ->setStatement('OR `loo` = CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $directEqiFieldCriterion = new Criterion;
@@ -225,7 +225,7 @@ class SqlTest extends TestCase
 
         $directEqiFieldClause = new Clause;
         $directEqiFieldClause
-            ->setStatement('and `bar` = CAST(`abc` AS CHAR) COLLATE utf8_general_ci');
+            ->setStatement('AND `bar` = CAST(`abc` AS CHAR) COLLATE utf8_general_ci');
 
         $directEqiFieldOrCriterion = new Criterion;
         $directEqiFieldOrCriterion
@@ -237,7 +237,7 @@ class SqlTest extends TestCase
 
         $directEqiFieldOrClause = new Clause;
         $directEqiFieldOrClause
-            ->setStatement('or `bar` = CAST(`loo` AS CHAR) COLLATE utf8_general_ci');
+            ->setStatement('OR `bar` = CAST(`loo` AS CHAR) COLLATE utf8_general_ci');
 
         return array(
             array($directEqiValueCriterion, $directEqiValueClause),
@@ -259,7 +259,7 @@ class SqlTest extends TestCase
 
         $directNeiValueClause = new Clause;
         $directNeiValueClause
-            ->setStatement('and `foo` != CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
+            ->setStatement('AND `foo` != CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $directNeiValueOrCriterion = new Criterion;
@@ -272,7 +272,7 @@ class SqlTest extends TestCase
 
         $directNeiValueOrClause = new Clause;
         $directNeiValueOrClause
-            ->setStatement('or `loo` != CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
+            ->setStatement('OR `loo` != CAST(:filter_0 AS CHAR) COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $directNeiFieldCriterion = new Criterion;
@@ -285,7 +285,7 @@ class SqlTest extends TestCase
 
         $directNeiFieldClause = new Clause;
         $directNeiFieldClause
-            ->setStatement('and `bar` != CAST(`abc` AS CHAR) COLLATE utf8_general_ci');
+            ->setStatement('AND `bar` != CAST(`abc` AS CHAR) COLLATE utf8_general_ci');
 
         $directNeiFieldOrCriterion = new Criterion;
         $directNeiFieldOrCriterion
@@ -297,7 +297,7 @@ class SqlTest extends TestCase
 
         $directNeiFieldOrClause = new Clause;
         $directNeiFieldOrClause
-            ->setStatement('or `bar` != CAST(`loo` AS CHAR) COLLATE utf8_general_ci');
+            ->setStatement('OR `bar` != CAST(`loo` AS CHAR) COLLATE utf8_general_ci');
 
         return array(
             array($directNeiValueCriterion, $directNeiValueClause),
@@ -319,7 +319,7 @@ class SqlTest extends TestCase
 
         $relativeGtValueClause = new Clause;
         $relativeGtValueClause
-            ->setStatement('and `foo` > :filter_0')
+            ->setStatement('AND `foo` > :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeGtValueOrCriterion = new Criterion;
@@ -332,7 +332,7 @@ class SqlTest extends TestCase
 
         $relativeGtValueOrClause = new Clause;
         $relativeGtValueOrClause
-            ->setStatement('or `loo` > :filter_0')
+            ->setStatement('OR `loo` > :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeGtFieldCriterion = new Criterion;
@@ -345,7 +345,7 @@ class SqlTest extends TestCase
 
         $relativeGtFieldClause = new Clause;
         $relativeGtFieldClause
-            ->setStatement('and `bar` > `abc`');
+            ->setStatement('AND `bar` > `abc`');
 
         $relativeGtFieldOrCriterion = new Criterion;
         $relativeGtFieldOrCriterion
@@ -357,7 +357,7 @@ class SqlTest extends TestCase
 
         $relativeGtFieldOrClause = new Clause;
         $relativeGtFieldOrClause
-            ->setStatement('or `bar` > `loo`');
+            ->setStatement('OR `bar` > `loo`');
 
         return array(
             array($relativeGtValueCriterion, $relativeGtValueClause),
@@ -379,7 +379,7 @@ class SqlTest extends TestCase
 
         $relativeGeValueClause = new Clause;
         $relativeGeValueClause
-            ->setStatement('and `foo` >= :filter_0')
+            ->setStatement('AND `foo` >= :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeGeValueOrCriterion = new Criterion;
@@ -392,7 +392,7 @@ class SqlTest extends TestCase
 
         $relativeGeValueOrClause = new Clause;
         $relativeGeValueOrClause
-            ->setStatement('or `loo` >= :filter_0')
+            ->setStatement('OR `loo` >= :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeGeFieldCriterion = new Criterion;
@@ -405,7 +405,7 @@ class SqlTest extends TestCase
 
         $relativeGeFieldClause = new Clause;
         $relativeGeFieldClause
-            ->setStatement('and `bar` >= `abc`');
+            ->setStatement('AND `bar` >= `abc`');
 
         $relativeGeFieldOrCriterion = new Criterion;
         $relativeGeFieldOrCriterion
@@ -417,7 +417,7 @@ class SqlTest extends TestCase
 
         $relativeGeFieldOrClause = new Clause;
         $relativeGeFieldOrClause
-            ->setStatement('or `bar` >= `loo`');
+            ->setStatement('OR `bar` >= `loo`');
 
         return array(
             array($relativeGeValueCriterion, $relativeGeValueClause),
@@ -439,7 +439,7 @@ class SqlTest extends TestCase
 
         $relativeLtValueClause = new Clause;
         $relativeLtValueClause
-            ->setStatement('and `foo` < :filter_0')
+            ->setStatement('AND `foo` < :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeLtValueOrCriterion = new Criterion;
@@ -452,7 +452,7 @@ class SqlTest extends TestCase
 
         $relativeLtValueOrClause = new Clause;
         $relativeLtValueOrClause
-            ->setStatement('or `loo` < :filter_0')
+            ->setStatement('OR `loo` < :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeLtFieldCriterion = new Criterion;
@@ -465,7 +465,7 @@ class SqlTest extends TestCase
 
         $relativeLtFieldClause = new Clause;
         $relativeLtFieldClause
-            ->setStatement('and `bar` < `abc`');
+            ->setStatement('AND `bar` < `abc`');
 
         $relativeLtFieldOrCriterion = new Criterion;
         $relativeLtFieldOrCriterion
@@ -477,7 +477,7 @@ class SqlTest extends TestCase
 
         $relativeLtFieldOrClause = new Clause;
         $relativeLtFieldOrClause
-            ->setStatement('or `bar` < `loo`');
+            ->setStatement('OR `bar` < `loo`');
 
         return array(
             array($relativeLtValueCriterion, $relativeLtValueClause),
@@ -499,7 +499,7 @@ class SqlTest extends TestCase
 
         $relativeLeValueClause = new Clause;
         $relativeLeValueClause
-            ->setStatement('and `foo` <= :filter_0')
+            ->setStatement('AND `foo` <= :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeLeValueOrCriterion = new Criterion;
@@ -512,7 +512,7 @@ class SqlTest extends TestCase
 
         $relativeLeValueOrClause = new Clause;
         $relativeLeValueOrClause
-            ->setStatement('or `loo` <= :filter_0')
+            ->setStatement('OR `loo` <= :filter_0')
             ->setParameter('filter_0', 'abc');
 
         $relativeLeFieldCriterion = new Criterion;
@@ -525,7 +525,7 @@ class SqlTest extends TestCase
 
         $relativeLeFieldClause = new Clause;
         $relativeLeFieldClause
-            ->setStatement('and `bar` <= `abc`');
+            ->setStatement('AND `bar` <= `abc`');
 
         $relativeLeFieldOrCriterion = new Criterion;
         $relativeLeFieldOrCriterion
@@ -537,7 +537,7 @@ class SqlTest extends TestCase
 
         $relativeLeFieldOrClause = new Clause;
         $relativeLeFieldOrClause
-            ->setStatement('or `bar` <= `loo`');
+            ->setStatement('OR `bar` <= `loo`');
 
         return array(
             array($relativeLeValueCriterion, $relativeLeValueClause),
@@ -559,7 +559,7 @@ class SqlTest extends TestCase
 
         $containsIncValueClause = new Clause;
         $containsIncValueClause
-            ->setStatement('and `foo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('AND `foo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $containsIncValueOrCriterion = new Criterion;
@@ -572,7 +572,7 @@ class SqlTest extends TestCase
 
         $containsIncValueOrClause = new Clause;
         $containsIncValueOrClause
-            ->setStatement('or `loo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('OR `loo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $containsIncFieldCriterion = new Criterion;
@@ -585,7 +585,7 @@ class SqlTest extends TestCase
 
         $containsIncFieldClause = new Clause;
         $containsIncFieldClause
-            ->setStatement('and `bar` LIKE CONCAT("%", `abc`, "%") COLLATE utf8_bin');
+            ->setStatement('AND `bar` LIKE CONCAT("%", `abc`, "%") COLLATE utf8_bin');
 
         $containsIncFieldOrCriterion = new Criterion;
         $containsIncFieldOrCriterion
@@ -597,7 +597,7 @@ class SqlTest extends TestCase
 
         $containsIncFieldOrClause = new Clause;
         $containsIncFieldOrClause
-            ->setStatement('or `bar` LIKE CONCAT("%", `loo`, "%") COLLATE utf8_bin');
+            ->setStatement('OR `bar` LIKE CONCAT("%", `loo`, "%") COLLATE utf8_bin');
 
         return array(
             array($containsIncValueCriterion, $containsIncValueClause),
@@ -619,7 +619,7 @@ class SqlTest extends TestCase
 
         $containsNincValueClause = new Clause;
         $containsNincValueClause
-            ->setStatement('and `foo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('AND `foo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $containsNincValueOrCriterion = new Criterion;
@@ -632,7 +632,7 @@ class SqlTest extends TestCase
 
         $containsNincValueOrClause = new Clause;
         $containsNincValueOrClause
-            ->setStatement('or `loo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('OR `loo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $containsNincFieldCriterion = new Criterion;
@@ -645,7 +645,7 @@ class SqlTest extends TestCase
 
         $containsNincFieldClause = new Clause;
         $containsNincFieldClause
-            ->setStatement('and `bar` NOT LIKE CONCAT("%", `abc`, "%") COLLATE utf8_bin');
+            ->setStatement('AND `bar` NOT LIKE CONCAT("%", `abc`, "%") COLLATE utf8_bin');
 
         $containsNincFieldOrCriterion = new Criterion;
         $containsNincFieldOrCriterion
@@ -657,7 +657,7 @@ class SqlTest extends TestCase
 
         $containsNincFieldOrClause = new Clause;
         $containsNincFieldOrClause
-            ->setStatement('or `bar` NOT LIKE CONCAT("%", `loo`, "%") COLLATE utf8_bin');
+            ->setStatement('OR `bar` NOT LIKE CONCAT("%", `loo`, "%") COLLATE utf8_bin');
 
         return array(
             array($containsNincValueCriterion, $containsNincValueClause),
@@ -679,7 +679,7 @@ class SqlTest extends TestCase
 
         $containsInciValueClause = new Clause;
         $containsInciValueClause
-            ->setStatement('and `foo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('AND `foo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $containsInciValueOrCriterion = new Criterion;
@@ -692,7 +692,7 @@ class SqlTest extends TestCase
 
         $containsInciValueOrClause = new Clause;
         $containsInciValueOrClause
-            ->setStatement('or `loo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('OR `loo` LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $containsInciFieldCriterion = new Criterion;
@@ -705,7 +705,7 @@ class SqlTest extends TestCase
 
         $containsInciFieldClause = new Clause;
         $containsInciFieldClause
-            ->setStatement('and `bar` LIKE CONCAT("%", `abc`, "%") COLLATE utf8_general_ci');
+            ->setStatement('AND `bar` LIKE CONCAT("%", `abc`, "%") COLLATE utf8_general_ci');
 
         $containsInciFieldOrCriterion = new Criterion;
         $containsInciFieldOrCriterion
@@ -717,7 +717,7 @@ class SqlTest extends TestCase
 
         $containsInciFieldOrClause = new Clause;
         $containsInciFieldOrClause
-            ->setStatement('or `bar` LIKE CONCAT("%", `loo`, "%") COLLATE utf8_general_ci');
+            ->setStatement('OR `bar` LIKE CONCAT("%", `loo`, "%") COLLATE utf8_general_ci');
 
         return array(
             array($containsInciValueCriterion, $containsInciValueClause),
@@ -739,7 +739,7 @@ class SqlTest extends TestCase
 
         $containsNinciValueClause = new Clause;
         $containsNinciValueClause
-            ->setStatement('and `foo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('AND `foo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $containsNinciValueOrCriterion = new Criterion;
@@ -752,7 +752,7 @@ class SqlTest extends TestCase
 
         $containsNinciValueOrClause = new Clause;
         $containsNinciValueOrClause
-            ->setStatement('or `loo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('OR `loo` NOT LIKE CONCAT("%", :filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $containsNinciFieldCriterion = new Criterion;
@@ -765,7 +765,7 @@ class SqlTest extends TestCase
 
         $containsNinciFieldClause = new Clause;
         $containsNinciFieldClause
-            ->setStatement('and `bar` NOT LIKE CONCAT("%", `abc`, "%") COLLATE utf8_general_ci');
+            ->setStatement('AND `bar` NOT LIKE CONCAT("%", `abc`, "%") COLLATE utf8_general_ci');
 
         $containsNinciFieldOrCriterion = new Criterion;
         $containsNinciFieldOrCriterion
@@ -777,7 +777,7 @@ class SqlTest extends TestCase
 
         $containsNinciFieldOrClause = new Clause;
         $containsNinciFieldOrClause
-            ->setStatement('or `bar` NOT LIKE CONCAT("%", `loo`, "%") COLLATE utf8_general_ci');
+            ->setStatement('OR `bar` NOT LIKE CONCAT("%", `loo`, "%") COLLATE utf8_general_ci');
 
         return array(
             array($containsNinciValueCriterion, $containsNinciValueClause),
@@ -799,7 +799,7 @@ class SqlTest extends TestCase
 
         $beginsBeginsValueClause = new Clause;
         $beginsBeginsValueClause
-            ->setStatement('and `foo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('AND `foo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $beginsBeginsValueOrCriterion = new Criterion;
@@ -812,7 +812,7 @@ class SqlTest extends TestCase
 
         $beginsBeginsValueOrClause = new Clause;
         $beginsBeginsValueOrClause
-            ->setStatement('or `loo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('OR `loo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $beginsBeginsFieldCriterion = new Criterion;
@@ -825,7 +825,7 @@ class SqlTest extends TestCase
 
         $beginsBeginsFieldClause = new Clause;
         $beginsBeginsFieldClause
-            ->setStatement('and `bar` LIKE CONCAT(`abc`, "%") COLLATE utf8_bin');
+            ->setStatement('AND `bar` LIKE CONCAT(`abc`, "%") COLLATE utf8_bin');
 
         $beginsBeginsFieldOrCriterion = new Criterion;
         $beginsBeginsFieldOrCriterion
@@ -837,7 +837,7 @@ class SqlTest extends TestCase
 
         $beginsBeginsFieldOrClause = new Clause;
         $beginsBeginsFieldOrClause
-            ->setStatement('or `bar` LIKE CONCAT(`loo`, "%") COLLATE utf8_bin');
+            ->setStatement('OR `bar` LIKE CONCAT(`loo`, "%") COLLATE utf8_bin');
 
         return array(
             array($beginsBeginsValueCriterion, $beginsBeginsValueClause),
@@ -859,7 +859,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsValueClause = new Clause;
         $beginsNbeginsValueClause
-            ->setStatement('and `foo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('AND `foo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $beginsNbeginsValueOrCriterion = new Criterion;
@@ -872,7 +872,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsValueOrClause = new Clause;
         $beginsNbeginsValueOrClause
-            ->setStatement('or `loo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
+            ->setStatement('OR `loo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_bin')
             ->setParameter('filter_0', 'abc');
 
         $beginsNbeginsFieldCriterion = new Criterion;
@@ -885,7 +885,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsFieldClause = new Clause;
         $beginsNbeginsFieldClause
-            ->setStatement('and `bar` NOT LIKE CONCAT(`abc`, "%") COLLATE utf8_bin');
+            ->setStatement('AND `bar` NOT LIKE CONCAT(`abc`, "%") COLLATE utf8_bin');
 
         $beginsNbeginsFieldOrCriterion = new Criterion;
         $beginsNbeginsFieldOrCriterion
@@ -897,7 +897,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsFieldOrClause = new Clause;
         $beginsNbeginsFieldOrClause
-            ->setStatement('or `bar` NOT LIKE CONCAT(`loo`, "%") COLLATE utf8_bin');
+            ->setStatement('OR `bar` NOT LIKE CONCAT(`loo`, "%") COLLATE utf8_bin');
 
         return array(
             array($beginsNbeginsValueCriterion, $beginsNbeginsValueClause),
@@ -919,7 +919,7 @@ class SqlTest extends TestCase
 
         $beginsbeginsiValueClause = new Clause;
         $beginsbeginsiValueClause
-            ->setStatement('and `foo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('AND `foo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $beginsbeginsiValueOrCriterion = new Criterion;
@@ -932,7 +932,7 @@ class SqlTest extends TestCase
 
         $beginsbeginsiValueOrClause = new Clause;
         $beginsbeginsiValueOrClause
-            ->setStatement('or `loo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('OR `loo` LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $beginsbeginsiFieldCriterion = new Criterion;
@@ -945,7 +945,7 @@ class SqlTest extends TestCase
 
         $beginsbeginsiFieldClause = new Clause;
         $beginsbeginsiFieldClause
-            ->setStatement('and `bar` LIKE CONCAT(`abc`, "%") COLLATE utf8_general_ci');
+            ->setStatement('AND `bar` LIKE CONCAT(`abc`, "%") COLLATE utf8_general_ci');
 
         $beginsbeginsiFieldOrCriterion = new Criterion;
         $beginsbeginsiFieldOrCriterion
@@ -957,7 +957,7 @@ class SqlTest extends TestCase
 
         $beginsbeginsiFieldOrClause = new Clause;
         $beginsbeginsiFieldOrClause
-            ->setStatement('or `bar` LIKE CONCAT(`loo`, "%") COLLATE utf8_general_ci');
+            ->setStatement('OR `bar` LIKE CONCAT(`loo`, "%") COLLATE utf8_general_ci');
 
         return array(
             array($beginsbeginsiValueCriterion, $beginsbeginsiValueClause),
@@ -979,7 +979,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsiValueClause = new Clause;
         $beginsNbeginsiValueClause
-            ->setStatement('and `foo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('AND `foo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $beginsNbeginsiValueOrCriterion = new Criterion;
@@ -992,7 +992,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsiValueOrClause = new Clause;
         $beginsNbeginsiValueOrClause
-            ->setStatement('or `loo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
+            ->setStatement('OR `loo` NOT LIKE CONCAT(:filter_0, "%") COLLATE utf8_general_ci')
             ->setParameter('filter_0', 'abc');
 
         $beginsNbeginsiFieldCriterion = new Criterion;
@@ -1005,7 +1005,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsiFieldClause = new Clause;
         $beginsNbeginsiFieldClause
-            ->setStatement('and `bar` NOT LIKE CONCAT(`abc`, "%") COLLATE utf8_general_ci');
+            ->setStatement('AND `bar` NOT LIKE CONCAT(`abc`, "%") COLLATE utf8_general_ci');
 
         $beginsNbeginsiFieldOrCriterion = new Criterion;
         $beginsNbeginsiFieldOrCriterion
@@ -1017,7 +1017,7 @@ class SqlTest extends TestCase
 
         $beginsNbeginsiFieldOrClause = new Clause;
         $beginsNbeginsiFieldOrClause
-            ->setStatement('or `bar` NOT LIKE CONCAT(`loo`, "%") COLLATE utf8_general_ci');
+            ->setStatement('OR `bar` NOT LIKE CONCAT(`loo`, "%") COLLATE utf8_general_ci');
 
         return array(
             array($beginsNbeginsiValueCriterion, $beginsNbeginsiValueClause),
@@ -1039,7 +1039,7 @@ class SqlTest extends TestCase
 
         $regexValueClause = new Clause;
         $regexValueClause
-            ->setStatement('and `foo` REGEXP :filter_0')
+            ->setStatement('AND `foo` REGEXP :filter_0')
             ->setParameter('filter_0', '\d+');
 
         $regexValueOrCriterion = new Criterion;
@@ -1052,7 +1052,7 @@ class SqlTest extends TestCase
 
         $regexValueOrClause = new Clause;
         $regexValueOrClause
-            ->setStatement('or `loo` REGEXP :filter_0')
+            ->setStatement('OR `loo` REGEXP :filter_0')
             ->setParameter('filter_0', '\d+');
 
         $regexFieldCriterion = new Criterion;
@@ -1065,7 +1065,7 @@ class SqlTest extends TestCase
 
         $regexFieldClause = new Clause;
         $regexFieldClause
-            ->setStatement('and `foo` REGEXP `loo`');
+            ->setStatement('AND `foo` REGEXP `loo`');
 
         return array(
             array($regexValueCriterion, $regexValueClause),
@@ -1086,7 +1086,7 @@ class SqlTest extends TestCase
 
         $inInValueAndClause = new Clause;
         $inInValueAndClause
-            ->setStatement('and `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setStatement('AND `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1104,7 +1104,7 @@ class SqlTest extends TestCase
 
         $inInValueOrClause = new Clause;
         $inInValueOrClause
-            ->setStatement('or `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setStatement('OR `foo` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1122,7 +1122,7 @@ class SqlTest extends TestCase
 
         $inInTypeAndClause = new Clause;
         $inInTypeAndClause
-            ->setStatement('and `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+            ->setStatement('AND `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
 
         $inInTypeOrCriterion = new Criterion;
         $inInTypeOrCriterion
@@ -1134,7 +1134,7 @@ class SqlTest extends TestCase
 
         $inInTypeOrClause = new Clause;
         $inInTypeOrClause
-            ->setStatement('or `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+            ->setStatement('OR `foo` IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
 
         return array(
             array($inInValueAndCriterion, $inInValueAndClause),
@@ -1156,7 +1156,7 @@ class SqlTest extends TestCase
 
         $inNinValueAndClause = new Clause;
         $inNinValueAndClause
-            ->setStatement('and `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setStatement('AND `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1174,7 +1174,7 @@ class SqlTest extends TestCase
 
         $inNinValueOrClause = new Clause;
         $inNinValueOrClause
-            ->setStatement('or `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
+            ->setStatement('OR `foo` NOT IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1192,7 +1192,7 @@ class SqlTest extends TestCase
 
         $inNinTypeAndClause = new Clause;
         $inNinTypeAndClause
-            ->setStatement('and `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+            ->setStatement('AND `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
 
         $inNinTypeOrCriterion = new Criterion;
         $inNinTypeOrCriterion
@@ -1204,7 +1204,7 @@ class SqlTest extends TestCase
 
         $inNinTypeOrClause = new Clause;
         $inNinTypeOrClause
-            ->setStatement('or `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
+            ->setStatement('OR `foo` NOT IN (`bar` COLLATE utf8_bin, `loo` COLLATE utf8_bin, `foo` COLLATE utf8_bin)');
 
         return array(
             array($inNinValueAndCriterion, $inNinValueAndClause),
@@ -1226,7 +1226,7 @@ class SqlTest extends TestCase
 
         $inIniValueAndClause = new Clause;
         $inIniValueAndClause
-            ->setStatement('and `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setStatement('AND `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1244,7 +1244,7 @@ class SqlTest extends TestCase
 
         $inIniValueOrClause = new Clause;
         $inIniValueOrClause
-            ->setStatement('or `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setStatement('OR `foo` IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1262,7 +1262,7 @@ class SqlTest extends TestCase
 
         $inIniTypeAndClause = new Clause;
         $inIniTypeAndClause
-            ->setStatement('and `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+            ->setStatement('AND `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
 
         $inIniTypeOrCriterion = new Criterion;
         $inIniTypeOrCriterion
@@ -1274,7 +1274,7 @@ class SqlTest extends TestCase
 
         $inIniTypeOrClause = new Clause;
         $inIniTypeOrClause
-            ->setStatement('or `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+            ->setStatement('OR `foo` IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
 
         return array(
             array($inIniValueAndCriterion, $inIniValueAndClause),
@@ -1296,7 +1296,7 @@ class SqlTest extends TestCase
 
         $inNiniValueAndClause = new Clause;
         $inNiniValueAndClause
-            ->setStatement('and `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setStatement('AND `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1314,7 +1314,7 @@ class SqlTest extends TestCase
 
         $inNiniValueOrClause = new Clause;
         $inNiniValueOrClause
-            ->setStatement('or `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
+            ->setStatement('OR `foo` NOT IN (:filter_0_0 COLLATE utf8_general_ci, :filter_0_1 COLLATE utf8_general_ci, :filter_0_2 COLLATE utf8_general_ci, :filter_0_3 COLLATE utf8_general_ci)')
             ->setParameters(array(
                     'filter_0_0' => 'abc',
                     'filter_0_1' => 'def',
@@ -1332,7 +1332,7 @@ class SqlTest extends TestCase
 
         $inNiniTypeAndClause = new Clause;
         $inNiniTypeAndClause
-            ->setStatement('and `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+            ->setStatement('AND `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
 
         $inNiniTypeOrCriterion = new Criterion;
         $inNiniTypeOrCriterion
@@ -1344,7 +1344,7 @@ class SqlTest extends TestCase
 
         $inNiniTypeOrClause = new Clause;
         $inNiniTypeOrClause
-            ->setStatement('or `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
+            ->setStatement('OR `foo` NOT IN (`bar` COLLATE utf8_general_ci, `loo` COLLATE utf8_general_ci, `foo` COLLATE utf8_general_ci)');
 
         return array(
             array($inNiniValueAndCriterion, $inNiniValueAndClause),
@@ -1359,7 +1359,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToBoolPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBool($criterion);
+        $sqlClause = Sql::criterionToBoolClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1414,7 +1414,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRelativeGtPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1425,7 +1425,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRelativeGePass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1436,7 +1436,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRelativeLtPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1447,7 +1447,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToLelativeGePass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1458,7 +1458,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsIncPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1469,7 +1469,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsNincPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1480,7 +1480,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsInciPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1491,7 +1491,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsNinciPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1502,7 +1502,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToBeginsBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1513,7 +1513,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToNbeginsBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1524,7 +1524,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToBeginsiBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1535,7 +1535,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToNbeginsiBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1546,7 +1546,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRegexpPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRegex($criterion);
+        $sqlClause = Sql::criterionToRegexClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1557,7 +1557,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInInPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1568,7 +1568,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInNinPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1579,7 +1579,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInIniPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1590,7 +1590,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInNiniPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);

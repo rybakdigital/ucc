@@ -37,7 +37,29 @@ class ClauseTest extends TestCase
 
         $this->assertTrue(empty($statement));
         $this->assertInstanceOf(get_class($clause), $clause->setStatement('abc'));
-        $this->assertEquals('abc', $clause->getStatement('abc'));
-        $this->assertEquals('abc', $clause->statement('abc'));
+        $this->assertEquals('abc', $clause->getStatement());
+        $this->assertEquals('abc', $clause->statement());
+    }
+
+    public function testRemoveLogicFromStatement()
+    {
+        $clause     = new Clause();
+        $clause
+            ->setStatement('AND `loo` IS NOT NULL');
+        $statement  = $clause->removeLogicFromStatement();
+
+
+        $this->assertEquals('`loo` IS NOT NULL', $clause->getStatement());
+        $this->assertEquals('`loo` IS NOT NULL', $clause->statement());
+
+
+        $clause     = new Clause();
+        $clause
+            ->setStatement('OR `loo` IS NOT NULL');
+        $statement  = $clause->removeLogicFromStatement();
+
+
+        $this->assertEquals('`loo` IS NOT NULL', $clause->getStatement());
+        $this->assertEquals('`loo` IS NOT NULL', $clause->statement());
     }
 }

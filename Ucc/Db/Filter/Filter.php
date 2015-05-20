@@ -7,6 +7,7 @@ use Ucc\Exception\Data\InvalidDataException\InvalidDataValueException;
 use Ucc\Data\Types\Pseudo\FilterType;
 use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Db\Filter\Sql;
+use Ucc\Data\Filter\Clause\Clause;
 
 /**
  * Ucc\Db\Filter\Filter
@@ -18,40 +19,44 @@ class Filter
     /**
      * Turns array of Ucc\Data\Filter\Filter objects (also known as criteria) into SQL
      *
-     * @param array     $criteria   Array of Ucc\Data\Filter\Filter objects
+     * @param array     $filers     Array of Ucc\Data\Filter\Criterion\Criterion objects
      * @param array     $fieldMap   Array of field names and tables
      * @param string    $namespace  Prefix for query placeholders
+     * @return Ucc\Data\Filter\Clause\Clause
      */
-    public static function filterToSql($criteria = array(), $fieldMap = array(), $namespace = 'filter')
+    public static function filterToSqlClause($filter, $fieldMap = array(), $namespace = 'filter')
     {
         // Default return values
-        $sql    = '';
-        $params = array();
+        $sqlClause  = new Clause;
+        $sql        = '';
+        $params     = array();
+        $criterions = $filter->getCriterions();
 
-        if (!is_array($criteria)) {
-            $error = 'criteria must be an array of Criterion objects or list of filters (string type) in a format: {logic}-{field}-{operand}-{type}-{value}';
-
-            throw new InvalidDataTypeException($error);
-        }
-
-        foreach ($criteria as $i => $criterion) {
-            if (is_string($criterion)) {
-                $criterion = FilterType::filterToCriterion($criterion);
-            }
-
-            if (!is_a($criterion, 'Ucc\Data\Filter\Criterion\Criterion')) {
-                $error = 'value for index ' . $i . ' of criteria must be of Ucc\Data\Filter\Criterion\Criterion type';
-
-                throw new InvalidDataTypeException($error);
-            }
-
+        foreach ($criterions as $i => $criterion) {
             // Placeholder name for query binding
             $placeHolder = $namespace . '_' . $i;
 
-            $filter = self::criterionToSQL($criterion, $placeHolder, $fieldMap);
+            // Turn each Criterion into Clause
+            $clause = self::criterionToSqlClause($criterion, $placeHolder, $fieldMap);
 
-            $sql .= $filter->getStatement();
+            // Remove logic operand for first statement
+            if (empty($sql)) {
+                $clause->removeLogicFromStatement();
+                $sql .= $clause->getStatement();
+            } else {
+                // We need to add extra space in order to separate statements
+                $sql .= ' ' . $clause->getStatement();
+            }
+
+            // Add params
+            $params[] = $clause->getParameters();
+
+            $sqlClause->setParameters($clause->getParameters());
         }
+
+        $sqlClause->setStatement($sql);
+
+        return $sqlClause;
     }
 
     /**
@@ -59,7 +64,7 @@ class Filter
      *
      * @return Ucc\Data\Filter\Clause\Clause | false
      */
-    public static function criterionToSQL(Criterion $criterion, $placeHolder = 'filter', $fieldMap = array())
+    public static function criterionToSqlClause(Criterion $criterion, $placeHolder = 'filter', $fieldMap = array())
     {
         $method = self::criterionOperandToMethod($criterion) . 'Clause';
 
