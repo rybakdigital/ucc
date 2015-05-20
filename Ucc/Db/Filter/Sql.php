@@ -15,7 +15,7 @@ class Sql
     /**
      * Turns Criterion into Sql Clause
      */
-    public static function criterionToBool(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
+    public static function criterionToBoolClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Escape, quote and qualify the field name for security.
         $field  = self::getSafeFieldName($criterion->key(), $fieldMap);
@@ -26,12 +26,12 @@ class Sql
             (strtolower($criterion->value()) == 'true') ||
             ($criterion->value() == 1)
             ) {
-            $clause->setStatement('(' . $field . ' IS NOT NULL AND ' . $field . ' != "")');
+            $clause->setStatement(self::addLogic($criterion) . ' (' . $field . ' IS NOT NULL AND ' . $field . ' != "")');
         } elseif (
             (strtolower($criterion->value()) == 'false') ||
             ($criterion->value() == 0)
             ) {
-            $clause->setStatement('(' . $field . ' IS NULL OR ' . $field . ' = "")');
+            $clause->setStatement(self::addLogic($criterion) . ' (' . $field . ' IS NULL OR ' . $field . ' = "")');
         }
 
         return $clause;
@@ -81,14 +81,14 @@ class Sql
             // use the relevant collation for the comparison.
             // Testing shows this doesn't affect use of keys on integer
             // fields, if they are used as part of a case sensitive filter
-            $clause->setStatement($criterion->logic(). ' ' . $field . ' ' . $op . ' '
+            $clause->setStatement(self::addLogic($criterion) . ' ' . $field . ' ' . $op . ' '
                 . 'CAST(' . $comparand . ' AS CHAR)' . ' COLLATE ' . $collate);
         }
 
         return $clause;
     }
 
-    public static function criterionToRelative(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
+    public static function criterionToRelativeClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand
         $op         = false;
@@ -123,13 +123,13 @@ class Sql
             $field = self::getSafeFieldName($criterion->key(), $fieldMap);
 
             // Build the final clause.
-            $clause->setStatement($criterion->logic(). ' ' .$field . ' ' . $op . ' ' . $comparand);
+            $clause->setStatement(self::addLogic($criterion) . ' ' .$field . ' ' . $op . ' ' . $comparand);
         }
 
         return $clause;
     }
 
-    public static function criterionToContains(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
+    public static function criterionToContainsClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
         $op         = false;
@@ -178,7 +178,7 @@ class Sql
         return $clause;
     }
 
-    public static function criterionToBegins(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
+    public static function criterionToBeginsClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
         $op         = false;
@@ -227,7 +227,7 @@ class Sql
         return $clause;
     }
 
-    public static function criterionToRegex(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
+    public static function criterionToRegexClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         $clause = new Clause;
 

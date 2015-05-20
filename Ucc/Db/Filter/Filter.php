@@ -59,7 +59,7 @@ class Filter
      *
      * @return Ucc\Data\Filter\Clause\Clause | false
      */
-    public static function criterionToSQL(Criterion $criterion, $placeHolder = 'filter', $fieldMap = array())
+    public static function criterionToSqlClause(Criterion $criterion, $placeHolder = 'filter', $fieldMap = array())
     {
         $method = self::criterionOperandToMethod($criterion) . 'Clause';
 

@@ -1359,7 +1359,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToBoolPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBool($criterion);
+        $sqlClause = Sql::criterionToBoolClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1414,7 +1414,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRelativeGtPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1425,7 +1425,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRelativeGePass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1436,7 +1436,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRelativeLtPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1447,7 +1447,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToLelativeGePass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRelative($criterion);
+        $sqlClause = Sql::criterionToRelativeClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1458,7 +1458,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsIncPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1469,7 +1469,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsNincPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1480,7 +1480,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsInciPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1491,7 +1491,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToContainsNinciPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToContains($criterion);
+        $sqlClause = Sql::criterionToContainsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1502,7 +1502,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToBeginsBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1513,7 +1513,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToNbeginsBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1524,7 +1524,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToBeginsiBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1535,7 +1535,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToNbeginsiBeginsPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToBegins($criterion);
+        $sqlClause = Sql::criterionToBeginsClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1546,7 +1546,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToRegexpPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToRegex($criterion);
+        $sqlClause = Sql::criterionToRegexClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1557,7 +1557,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInInPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1568,7 +1568,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInNinPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1579,7 +1579,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInIniPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
@@ -1590,7 +1590,7 @@ class SqlTest extends TestCase
      */
     public function testCriterionToInNiniPass($criterion, $expected)
     {
-        $sqlClause = Sql::criterionToIn($criterion);
+        $sqlClause = Sql::criterionToInClause($criterion);
 
         $this->assertInstanceOf('Ucc\Data\Filter\Clause\Clause', $sqlClause);
         $this->assertEquals($expected, $sqlClause);
