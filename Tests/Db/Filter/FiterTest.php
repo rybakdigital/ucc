@@ -31,7 +31,6 @@ class FilterTest extends TestCase
         $expected   = $clause;
         $data[]     = array($filter, $expected);
 
-
         $filter     = new Data_Filter();
         $criterions = array(
             FilterType::filterToCriterion('and-foo-nei-field-bar'),
@@ -41,6 +40,22 @@ class FilterTest extends TestCase
         $clause = new Clause();
         $clause
             ->setStatement($sql);
+        $filter->setCriterions($criterions);
+        $expected   = $clause;
+        $data[]     = array($filter, $expected);
+
+        $filter     = new Data_Filter();
+        $criterions = array(
+            FilterType::filterToCriterion('and-isActive-bool-field-true'),
+            FilterType::filterToCriterion('or-size-gt-field-volume'),
+            FilterType::filterToCriterion('and-bar-re-value-^moo$'),
+        );
+        $sql    = '(`isActive` IS NOT NULL AND `isActive` != "") OR `size` > `volume` AND `bar` REGEXP :filter_2';
+        $params = array('filter_2' => '^moo$');
+        $clause = new Clause();
+        $clause
+            ->setStatement($sql)
+            ->setParameters($params);
         $filter->setCriterions($criterions);
         $expected   = $clause;
         $data[]     = array($filter, $expected);
