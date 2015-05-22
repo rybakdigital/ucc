@@ -17,9 +17,9 @@ use Ucc\Data\Filter\Clause\Clause;
 class Filter
 {
     /**
-     * Turns array of Ucc\Data\Filter\Filter objects (also known as criteria) into SQL
+     * Turns Ucc\Data\Filter\Filter object (also known as criteria) into SQL
      *
-     * @param array     $filers     Array of Ucc\Data\Filter\Criterion\Criterion objects
+     * @param Ucc\Data\Filter\Filter     $filer
      * @param array     $fieldMap   Array of field names and tables
      * @param string    $namespace  Prefix for query placeholders
      * @return Ucc\Data\Filter\Clause\Clause
@@ -59,6 +59,14 @@ class Filter
         return $sqlClause;
     }
 
+    /**
+     * Turns array of Ucc\Data\Filter\Filter objects (also known as criteria) into SQL
+     *
+     * @param array     $filers     Array of Ucc\Data\Filter\Filter objects
+     * @param array     $fieldMap   Array of field names and tables
+     * @param string    $namespace  Prefix for query placeholders
+     * @return Ucc\Data\Filter\Clause\Clause
+     */
     public function filtersToSqlClause(array $filters, $fieldMap = array())
     {
         // Default return values
