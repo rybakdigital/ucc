@@ -61,12 +61,28 @@ class Filter
 
     public function filtersToSqlClause(array $filters, $fieldMap = array())
     {
+        // Default return values
+        $sqlClause  = new Clause;
         $sql        = '';
         $params     = array();
 
         foreach ($filters as $i => $filter) {
-            $sqlClause = sellf::filterToSqlClause($filter, $fieldMap = array(), $i . '_filter');
+            $clause = self::filterToSqlClause($filter, $fieldMap = array(), $i . '_filter');
+
+            if (!empty($sql)) {
+                $sql .= ' ' . strtoupper($filter->getLogic()) . ' ';
+            }
+
+            $sql .= '(' . $clause->getStatement() . ')';
+
+            // Add params
+            $params[] = $clause->getParameters();
+            $sqlClause->setParameters($clause->getParameters());
         }
+
+        $sqlClause->setStatement($sql);
+
+        return $sqlClause;
     }
 
     /**
