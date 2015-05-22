@@ -17,9 +17,9 @@ use Ucc\Data\Filter\Clause\Clause;
 class Filter
 {
     /**
-     * Turns array of Ucc\Data\Filter\Filter objects (also known as criteria) into SQL
+     * Turns Ucc\Data\Filter\Filter object (also known as criteria) into SQL
      *
-     * @param array     $filers     Array of Ucc\Data\Filter\Criterion\Criterion objects
+     * @param Ucc\Data\Filter\Filter     $filer
      * @param array     $fieldMap   Array of field names and tables
      * @param string    $namespace  Prefix for query placeholders
      * @return Ucc\Data\Filter\Clause\Clause
@@ -51,6 +51,40 @@ class Filter
             // Add params
             $params[] = $clause->getParameters();
 
+            $sqlClause->setParameters($clause->getParameters());
+        }
+
+        $sqlClause->setStatement($sql);
+
+        return $sqlClause;
+    }
+
+    /**
+     * Turns array of Ucc\Data\Filter\Filter objects (also known as criteria) into SQL
+     *
+     * @param array     $filers     Array of Ucc\Data\Filter\Filter objects
+     * @param array     $fieldMap   Array of field names and tables
+     * @param string    $namespace  Prefix for query placeholders
+     * @return Ucc\Data\Filter\Clause\Clause
+     */
+    public static function filtersToSqlClause(array $filters, $fieldMap = array())
+    {
+        // Default return values
+        $sqlClause  = new Clause;
+        $sql        = '';
+        $params     = array();
+
+        foreach ($filters as $i => $filter) {
+            $clause = self::filterToSqlClause($filter, $fieldMap = array(), $i . '_filter');
+
+            if (!empty($sql)) {
+                $sql .= ' ' . strtoupper($filter->getLogic()) . ' ';
+            }
+
+            $sql .= '(' . $clause->getStatement() . ')';
+
+            // Add params
+            $params[] = $clause->getParameters();
             $sqlClause->setParameters($clause->getParameters());
         }
 
