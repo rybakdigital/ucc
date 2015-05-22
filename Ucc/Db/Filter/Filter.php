@@ -67,7 +67,7 @@ class Filter
      * @param string    $namespace  Prefix for query placeholders
      * @return Ucc\Data\Filter\Clause\Clause
      */
-    public function filtersToSqlClause(array $filters, $fieldMap = array())
+    public static function filtersToSqlClause(array $filters, $fieldMap = array())
     {
         // Default return values
         $sqlClause  = new Clause;
