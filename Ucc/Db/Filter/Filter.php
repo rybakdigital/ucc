@@ -59,6 +59,16 @@ class Filter
         return $sqlClause;
     }
 
+    public function filtersToSqlClause(array $filters, $fieldMap = array())
+    {
+        $sql        = '';
+        $params     = array();
+
+        foreach ($filters as $i => $filter) {
+            $sqlClause = sellf::filterToSqlClause($filter, $fieldMap = array(), $i . '_filter');
+        }
+    }
+
     /**
      * Returns Ucc\Data\Filter\Clause\Clause for successful Criterion translations, otherwise false
      *
