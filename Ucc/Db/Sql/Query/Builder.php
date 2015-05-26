@@ -12,8 +12,8 @@ class Builder
     /**
      * Expands simple SQL query
      */
-    public function expand()
+    public static function expandSimpleQuery($query)
     {
-
+        return $query;
     }
 }
