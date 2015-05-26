@@ -1,9 +1,9 @@
 <?php
 
-namespace Ucc\Tests\Db\Query;
+namespace Ucc\Tests\Db\Sql\Query;
 
 use \PHPUnit_Framework_TestCase as TestCase;
-use Ucc\Data\Query\Builder;
+use Ucc\Db\Sql\Query\Builder;
 
 class BuilderTest extends TestCase
 {
