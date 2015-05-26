@@ -142,4 +142,111 @@ class FilterTest extends TestCase
         $result = Db_Filter::filtersToSqlClause($filters);
         $this->assertEquals($expected, $result);
     }
+
+    public function criterionOperandToMethodProvider()
+    {
+        $data = array();
+
+        // Bool compare
+        $criterion      = FilterType::filterToCriterion('and-foo-bool-value-1');
+        $expectedMethod = 'criterionToBool';
+        $data[]         = array($criterion, $expectedMethod);
+        $data[]         = array($criterion, $expectedMethod);
+
+        // Direct compare
+        $criterion      = FilterType::filterToCriterion('and-foo-nei-field-bar');
+        $expectedMethod = 'criterionToDirect';
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-ne-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-eq-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-eqi-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+
+        // Relative compare
+        $criterion      = FilterType::filterToCriterion('and-foo-gt-field-bar');
+        $expectedMethod = 'criterionToRelative';
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-ge-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-lt-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-le-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+
+        // Contains compare
+        $criterion      = FilterType::filterToCriterion('and-foo-inc-value-1,2,3');
+        $expectedMethod = 'criterionToContains';
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-ninc-value-1,2,3');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-inci-value-1,2,3');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-ninci-value-1,2,3');
+        $data[]         = array($criterion, $expectedMethod);
+
+        // Begins with compare
+        $criterion      = FilterType::filterToCriterion('and-foo-begins-field-bar');
+        $expectedMethod = 'criterionToBegins';
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-nbegins-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-beginsi-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-nbeginsi-field-bar');
+        $data[]         = array($criterion, $expectedMethod);
+
+        // Regex compare
+        $criterion      = FilterType::filterToCriterion('and-foo-re-value-^1');
+        $expectedMethod = 'criterionToRegex';
+        $data[]         = array($criterion, $expectedMethod);
+ 
+        // In compare
+        $criterion      = FilterType::filterToCriterion('and-foo-in-field-1,2,3');
+        $expectedMethod = 'criterionToIn';
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-nin-field-1,2,3');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-ini-field-1,2,3');
+        $data[]         = array($criterion, $expectedMethod);
+        $criterion      = FilterType::filterToCriterion('and-foo-nini-field-1,2,3');
+        $data[]         = array($criterion, $expectedMethod);
+
+        // No method
+        $criterion      = new Criterion();
+        $expectedMethod = false;
+        $data[]         = array($criterion, $expectedMethod);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider criterionOperandToMethodProvider
+     */
+    public function testCriterionOperandToMethod($criterion, $expected)
+    {
+        $result = Db_Filter::criterionOperandToMethod($criterion);
+        $this->assertEquals($expected, $result);
+    }
+
+    public function criterionToSqlClauseProvider()
+    {
+        $data = array();
+
+        $criterion      = new Criterion();
+        $expectedMethod = false;
+        $data[]         = array($criterion, $expectedMethod);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider criterionToSqlClauseProvider
+     */
+    public function testCriterionToSqlClause($criterion, $expected)
+    {
+        $result = Db_Filter::criterionToSqlClause($criterion);
+        $this->assertEquals($expected, $result);
+    }
 }

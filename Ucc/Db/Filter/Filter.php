@@ -113,7 +113,7 @@ class Filter
      * Decides which transformation method use for given operand
      *
      * @param   Criterion   $criterion
-     * @return  string
+     * @return  string | false      Return method name or false if method can not be determined
      */
     public static function criterionOperandToMethod(Criterion $criterion)
     {
@@ -168,6 +168,9 @@ class Filter
             case 'nini': // is not in the list (case insensitive)
                 $method = 'criterionToIn';
                 break;
+
+            default:
+                $method = false;
         }
 
         return $method;
