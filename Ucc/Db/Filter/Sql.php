@@ -4,6 +4,8 @@ namespace Ucc\Db\Filter;
 
 use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Data\Filter\Clause\Clause;
+use Ucc\Data\Sortable\Sort\Sort;
+use \InvalidArgumentException;
 
 /**
  * Ucc\Db\Filter\Sql
@@ -422,5 +424,94 @@ class Sql
         }
 
         return false;
+    }
+
+    /**
+     * 
+     */
+    public static function getFilterSql($filters = array(), $fieldMap = array(), $singleTable = false)
+    {
+        $ret            = array('where', 'having');
+        $havingFilters  = array();
+        $whereFilters   = array();
+        $table          = '';
+
+        foreach ($filters as $i => $filter) {
+            // get Criterions
+            $criterions = $filter->getCriterions();
+
+            foreach ($criterions as $criterion) {
+                if (isset($fieldMap[$criterion->key()])) {
+                    // Get table name from field map
+                    $table = $fieldMap[$criterion->key()];
+
+                // Check for wildecard
+                } elseif (isset($fieldMap['*'])) {
+                    $table = $fieldMap['*'];
+                }
+
+                if (!$singleTable || $singleTable === $table) {
+                    // Allow pseudo tables 'HAVING'
+                    if ($table == 'having') {
+                        $havingFilters[] = $filters[$i];
+                    } else {
+                        $whereFilters[] = $filters[$i];
+                    }
+                }
+            }
+        }
+
+        $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap);
+        $having = Filter::filtersToSqlClause($havingFilters, $fieldMap);
+
+        $ret['where'] = 'WHERE ' . $where->getStatement();
+        $ret['having'] = 'HAVING ' . $having->getStatement();
+
+        return $ret;
+    }
+
+    /**
+     * 
+     */
+    public static function getGroupSql($groups = array(), $fieldMap = array())
+    {
+        $ret = '';
+
+        // Generate custom group statements
+        if(is_array($groups)) {
+            foreach($groups as $group) {
+                $field = self::getSafeFieldName($group, $fieldMap);
+                $ret .= $field . ',';
+            }
+
+            return 'GROUP BY ' . rtrim($ret, ',');
+        }
+
+        return $ret;
+    }
+
+    /**
+     * 
+     */
+    public static function getSortSql($sorts = array(), $fieldMap = array())
+    {
+        $ret = '';
+
+        foreach ($sorts as $sort) {
+            if (!is_a($sort, 'Ucc\Data\Sortable\Sort\SortInterface')) {
+                throw new InvalidArgumentException("Sort must implement Ucc\Data\Sortable\Sort\SortInterface");
+            }
+
+            // Escape, quote and qualify the field name.
+            $field = self::getSafeFieldName($sort->field(), $fieldMap);
+
+            $ret .= $field . ' ' . strtoupper($sort->direction()) . ',';
+        }
+
+        if (!empty($ret)) {
+            return 'ORDER BY ' . rtrim($ret, ',');
+        }
+
+        return $ret;
     }
 }
