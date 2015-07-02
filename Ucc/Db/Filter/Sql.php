@@ -463,7 +463,9 @@ class Sql
                 }
             }
 
-            if (!empty($havingFilter->getCriterions())) {
+            $havingCriterions = $havingFilter->getCriterions();
+
+            if (!empty($havingCriterions)) {
                 $havingFilters[$i]  = $havingFilter;
             }
 
@@ -473,11 +475,14 @@ class Sql
         $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap);
         $having = Filter::filtersToSqlClause($havingFilters, $fieldMap);
 
-        if (!empty($where->getStatement())) {
+        $whareStatemet      = $where->getStatement();
+        $havingStatement    = $having->getStatement();
+
+        if (!empty($whareStatemet)) {
             $ret['where'] = 'WHERE ' . $where->getStatement();
         }
 
-        if (!empty($having->getStatement())) {
+        if (!empty($havingStatement)) {
             $ret['having'] = 'WHERE ' . $where->getStatement();
         }
 
