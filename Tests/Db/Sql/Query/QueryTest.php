@@ -17,7 +17,7 @@ class QueryTest extends TestCase
 
         $query      = new Query;
         $sql        = 'SELECT * FROM `products` ';
-        $expectedSql = 'SELECT * FROM `products` WHERE (`name` LIKE CONCAT("%", :0_filter_0, "%") COLLATE utf8_general_ci OR `name` LIKE CONCAT("%", :0_filter_1, "%") COLLATE utf8_general_ci AND `price` > :0_filter_2) GROUP BY `name`,`price` ORDER BY `name` ASC,`price` ASC';
+        $expectedSql = 'SELECT * FROM `products` WHERE (`name` LIKE CONCAT("%", :0_filter_0, "%") COLLATE utf8_general_ci OR `name` LIKE CONCAT("%", :0_filter_1, "%") COLLATE utf8_general_ci AND `price` > :0_filter_2) GROUP BY `name`,`price` ORDER BY `name` ASC,`price` DESC';
         $query
             ->setStatement($sql);
         $expected   = new Query;
@@ -27,7 +27,7 @@ class QueryTest extends TestCase
         $sort1 = new Sort;
         $sort1->setField('name');
         $sort2 = new Sort;
-        $sort2->setField('price');
+        $sort2->setField('price')->setDirection('DESC');
 
         $filterA     = new Filter();
         $criterions = array(

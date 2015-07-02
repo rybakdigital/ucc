@@ -5,6 +5,7 @@ namespace Ucc\Db\Filter;
 use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Data\Filter\Clause\Clause;
 use Ucc\Data\Sortable\Sort\Sort;
+use Ucc\Data\Filter\Filter as Data_Filter;
 use \InvalidArgumentException;
 
 /**
@@ -438,7 +439,9 @@ class Sql
 
         foreach ($filters as $i => $filter) {
             // get Criterions
-            $criterions = $filter->getCriterions();
+            $criterions     = $filter->getCriterions();
+            $havingFilter   = new Data_Filter();
+            $whereFilter    = new Data_Filter();
 
             foreach ($criterions as $criterion) {
                 if (isset($fieldMap[$criterion->key()])) {
@@ -453,19 +456,30 @@ class Sql
                 if (!$singleTable || $singleTable === $table) {
                     // Allow pseudo tables 'HAVING'
                     if ($table == 'having') {
-                        $havingFilters[] = $filters[$i];
+                        $havingFilter->addCriterion($criterion);
                     } else {
-                        $whereFilters[] = $filters[$i];
+                        $whereFilter->addCriterion($criterion);
                     }
                 }
             }
+
+            if (!empty($havingFilter->getCriterions())) {
+                $havingFilters[$i]  = $havingFilter;
+            }
+
+            $whereFilters[$i]   = $whereFilter;
         }
 
         $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap);
         $having = Filter::filtersToSqlClause($havingFilters, $fieldMap);
 
-        $ret['where'] = 'WHERE ' . $where->getStatement();
-        $ret['having'] = 'HAVING ' . $having->getStatement();
+        if (!empty($where->getStatement())) {
+            $ret['where'] = 'WHERE ' . $where->getStatement();
+        }
+
+        if (!empty($having->getStatement())) {
+            $ret['having'] = 'WHERE ' . $where->getStatement();
+        }
 
         return $ret;
     }
