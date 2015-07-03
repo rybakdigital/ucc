@@ -475,15 +475,15 @@ class Sql
         $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap);
         $having = Filter::filtersToSqlClause($havingFilters, $fieldMap);
 
-        $whareStatemet      = $where->getStatement();
+        $whereStatemet      = $where->getStatement();
         $havingStatement    = $having->getStatement();
 
-        if (!empty($whareStatemet)) {
-            $ret['where'] = 'WHERE ' . $where->getStatement();
+        if (!empty($whereStatemet) && $whereStatemet != '()') {
+            $ret['where'] = 'WHERE ' . $whereStatemet;
         }
 
         if (!empty($havingStatement)) {
-            $ret['having'] = 'WHERE ' . $where->getStatement();
+            $ret['having'] = 'HAVING ' . $havingStatement;
         }
 
         return $ret;
@@ -497,7 +497,7 @@ class Sql
         $ret = '';
 
         // Generate custom group statements
-        if(is_array($groups)) {
+        if(is_array($groups) && !empty($groups)) {
             foreach($groups as $group) {
                 $field = self::getSafeFieldName($group, $fieldMap);
                 $ret .= $field . ',';

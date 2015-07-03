@@ -45,6 +45,10 @@ class Query extends Clause
             $sql .= ' ' . $clauses['group'];
         }
 
+        if (!empty($clauses['filter']['having'])) {
+            $sql .= ' ' . $clauses['filter']['having'];
+        }
+
         if (!empty($clauses['sort'])) {
             $sql .= ' ' . $clauses['sort'];
         }
