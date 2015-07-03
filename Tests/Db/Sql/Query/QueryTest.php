@@ -12,6 +12,7 @@ class QueryTest extends TestCase
 {
     public function expandSimpleQueryProvider()
     {
+        // test WHERE and SORT
         $data       = array();
         $options    = array();
 
@@ -36,11 +37,28 @@ class QueryTest extends TestCase
             FilterType::filterToCriterion('and-price-gt-value-100'),
         );
         $filterA->setCriterions($criterions);
-
-
         $options = array('sort' => array($sort1, $sort2), 'group' => array('name', 'price'), 'filter' => array($filterA));
 
         $data[]     = array($query, $options, $expected->getStatement());
+
+        // test HAVING
+        $query      = new Query;
+        $query->setStatement($sql);
+        $sql        = 'SELECT * FROM `products` ';
+        $expectedSql = 'SELECT * FROM `products` HAVING (`name` = CAST(`price` AS CHAR) COLLATE utf8_bin OR `clicks` > `price`)';
+        $expected   = new Query;
+        $expected
+            ->setStatement($expectedSql);
+        $fieldMap   = array( 'name' => 'having' );
+        $filterA    = new Filter();
+        $criterions = array(
+            FilterType::filterToCriterion('and-name-eq-field-price'),
+            FilterType::filterToCriterion('or-clicks-gt-field-price')
+        );
+        $filterA->setCriterions($criterions);
+
+        $options = array('filter' => array($filterA));
+        $data[]  = array($query, $options, $expected->getStatement(), $fieldMap);
 
         return $data;
     }
@@ -48,9 +66,9 @@ class QueryTest extends TestCase
     /**
      * @dataProvider expandSimpleQueryProvider
      */
-    public function testExpandSimpleQuery($query, $options, $expected)
+    public function testExpandSimpleQuery($query, $options, $expected, $fieldMap = array())
     {
-        $result = Query::expandSimpleQuery($query, $options);
+        $result = Query::expandSimpleQuery($query, $options, $fieldMap);
         $this->assertEquals($expected, $result);
     }
 }
