@@ -40,6 +40,13 @@ class Sql
         return $clause;
     }
 
+    /**
+     * Turns Criterion into Direct Sql Clause
+     *
+     * @param   Criterion   $criterion      Criterion to process
+     * @param   string      $placeHolder    Placeholder for parameter name
+     * @param   array       $fieldMap       Array representing field map
+     */
     public static function criterionToDirectClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
@@ -91,6 +98,13 @@ class Sql
         return $clause;
     }
 
+    /**
+     * Turns Criterion into Relative Sql Clause
+     *
+     * @param   Criterion   $criterion      Criterion to process
+     * @param   string      $placeHolder    Placeholder for parameter name
+     * @param   array       $fieldMap       Array representing field map
+     */
     public static function criterionToRelativeClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand
@@ -132,6 +146,13 @@ class Sql
         return $clause;
     }
 
+    /**
+     * Turns Criterion into Contains Sql Clause
+     *
+     * @param   Criterion   $criterion      Criterion to process
+     * @param   string      $placeHolder    Placeholder for parameter name
+     * @param   array       $fieldMap       Array representing field map
+     */
     public static function criterionToContainsClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
@@ -181,6 +202,13 @@ class Sql
         return $clause;
     }
 
+    /**
+     * Turns Criterion into Begins with Sql Clause
+     *
+     * @param   Criterion   $criterion      Criterion to process
+     * @param   string      $placeHolder    Placeholder for parameter name
+     * @param   array       $fieldMap       Array representing field map
+     */
     public static function criterionToBeginsClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
@@ -230,6 +258,13 @@ class Sql
         return $clause;
     }
 
+    /**
+     * Turns Criterion into Regular expression Sql Clause
+     *
+     * @param   Criterion   $criterion      Criterion to process
+     * @param   string      $placeHolder    Placeholder for parameter name
+     * @param   array       $fieldMap       Array representing field map
+     */
     public static function criterionToRegexClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         $clause = new Clause;
@@ -252,6 +287,13 @@ class Sql
         return $clause;
     }
 
+    /**
+     * Turns Criterion into IN Sql Clause
+     *
+     * @param   Criterion   $criterion      Criterion to process
+     * @param   string      $placeHolder    Placeholder for parameter name
+     * @param   array       $fieldMap       Array representing field map
+     */
     public static function criterionToInClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
     {
         // Create local operand and collate
@@ -322,6 +364,8 @@ class Sql
 
     /**
      * Gets Criterion logic and returns it in CAPITALIZED string
+     * @param   Criterion
+     * @return  string      Criterion logic
      */
     public static function addLogic(Criterion $criterion)
     {
@@ -428,7 +472,12 @@ class Sql
     }
 
     /**
-     * 
+     * Builds SQL from filters (WHERE or HAVING parts)
+     *
+     * @param array     $filters        Array of Ucc\Data\Filter\Filter objects
+     * @param array     $fieldMap       Array representing filed map
+     * @param boolean   $singleTable    Marker to indicate single table queries.
+     * @return  string
      */
     public static function getFilterSql($filters = array(), $fieldMap = array(), $singleTable = false)
     {
@@ -490,7 +539,11 @@ class Sql
     }
 
     /**
-     * 
+     * Returns GROUP part of SQL statement
+     *
+     * @param   array   $groups     Array of groups to use
+     * @param   array   $fieldMap   Array representing filed map
+     * @return  string
      */
     public static function getGroupSql($groups = array(), $fieldMap = array())
     {
@@ -510,7 +563,11 @@ class Sql
     }
 
     /**
-     * 
+     * Returns SORT part of SQL statement
+     *
+     * @param   array   $sorts      Array of sorts
+     * @param   array   $fieldMap   Array representing filed map
+     * @return  string
      */
     public static function getSortSql($sorts = array(), $fieldMap = array())
     {
