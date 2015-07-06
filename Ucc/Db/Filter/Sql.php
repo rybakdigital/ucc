@@ -563,7 +563,7 @@ class Sql
     }
 
     /**
-     * Returns SORT part of SQL statement
+     * Returns ORDER BY part of SQL statement
      *
      * @param   array   $sorts      Array of sorts
      * @param   array   $fieldMap   Array representing filed map
