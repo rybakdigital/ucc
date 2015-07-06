@@ -16,7 +16,12 @@ class Query extends Clause
     public static $defaultOptions = array('filter', 'group', 'sort');
 
     /**
-     * Expands simple SQL query. 
+     * Expands simple SQL query. Adds filter, group, sort, limit and offset to existing query.
+     *
+     * @param   Ucc\Db\Sql\Query    $query      Instance of the Query to expand. This must be a simple
+     *                                          query to work.
+     * @param   array               $options    Array of options to pass to query.
+     * @param   array               $fieldMap   Field map to use when building the query.
      */
     public static function expandSimpleQuery(Query $query, $options = array(), $fieldMap = array())
     {
