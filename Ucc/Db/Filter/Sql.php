@@ -590,4 +590,25 @@ class Sql
 
         return $ret;
     }
+
+    /**
+     * Gets LIMIT part of the SQL statement
+     * @param integer   $limit
+     * @param integer   $offset
+     */
+    public function getLimitSql($limit = NULL, $offset = NULL)
+    {
+        $ret = '';
+
+        // Convert to numbers
+        $limit  = intval($limit);
+        $offset = intval($offset);
+
+        if (($limit > 0) && ($offset >= 0)) {
+            return 'LIMIT ' . $offset  . ',' . $limit;
+        }
+
+        return $ret;
+    }
+
 }

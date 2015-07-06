@@ -29,7 +29,10 @@ class Query extends Clause
         // Remove white space from SQL
         $sql = trim($query->getStatement());
 
-        $clauses = array();
+        $clauses    = array();
+        $limit      = false;
+        $offset     = false;
+
 
         foreach (self::$defaultOptions as $option) {
             if (!empty($options[$option])) {
@@ -41,6 +44,19 @@ class Query extends Clause
             $method = 'get' . ucfirst($option) . 'Sql';
             $clauses[$option] = SQL::$method($optionSettings, $fieldMap);
         }
+
+        // Build LIMIT clause
+        // get limit from options
+        if (isset($options['limit'])) {
+            $limit = $options['limit'];
+        }
+
+        // get offset from options
+        if (isset($options['offset'])) {
+            $offset = $options['offset'];
+        }
+
+        $clauses['limit']  = SQL::getLimitSql($limit, $offset);
 
         if (!empty($clauses['filter']['where'])) {
             $sql .= ' ' . $clauses['filter']['where'];
@@ -56,6 +72,10 @@ class Query extends Clause
 
         if (!empty($clauses['sort'])) {
             $sql .= ' ' . $clauses['sort'];
+        }
+
+        if (!empty($clauses['limit'])) {
+            $sql .= ' ' . $clauses['limit'];
         }
 
         return $sql;

@@ -60,7 +60,7 @@ class QueryTest extends TestCase
         $options = array('filter' => array($filterA));
         $data[]  = array($query, $options, $expected->getStatement(), $fieldMap);
 
-        // test HAVING
+        // test * in field map
         $query      = new Query;
         $query->setStatement($sql);
         $sql        = 'SELECT * FROM `products` ';
@@ -78,6 +78,24 @@ class QueryTest extends TestCase
 
         $options = array('filter' => array($filterA));
         $data[]  = array($query, $options, $expected->getStatement(), $fieldMap);
+
+        // test LIMIT and offset
+        $query      = new Query;
+        $query->setStatement($sql);
+        $sql        = 'SELECT * FROM `products` ';
+        $expectedSql = 'SELECT * FROM `products` WHERE (`name` = CAST(`price` AS CHAR) COLLATE utf8_bin OR `clicks` > `price`) LIMIT 10,20';
+        $expected   = new Query;
+        $expected
+            ->setStatement($expectedSql);
+        $filterA    = new Filter();
+        $criterions = array(
+            FilterType::filterToCriterion('and-name-eq-field-price'),
+            FilterType::filterToCriterion('or-clicks-gt-field-price')
+        );
+        $filterA->setCriterions($criterions);
+
+        $options = array('filter' => array($filterA), 'limit' => 20, 'offset' => 10);
+        $data[]  = array($query, $options, $expected->getStatement());
 
         return $data;
     }
