@@ -60,6 +60,25 @@ class QueryTest extends TestCase
         $options = array('filter' => array($filterA));
         $data[]  = array($query, $options, $expected->getStatement(), $fieldMap);
 
+        // test HAVING
+        $query      = new Query;
+        $query->setStatement($sql);
+        $sql        = 'SELECT * FROM `products` ';
+        $expectedSql = 'SELECT * FROM `products` HAVING (`name` = CAST(`price` AS CHAR) COLLATE utf8_bin OR `clicks` > `price`)';
+        $expected   = new Query;
+        $expected
+            ->setStatement($expectedSql);
+        $fieldMap   = array( '*' => 'having' );
+        $filterA    = new Filter();
+        $criterions = array(
+            FilterType::filterToCriterion('and-name-eq-field-price'),
+            FilterType::filterToCriterion('or-clicks-gt-field-price')
+        );
+        $filterA->setCriterions($criterions);
+
+        $options = array('filter' => array($filterA));
+        $data[]  = array($query, $options, $expected->getStatement(), $fieldMap);
+
         return $data;
     }
 
