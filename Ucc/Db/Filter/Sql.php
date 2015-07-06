@@ -596,7 +596,7 @@ class Sql
      * @param integer   $limit
      * @param integer   $offset
      */
-    public function getLimitSql($limit = NULL, $offset = NULL)
+    public static function getLimitSql($limit = NULL, $offset = NULL)
     {
         $ret = '';
 
