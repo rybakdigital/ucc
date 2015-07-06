@@ -6,6 +6,7 @@ use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Data\Filter\Clause\Clause;
 use Ucc\Db\Filter\Sql;
+use Ucc\Data\Sortable\Sort\Sort;
 
 class SqlTest extends TestCase
 {
@@ -1770,5 +1771,63 @@ class SqlTest extends TestCase
     {
         $result = Sql::getSafeTableName($field, $fieldMap);
         $this->assertSame($expected, $result);
+    }
+
+    /**
+     * @expectedException     InvalidArgumentException
+     */
+    public function testGetSortSqlFail()
+    {
+        $sorts = array('abc', array());
+
+        Sql::getSortSql($sorts, array());
+    }
+
+    public function getSortSqlPassProvider()
+    {
+        $data   = array();
+        $sorts  = array();
+        $sort1 = new Sort;
+        $sort1->setField('name');
+        $sort2 = new Sort;
+        $sort2
+            ->setField('price')
+            ->setDirection('DESC');
+
+        $expected = 'ORDER BY `name` ASC,`price` DESC';
+
+        $data[] = array(array($sort1, $sort2), array(), $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider getSortSqlPassProvider
+     */
+    public function testGetSortSqlPass($sorts, $fieldMap, $expected)
+    {
+        $result = Sql::getSortSql($sorts, $fieldMap);
+        $this->assertEquals($result, $expected);
+    }
+
+    public function getGroupSqlPassProvider()
+    {
+        $data       = array();
+        $groups     = array('name', 'price');
+
+        $expected = 'GROUP BY `name`,`price`';
+
+        $data[] = array($groups, array(), $expected);
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider getGroupSqlPassProvider
+     */
+    public function testGetGroupSqlPass($groups, $fieldMap, $expected)
+    {
+        $result = Sql::getGroupSql($groups, $fieldMap);
+        $this->assertEquals($result, $expected);
     }
 }
