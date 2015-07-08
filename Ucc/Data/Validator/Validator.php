@@ -10,6 +10,9 @@ namespace Ucc\Data\Validator;
  */
 class Validator
 {
+    /**
+     * @var     array   Array of checks to perform
+     */
     private $checks;
 
     public function __construct()
@@ -17,16 +20,43 @@ class Validator
         $this->checks = array();
     }
 
+    /**
+     * Gets list of checks
+     *
+     * @return  array
+     */
     public function getChecks()
     {
         return $this->checks();
     }
 
-    public function setChecks()
+    /**
+     * Sets checks
+     *
+     * @param   array   $checks     Array of checks to perform
+     * @return  Validator
+     */
+    public function setChecks(array $checks)
     {
         foreach ($checks as $key => $check) {
             $this->setCheck($key, $check);
         }
+
+        return $this;
+    }
+
+    /**
+     * Sets checks
+     *
+     * @param   string  $key        Input key to apply check to
+     * @param   array   $check      Validation criteria
+     * @return  Validator
+     */
+    public function setCheck($key, $check)
+    {
+        $this->checks[$key] = $check;
+
+        return $this;
     }
 
     /**
