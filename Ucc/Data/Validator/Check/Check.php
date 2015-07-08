@@ -10,4 +10,80 @@ namespace Ucc\Data\Validator\Check;
  */
 class Check
 {
+    /**
+     * @var     string  Check identifier, i.e. key, field name
+     */
+    private $key;
+
+    /**
+     * @var     array   Array of requirements
+     */
+    private $requirements;
+
+    public function __construct()
+    {
+        $this->requirements = array();
+    }
+
+    /**
+     * Gets key
+     *
+     * @return  string
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Sets key
+     *
+     * @param   string  $key
+     * @return  Check
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    /**
+     * Gets requirements
+     *
+     * @return  array
+     */
+    public function getRequirements()
+    {
+        return $this->requirements;
+    }
+
+    /**
+     * Sets requirements
+     *
+     * @param   array   $requirements
+     * @return  Check
+     */
+    public function setRequirements(array $requirements)
+    {
+        foreach ($requirements as $rule => $condition) {
+            $this->addRequirement($rule, $condition);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Adds single requirements
+     *
+     * @param   string  $rule           Type of criteria
+     * @param   mixed   $condition      Requisites to be met
+     * @return  Check
+     */
+    public function addRequirement($rule, $condition)
+    {
+        $this->requirements[$rule] = $condition;
+
+        return $this;
+    }
 }
