@@ -60,6 +60,18 @@ class Validator
     }
 
     /**
+     * Clears all validation checks.
+     *
+     * @return  Validator
+     */
+    public function clearChecks()
+    {
+        $this->checks = array();
+
+        return $this;
+    }
+
+    /**
      * Checks inputs conformity with field checks set.
      */
     public function validate()
