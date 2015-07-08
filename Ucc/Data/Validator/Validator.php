@@ -27,7 +27,7 @@ class Validator
      */
     public function getChecks()
     {
-        return $this->checks();
+        return $this->checks;
     }
 
     /**
