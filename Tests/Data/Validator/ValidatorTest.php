@@ -22,6 +22,17 @@ class ValidatorTest extends TestCase
         $this->assertEquals($checks, $validator->getChecks());
     }
 
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage Argument 1 passed to Ucc\Data\Validator\Validator::setChecks() must be of the type array
+     */
+    public function testSetChecksFail()
+    {
+        $validator  = new Validator;
+        $checks     = true;
+        $this->assertInstanceOf(get_class($validator), $validator->setChecks($checks));
+    }
+
     public function testClearChecks()
     {
         $validator  = new Validator;
