@@ -33,6 +33,21 @@ class ValidatorTest extends TestCase
         $this->assertInstanceOf(get_class($validator), $validator->setChecks($checks));
     }
 
+    public function testGetError()
+    {
+        $validator = new Validator;
+
+        $this->assertFalse(is_array($validator->getError()));
+    }
+
+    public function testSetError()
+    {
+        $validator = new Validator;
+        $message = 'Foo has made boo';
+        $this->assertInstanceOf(get_class($validator), $validator->setError($message));
+        $this->assertEquals($message, $validator->getError());
+    }
+
     public function testClearChecks()
     {
         $validator  = new Validator;

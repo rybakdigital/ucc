@@ -78,6 +78,29 @@ class Validator
     }
 
     /**
+     * Gets error
+     *
+     * @return  mixed           String if error occurred, otherwise false
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * Set error
+     *
+     * @param   mixed       $message
+     * @return  Validator
+     */
+    public function setError($message)
+    {
+        $this->error = $message;
+
+        return $this;
+    }
+
+    /**
      * Checks inputs conformity with field checks set.
      */
     public function validate()
