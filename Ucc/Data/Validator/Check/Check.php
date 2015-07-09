@@ -86,4 +86,14 @@ class Check
 
         return $this;
     }
+
+    public function fromArray(array $check)
+    {
+        foreach ($check as $key => $requirements) {
+            $this->setKey($key);
+            $this->setRequirements($requirements);
+        }
+
+        return $this;
+    }
 }
