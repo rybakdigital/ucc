@@ -87,6 +87,13 @@ class Check
         return $this;
     }
 
+    /**
+     * Allows to import check from array
+     *
+     * @param   array   $check          Array of key => requirements (array) that will be imported to check
+     *                                  Example: array('name' => array('min' => 1, 'opt' => true))
+     * @return  Check
+     */
     public function fromArray(array $check)
     {
         foreach ($check as $key => $requirements) {

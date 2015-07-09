@@ -15,9 +15,15 @@ class Validator
      */
     private $checks;
 
+    /**
+     * @var     mixed   Error message if validation fails, otherwise false
+     */
+    private $error;
+
     public function __construct()
     {
-        $this->checks = array();
+        $this->checks   = array();
+        $this->error    = false;
     }
 
     /**

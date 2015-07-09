@@ -61,4 +61,14 @@ class CheckTest extends TestCase
         $this->assertEquals($requirements, $check->getRequirements());
         $this->assertEquals($key, $check->getKey());
     }
+
+    /**
+     * @expectedException Exception
+     * @expectedExceptionMessage Argument 1 passed to Ucc\Data\Validator\Check\Check::fromArray() must be of the type array
+     */
+    public function testFromArrayFail()
+    {
+        $check  = new Check;
+        $this->assertInstanceOf(get_class($check), $check->fromArray('abc'));
+    }
 }
