@@ -22,16 +22,6 @@ class ValidatorTest extends TestCase
         $this->assertEquals($checks, $validator->getChecks());
     }
 
-    /**
-     * @expectedException Exception
-     */
-    public function testSetChecksFail()
-    {
-        $validator  = new Validator;
-        $checks     = true;
-        $this->assertInstanceOf(get_class($validator), $validator->setChecks($checks));
-    }
-
     public function testGetError()
     {
         $validator = new Validator;

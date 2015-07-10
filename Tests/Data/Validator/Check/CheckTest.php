@@ -35,16 +35,6 @@ class CheckTest extends TestCase
         $this->assertEquals($requirements, $check->getRequirements());
     }
 
-    /**
-     * @expectedException Exception
-     */
-    public function testSetRequirementsFail()
-    {
-        $check = new Check;
-        $requirements = true;
-        $this->assertInstanceOf(get_class($check), $check->setRequirements($requirements));
-    }
-
     public function testAddRequirement()
     {
         $check = new Check;
@@ -70,14 +60,5 @@ class CheckTest extends TestCase
         $this->assertInstanceOf(get_class($check), $check->fromArray(array($key => $requirements)));
         $this->assertEquals($requirements, $check->getRequirements());
         $this->assertEquals($key, $check->getKey());
-    }
-
-    /**
-     * @expectedException Exception
-     */
-    public function testFromArrayFail()
-    {
-        $check  = new Check;
-        $this->assertInstanceOf(get_class($check), $check->fromArray('abc'));
     }
 }
