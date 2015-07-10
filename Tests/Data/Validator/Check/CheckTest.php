@@ -37,7 +37,6 @@ class CheckTest extends TestCase
 
     /**
      * @expectedException Exception
-     * @expectedExceptionMessage Argument 1 passed to Ucc\Data\Validator\Check\Check::setRequirements() must be of the type array
      */
     public function testSetRequirementsFail()
     {
@@ -75,7 +74,6 @@ class CheckTest extends TestCase
 
     /**
      * @expectedException Exception
-     * @expectedExceptionMessage Argument 1 passed to Ucc\Data\Validator\Check\Check::fromArray() must be of the type array
      */
     public function testFromArrayFail()
     {

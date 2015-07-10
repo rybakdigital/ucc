@@ -24,7 +24,6 @@ class ValidatorTest extends TestCase
 
     /**
      * @expectedException Exception
-     * @expectedExceptionMessage Argument 1 passed to Ucc\Data\Validator\Validator::setChecks() must be of the type array
      */
     public function testSetChecksFail()
     {
