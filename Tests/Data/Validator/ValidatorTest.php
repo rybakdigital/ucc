@@ -38,6 +38,34 @@ class ValidatorTest extends TestCase
         $this->assertEquals($expected, $validator->getChecks());
     }
 
+    public function testSetChecksFromArray()
+    {
+        $validator     = new Validator;
+        $checksArray   = array(
+            'name'  => array('type' => 'string', 'min' => 1),
+            'age'   => array('type' => 'int', 'default' => 18, 'opt' => false),
+            );
+
+        $firstCheck    = array(
+            'name'  => array('type' => 'string', 'min' => 1)
+            );
+        $secondCheck    = array(
+            'age'   => array('type' => 'int', 'default' => 18, 'opt' => false),
+            );
+
+        $nameCheck      = new Check();
+        $nameCheck->fromArray($firstCheck);
+
+        $ageCheck      = new Check();
+        $ageCheck->fromArray($secondCheck);
+
+        $checks         = array($nameCheck, $ageCheck);
+        $expected       = array('name' => $nameCheck, 'age' => $ageCheck);
+
+        $this->assertInstanceOf(get_class($validator), $validator->setChecks($checksArray));
+        $this->assertEquals($expected, $validator->getChecks());
+    }
+
     public function testGetError()
     {
         $validator = new Validator;

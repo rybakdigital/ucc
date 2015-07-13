@@ -46,8 +46,15 @@ class Validator
      */
     public function setChecks(array $checks)
     {
+
         foreach ($checks as $key => $check) {
-            $this->addCheck($check);
+            if (is_a($check, 'Ucc\Data\Validator\Check\Check')) {
+                $this->addCheck($check);
+            } elseif (is_array($check)) {
+                $checkObj = new Check();
+                $checkObj->fromArray(array($key => $check));
+                $this->addCheck($checkObj);
+            }
         }
 
         return $this;
