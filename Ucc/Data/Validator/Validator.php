@@ -2,6 +2,8 @@
 
 namespace Ucc\Data\Validator;
 
+use Ucc\Data\Validator\Check\Check;
+
 /**
  * Ucc\Data\Validator\Validator
  * Provides methods to validate data against defined checks
@@ -45,7 +47,7 @@ class Validator
     public function setChecks(array $checks)
     {
         foreach ($checks as $key => $check) {
-            $this->setCheck($key, $check);
+            $this->addCheck($check);
         }
 
         return $this;
@@ -58,9 +60,9 @@ class Validator
      * @param   array   $check      Validation criteria
      * @return  Validator
      */
-    public function setCheck($key, $check)
+    public function addCheck(Check $check)
     {
-        $this->checks[$key] = $check;
+        $this->checks[$check->getKey()] = $check;
 
         return $this;
     }

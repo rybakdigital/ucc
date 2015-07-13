@@ -4,6 +4,7 @@ namespace Ucc\Tests\Data\Validator;
 
 use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Validator\Validator;
+use Ucc\Data\Validator\Check\Check;
 
 class ValidatorTest extends TestCase
 {
@@ -16,10 +17,25 @@ class ValidatorTest extends TestCase
 
     public function testSetChecks()
     {
-        $validator  = new Validator;
-        $checks     = array('name' => array('type' => 'int'));
+        $validator     = new Validator;
+        $firstCheck    = array(
+            'name'  => array('type' => 'string', 'min' => 1)
+            );
+        $secondCheck    = array(
+            'age'   => array('type' => 'int', 'default' => 18, 'opt' => false),
+            );
+
+        $nameCheck      = new Check();
+        $nameCheck->fromArray($firstCheck);
+
+        $ageCheck      = new Check();
+        $ageCheck->fromArray($secondCheck);
+
+        $checks         = array($nameCheck, $ageCheck);
+        $expected       = array('name' => $nameCheck, 'age' => $ageCheck);
+
         $this->assertInstanceOf(get_class($validator), $validator->setChecks($checks));
-        $this->assertEquals($checks, $validator->getChecks());
+        $this->assertEquals($expected, $validator->getChecks());
     }
 
     public function testGetError()
@@ -40,9 +56,24 @@ class ValidatorTest extends TestCase
     public function testClearChecks()
     {
         $validator  = new Validator;
-        $checks     = array('name' => array('type' => 'int'));
+        $firstCheck    = array(
+            'name'  => array('type' => 'string', 'min' => 1)
+            );
+        $secondCheck    = array(
+            'age'   => array('type' => 'int', 'default' => 18, 'opt' => false),
+            );
+
+        $nameCheck      = new Check();
+        $nameCheck->fromArray($firstCheck);
+
+        $ageCheck      = new Check();
+        $ageCheck->fromArray($secondCheck);
+
+        $checks         = array($nameCheck, $ageCheck);
+        $expected       = array('name' => $nameCheck, 'age' => $ageCheck);
+
         $this->assertInstanceOf(get_class($validator), $validator->setChecks($checks));
-        $this->assertEquals($checks, $validator->getChecks());
+        $this->assertEquals($expected, $validator->getChecks());
         $this->assertInstanceOf(get_class($validator), $validator->clearChecks());
         $this->assertEmpty($validator->getChecks());
     }
