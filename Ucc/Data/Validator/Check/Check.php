@@ -87,6 +87,17 @@ class Check
         return $this;
     }
 
+    public function hasRequirement($rule)
+    {
+        $requirements = $this->getRequirements();
+
+        if (isset($requirements[$rule])) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Allows to import check from array
      *
