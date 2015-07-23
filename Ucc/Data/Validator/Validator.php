@@ -122,6 +122,55 @@ class Validator
     }
 
     /**
+     * Gets inputData
+     *
+     * @return  array
+     */
+    public function getInputData()
+    {
+        return $this->inputData;
+    }
+
+    /**
+     * Set InputData
+     *
+     * @param   array       $data
+     * @return  Validator
+     */
+    public function setInputData(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $this->addInputData($key, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add InputData
+     *
+     * @param   string      $key
+     * @param   mixed       $value
+     * @return  Validator
+     */
+    public function addInputData($key, $value)
+    {
+        $this->inputData[$key] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Clears the input data
+     *
+     * @return Validator
+     */
+    public function clearInputData()
+    {
+        $this->inputData = array();
+    }
+
+    /**
      * Checks inputs conformity with field checks set.
      */
     public function validate()
