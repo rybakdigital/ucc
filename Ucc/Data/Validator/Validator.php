@@ -232,6 +232,35 @@ class Validator
      */
     public function validate()
     {
+        // Loop through the checks and evaluate each field
+        foreach ($this->checks as $key => $check) {
+            // Check the key exist in inputData
+            if (isset($this->inputData[$key])) {
+                if ($check->hasRequirement('type')) {
+                    $this->checkInput($this->getInput($key), $check);
+                }
+            } else {
+                // Check if field is optional
+                if (!$check->hasRequirement('opt') || $check->getRequirement('opt') == false) {
+                    $this->setError('Required parameter "' . $key . '" missing');
+                    break;
+                } else {
+                    // Set default value if provided
+                    if ($check->hasRequirement('default')) {
+                        $this->addSafeData($key, $check->getRequirement('default'));
+                    }
+
+                    continue;
+                }
+            }
+        }
+    }
+
+    /**
+     * Validates input field
+     */
+    private function checkInput($input, $check)
+    {
 
     }
 }

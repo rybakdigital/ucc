@@ -105,4 +105,56 @@ class ValidatorTest extends TestCase
         $this->assertInstanceOf(get_class($validator), $validator->clearChecks());
         $this->assertEmpty($validator->getChecks());
     }
+
+    public function inpuDataProvider()
+    {
+        $data = array(
+            array(
+                array('name' => 'Jane', 'age' => 20),
+                array('name' => 'John', 'age' => 7, 'town' => 'London'),
+            )
+        );
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider inpuDataProvider
+     */
+    public function testInputData($inputData)
+    {
+        $validator = new Validator($inputData);
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+        $this->assertEquals($inputData, $validator->getInputData());
+    }
+
+    /**
+     * @dataProvider inpuDataProvider
+     */
+    public function testValidate($inputData)
+    {
+        $validator  = new Validator;
+        $firstCheck = array(
+            'name'  => array('type' => 'string', 'min' => 1)
+            );
+        $secondCheck = array(
+            'age'   => array('type' => 'int', 'default' => 18, 'opt' => false),
+            );
+        $thirdCheck = array(
+            'town'   => array('type' => 'str', 'max' => 20, 'opt' => false),
+            );
+
+        $nameCheck = new Check();
+        $nameCheck->fromArray($firstCheck);
+        $ageCheck = new Check();
+        $ageCheck->fromArray($secondCheck);
+        $townCheck = new Check();
+        $townCheck->fromArray($thirdCheck);
+        $validator->setInputData($inputData);
+
+        $checks = array($nameCheck, $ageCheck, $townCheck);
+        $validator->setChecks($checks);
+
+        $validator->validate();
+    }
 }
