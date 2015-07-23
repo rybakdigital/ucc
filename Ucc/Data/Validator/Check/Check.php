@@ -87,6 +87,12 @@ class Check
         return $this;
     }
 
+    /**
+     * Checks given requirement exists
+     *
+     * @param   string      $rule       Name of the requirement to check
+     * @return  boolean
+     */
     public function hasRequirement($rule)
     {
         $requirements = $this->getRequirements();
@@ -96,6 +102,23 @@ class Check
         }
 
         return false;
+    }
+
+    /**
+     * Gets requirement by a rule name
+     *
+     * @param   string      $rule
+     * @return  mixed       Requirement if exists, otherwise null
+     */
+    public function getRequirement($rule)
+    {
+        $requirements = $this->getRequirements();
+
+        if (isset($requirements[$rule])) {
+            return $requirements[$rule];
+        }
+
+        return null;
     }
 
     /**
