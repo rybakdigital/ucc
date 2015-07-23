@@ -161,6 +161,46 @@ class Validator
     }
 
     /**
+     * Gets safeData
+     *
+     * @return  array
+     */
+    public function getSafeData()
+    {
+        return $this->safeData;
+    }
+
+    /**
+     * Set safeData
+     * safeData can only be set internally
+     *
+     * @return  Validator
+     */
+    private function setSafeData(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $this->addSafeData($key, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Adds safeData
+     * Can only be called internally to prevent data overwrite
+     *
+     * @param   string  $key
+     * @param   mixed   $value
+     * @return  Validator
+     */
+    private function addSafeData($key, $value)
+    {
+        $this->safeData[$key] = $value;
+
+        return $this;
+    }
+
+    /**
      * Clears the input data
      *
      * @return Validator
