@@ -22,10 +22,22 @@ class Validator
      */
     private $error;
 
+    /**
+     * @var     array   Data to be validated
+     */
+    private $inputData;
+
+    /**
+     * @var     array   Safe data (passing checks)
+     */
+    private $safeData;
+
     public function __construct()
     {
-        $this->checks   = array();
-        $this->error    = false;
+        $this->checks       = array();
+        $this->inputData    = array();
+        $this->safeData     = array();
+        $this->error        = false;
     }
 
     /**
