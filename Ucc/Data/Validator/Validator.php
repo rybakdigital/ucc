@@ -132,6 +132,23 @@ class Validator
     }
 
     /**
+     * Gets input
+     *
+     * @param   string  $key
+     * @return  mixed
+     */
+    public function getInput($key)
+    {
+        $inputData = $this->getInputData();
+
+        if (isset($inputData[$key])) {
+            return $inputData[$key];
+        }
+
+        return null;
+    }
+
+    /**
      * Set InputData
      *
      * @param   array       $data
