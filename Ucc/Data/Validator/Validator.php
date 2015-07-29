@@ -225,6 +225,20 @@ class Validator
     public function clearInputData()
     {
         $this->inputData = array();
+
+        return $this;
+    }
+
+    /**
+     * Clears safe data
+     *
+     * @return Validator
+     */
+    public function clearSafeData()
+    {
+        $this->safeData = array();
+
+        return $this;
     }
 
     /**
