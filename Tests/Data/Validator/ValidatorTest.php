@@ -209,6 +209,73 @@ class ValidatorTest extends TestCase
 
         // validate data
         $this->assertTrue($validator->validate());
+    }
 
+    public function inpuDataBadProvider()
+    {
+        $data = array(
+            array(
+                // name too short
+                array('name' => 'Jo', 'age' => 20)
+            ),
+            array(
+                // underaged
+                array('name' => 'John', 'age' => 5, 'town' => 'London'),
+            ),
+            array(
+                // missing required field
+                array('name' => 'John', 'town' => 'London'),
+            ),
+            array(
+                // name too long
+                array('name' => 'Johhhhhhhhhhhhhhhnnnnnnnnnnnnnnnnnnnnnnnnn', 'age' => 20)
+            ),
+            array(
+                // wrong number value
+                array('name' => 'John', 'age' => 17, 'town' => 'London', 'number' => 30),
+            ),
+        );
+
+        return $data;
+    }
+
+    /**
+     * @dataProvider inpuDataBadProvider
+     */
+    public function testValidateFail($inputData)
+    {
+        $validator = new Validator();
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+
+        $checks = array(
+            'name'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'opt'   => false,
+                'max'   => 20,
+                ),
+            'age'   => array(
+                'type'  => 'int',
+                'min'   => 15,
+                'max'   => 20,
+                'opt'   => false,
+                ),
+            'town'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'default' => 'London',
+                'opt'   => true,
+                ),
+            'number' => array(
+                'type'  => 'int',
+                'opt'   => true,
+                'values'=> array(1,2,3),
+                ),
+        );
+
+        $validator->setChecks($checks);
+
+        // validate data
+        $this->assertFalse($validator->validate());
     }
 }
