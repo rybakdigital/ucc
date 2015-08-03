@@ -15,6 +15,13 @@ use Ucc\Data\Types\Pseudo\FormatType;
  */
 class PseudoTypes
 {
+    public static $knownTypes = array(
+        'filter'    => 'checkFilter',
+        'sort'      => 'checkSort',
+        'display'   => 'checkDisplay',
+        'format'    => 'checkFormat',
+    );
+
     /**
      * Checks if value is a Filter
      *

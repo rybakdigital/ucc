@@ -3,6 +3,9 @@
 namespace Ucc\Data\Validator;
 
 use Ucc\Data\Validator\Check\Check;
+use Ucc\Data\Types\Basic\BasicTypes;
+use Ucc\Data\Types\Pseudo\PseudoTypes;
+use Ucc\Exception\Data\InvalidDataValueException;
 
 /**
  * Ucc\Data\Validator\Validator
@@ -268,6 +271,8 @@ class Validator
                 }
             }
         }
+
+        return ($this->getError()) ? false : true;
     }
 
     /**
@@ -275,6 +280,35 @@ class Validator
      */
     private function checkInput($input, $check)
     {
+        $ret = false;
 
+        // Check is specyfic type required
+        if ($check->hasRequirement('type')) {
+            $type = $check->getRequirement('type');
+
+            if (in_array($type, array_keys(BasicTypes::$knownTypes))) {
+                $method     = BasicTypes::$knownTypes[$type];
+                $callable   = array('Ucc\Data\Types\Basic\BasicTypes', $method);
+            } elseif (in_array($type, array_keys(PseudoTypes::$knownTypes))) {
+                $method     = PseudoTypes::$knownTypes[$type];
+                $callable   = array('Ucc\Data\Types\Pseudo\PseudoTypes', $method);
+            }
+        }
+
+        $res = $this->checkValue($check->getKey(), $input, $check->getRequirements(), $callable);
+    }
+
+    private function checkValue($key, $value, $requirements, $callable)
+    {
+        if (is_callable($callable)) {
+            $args = array($value, $requirements);
+            try {
+                $result = call_user_func_array($callable, $args);
+
+                $this->addSafeData($key, $result);
+            } catch (InvalidDataValueException $e) {
+                $this->setError('Field ' . $key . ' failed validation because ' . $e->getMessage());
+            }
+        }
     }
 }

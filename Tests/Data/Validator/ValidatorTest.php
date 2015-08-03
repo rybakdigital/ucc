@@ -118,6 +118,18 @@ class ValidatorTest extends TestCase
         return $data;
     }
 
+    public function safeDataProvider()
+    {
+        $data = array(
+            array(
+                array('name' => 'Jane', 'age' => 20, 'town' => 'London'),
+                array('name' => 'Jane', 'age' => 20, 'town' => 'London'),
+            )
+        );
+
+        return $data;
+    }
+
     /**
      * @dataProvider inpuDataProvider
      */
@@ -126,6 +138,18 @@ class ValidatorTest extends TestCase
         $validator = new Validator($inputData);
         $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
         $this->assertEquals($inputData, $validator->getInputData());
+    }
+
+    /**
+     * @dataProvider safeDataProvider
+     */
+    public function testSafeData($inputData, $safeData)
+    {
+        $validator = new Validator($inputData);
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+        $validator->validate();
+
+        $this->assertEquals($safeData, $validator->getSafeData());
     }
 
     /**
