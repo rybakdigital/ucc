@@ -110,8 +110,10 @@ class ValidatorTest extends TestCase
     {
         $data = array(
             array(
-                array('name' => 'Jane', 'age' => 20),
-                array('name' => 'John', 'age' => 7, 'town' => 'London'),
+                array('name' => 'Jane', 'age' => 20)
+            ),
+            array(
+                array('name' => 'John', 'age' => 18, 'town' => 'London'),
             )
         );
 
@@ -122,8 +124,12 @@ class ValidatorTest extends TestCase
     {
         $data = array(
             array(
+                array('name' => 'Jane', 'age' => '20', 'town' => 'London'),
                 array('name' => 'Jane', 'age' => 20, 'town' => 'London'),
-                array('name' => 'Jane', 'age' => 20, 'town' => 'London'),
+            ),
+            array(
+                array('name' => 'Christopher', 'age' => 15),
+                array('name' => 'Christopher', 'age' => 15, 'town' => 'London'),
             )
         );
 
@@ -145,10 +151,29 @@ class ValidatorTest extends TestCase
      */
     public function testSafeData($inputData, $safeData)
     {
-        $validator = new Validator($inputData);
+        $checks = array(
+            'name'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'opt'   => false,
+                ),
+            'age'   => array(
+                'type'  => 'int',
+                'min'   => 15,
+                'max'   => 20,
+                'opt'   => false,
+                ),
+            'town'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'default' => 'London',
+                'opt'   => true,
+                ),
+        );
+        $validator = new Validator();
         $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+        $validator->setChecks($checks);
         $validator->validate();
-
         $this->assertEquals($safeData, $validator->getSafeData());
     }
 
@@ -157,28 +182,33 @@ class ValidatorTest extends TestCase
      */
     public function testValidate($inputData)
     {
-        $validator  = new Validator;
-        $firstCheck = array(
-            'name'  => array('type' => 'string', 'min' => 1)
-            );
-        $secondCheck = array(
-            'age'   => array('type' => 'int', 'default' => 18, 'opt' => false),
-            );
-        $thirdCheck = array(
-            'town'   => array('type' => 'str', 'max' => 20, 'opt' => false),
-            );
+        $validator = new Validator();
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
 
-        $nameCheck = new Check();
-        $nameCheck->fromArray($firstCheck);
-        $ageCheck = new Check();
-        $ageCheck->fromArray($secondCheck);
-        $townCheck = new Check();
-        $townCheck->fromArray($thirdCheck);
-        $validator->setInputData($inputData);
+        $checks = array(
+            'name'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'opt'   => false,
+                ),
+            'age'   => array(
+                'type'  => 'int',
+                'min'   => 15,
+                'max'   => 20,
+                'opt'   => false,
+                ),
+            'town'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'default' => 'London',
+                'opt'   => true,
+                ),
+        );
 
-        $checks = array($nameCheck, $ageCheck, $townCheck);
         $validator->setChecks($checks);
 
-        $validator->validate();
+        // validate data
+        $this->assertTrue($validator->validate());
+
     }
 }

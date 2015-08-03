@@ -5,7 +5,7 @@ namespace Ucc\Data\Validator;
 use Ucc\Data\Validator\Check\Check;
 use Ucc\Data\Types\Basic\BasicTypes;
 use Ucc\Data\Types\Pseudo\PseudoTypes;
-use Ucc\Exception\Data\InvalidDataValueException;
+use Ucc\Exception\Data\InvalidDataException;
 
 /**
  * Ucc\Data\Validator\Validator
@@ -282,7 +282,7 @@ class Validator
     {
         $ret = false;
 
-        // Check is specyfic type required
+        // Check is specific type required
         if ($check->hasRequirement('type')) {
             $type = $check->getRequirement('type');
 
@@ -298,17 +298,32 @@ class Validator
         $res = $this->checkValue($check->getKey(), $input, $check->getRequirements(), $callable);
     }
 
+    /**
+     * Validates value of the field against requirements
+     *
+     * @param   string  $key            Field name to check
+     * @param   mixed   $value          Value to check
+     * @param   array   $requirements   Array of requirements
+     * @param   array   $callable       Array of class name and method to call
+     * @return  mixed                   Validator if successful, otherwise false
+     */
     private function checkValue($key, $value, $requirements, $callable)
     {
         if (is_callable($callable)) {
             $args = array($value, $requirements);
             try {
+                // Call method to validate data
                 $result = call_user_func_array($callable, $args);
-
                 $this->addSafeData($key, $result);
-            } catch (InvalidDataValueException $e) {
+
+                return $this;
+            } catch (InvalidDataException $e) {
                 $this->setError('Field ' . $key . ' failed validation because ' . $e->getMessage());
             }
+        } else {
+            $this->setError('Unkown check type for field ' . $key);
         }
+
+        return false;
     }
 }
