@@ -3,6 +3,7 @@ UCC
 
 [![Join the chat at https://gitter.im/rybakdigital/ucc](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/rybakdigital/ucc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/rybakdigital/ucc.svg?branch=master)](https://travis-ci.org/rybakdigital/ucc)
+[![Circle CI](https://circleci.com/gh/rybakdigital/ucc/tree/master.svg?style=svg)](https://circleci.com/gh/rybakdigital/ucc/tree/master)
 [![Stories in Ready](https://badge.waffle.io/rybakdigital/ucc.png?label=ready&title=Ready)](https://waffle.io/rybakdigital/ucc)
 
 Universal Class Collection
