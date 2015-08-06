@@ -27,6 +27,23 @@ class CheckTest extends TestCase
         $this->assertTrue(is_array($check->getRequirements()));
     }
 
+    public function testGetRequirement()
+    {
+        $check = new Check;
+        $key    = "name";
+
+        $requirements = array(
+            'type'  => 'string',
+            'min'   => 10,
+            'opt'   => false,
+        );
+        $this->assertInstanceOf(get_class($check), $check->setKey($key));
+        $this->assertInstanceOf(get_class($check), $check->setRequirements($requirements));
+        $this->assertEquals($requirements['type'], $check->getRequirement('type'));
+
+        $this->assertNull($check->getRequirement('custom'));
+    }
+
     public function testSetRequirements()
     {
         $check = new Check;

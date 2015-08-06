@@ -73,6 +73,32 @@ class ValidatorTest extends TestCase
         $this->assertFalse(is_array($validator->getError()));
     }
 
+    public function getInputDataProvider()
+    {
+        return array(
+            array(
+                array('name' => 'Jane'),
+                'name',
+                'Jane',
+            ),
+            array(
+                array('name' => 'Jane'),
+                'age',
+                null,
+            ),
+        );
+    }
+
+    /**
+     * @dataProvider getInputDataProvider
+     */
+    public function testGetInputData($inputData, $key, $expected)
+    {
+        $validator = new Validator;
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+        $this->assertEquals($expected, $validator->getInput($key));
+    }
+
     public function testSetError()
     {
         $validator = new Validator;
@@ -110,7 +136,7 @@ class ValidatorTest extends TestCase
     {
         $data = array(
             array(
-                array('name' => 'Jane', 'age' => 20)
+                array('name' => 'Jane', 'age' => 20, 'display' => array('age-years'))
             ),
             array(
                 array('name' => 'John', 'age' => 18, 'town' => 'London'),
@@ -203,8 +229,12 @@ class ValidatorTest extends TestCase
                 'default' => 'London',
                 'opt'   => true,
                 ),
+            'display' => array(
+                'opt'   => true,
+                'type'  => 'display',
+                'fields' => array('age'),
+            ),
         );
-
         $validator->setChecks($checks);
 
         // validate data
@@ -277,5 +307,106 @@ class ValidatorTest extends TestCase
 
         // validate data
         $this->assertFalse($validator->validate());
+    }
+
+    public function testClearInputData()
+    {
+        $validator = new Validator;
+        $inputData = array(
+            'name'  => 'Jane',
+            'age'   => 17,
+        );
+
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+        $this->assertEquals($inputData, $validator->getInputData());
+        // Clear input Data
+        $this->assertInstanceOf(get_class($validator), $validator->clearInputData($inputData));
+        $this->assertEmpty($validator->getInputData());
+    }
+
+    public function testClearSafeData()
+    {
+        $validator = new Validator;
+        $inputData = array(
+            'name'  => 'Jane',
+            'age'   => 17,
+        );
+
+        $checks = array(
+            'name'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'opt'   => false,
+                'max'   => 20,
+                ),
+            'age'   => array(
+                'type'  => 'int',
+                'min'   => 15,
+                'max'   => 20,
+                'opt'   => false,
+                ),
+        );
+
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+        $validator->setChecks($checks);
+        // validate data
+        $this->assertTrue($validator->validate());
+        // Clear Safe data
+        $this->assertInstanceOf(get_class($validator), $validator->clearSafeData());
+        $this->assertEmpty($validator->getSafeData());
+    }
+
+    public function testUnknownCheckType()
+    {
+        $validator = new Validator;
+        $inputData = array(
+            'name'  => 'Jane',
+            'age'   => 17,
+            'phone' => 11,
+        );
+
+        $checks = array(
+            'name'  => array(
+                'type'  => 'str',
+                'min'   => 3,
+                'opt'   => false,
+                'max'   => 20,
+                ),
+            'age'   => array(
+                'type'  => 'int',
+                'min'   => 15,
+                'max'   => 20,
+                'opt'   => false,
+                ),
+            'phone' => array(
+                'type'  => 'custom',
+                'class' => 'MyClass',
+                'method'=> 'myMethod',
+            ),
+        );
+        $this->assertInstanceOf(get_class($validator), $validator->setInputData($inputData));
+        $validator->setChecks($checks);
+        // validate data
+        $validator->validate();
+        $this->assertFalse($validator->validate());
+        $error = 'Unkown check type for field phone';
+        $this->assertEquals($error, $validator->getError());
+    }
+
+    public function testSetSafeData()
+    {
+        $validator = new Validator;
+        $inputData = array(
+            'name'  => 'Jane',
+            'age'   => 17,
+            'phone' => 11,
+        );
+
+        $reflector = new \ReflectionClass($validator);
+        $method = $reflector->getMethod('setSafeData');
+        $method->setAccessible(true);
+
+        $result = $method->invokeArgs($validator, array($inputData));
+        $this->assertEquals($inputData, $validator->getSafeData());
     }
 }

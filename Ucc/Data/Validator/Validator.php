@@ -246,6 +246,8 @@ class Validator
 
     /**
      * Checks inputs conformity with field checks set.
+     *
+     * @return boolean
      */
     public function validate()
     {
@@ -277,6 +279,10 @@ class Validator
 
     /**
      * Validates input field
+     *
+     * @param mixed $input      Data to validate
+     * @param Check $check      Check to perform on input data
+     * @return Validator
      */
     private function checkInput($input, $check)
     {
@@ -292,10 +298,16 @@ class Validator
             } elseif (in_array($type, array_keys(PseudoTypes::$knownTypes))) {
                 $method     = PseudoTypes::$knownTypes[$type];
                 $callable   = array('Ucc\Data\Types\Pseudo\PseudoTypes', $method);
+            // Check if custom class is called
+            } elseif ($type == 'custom' && $check->hasRequirement('class') && $check->hasRequirement('method')) {
+                $method     = $check->getRequirement('method');
+                $callable   = array($check->getRequirement('method'), $method);
             }
         }
 
         $res = $this->checkValue($check->getKey(), $input, $check->getRequirements(), $callable);
+
+        return $this;
     }
 
     /**
@@ -317,7 +329,7 @@ class Validator
                 $this->addSafeData($key, $result);
 
                 return $this;
-            } catch (InvalidDataException $e) {
+            } catch (\Exception $e) {
                 $this->setError('Field ' . $key . ' failed validation because ' . $e->getMessage());
             }
         } else {
