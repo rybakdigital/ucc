@@ -6,6 +6,7 @@ use Ucc\Data\Validator\Check\Check;
 use Ucc\Data\Types\Basic\BasicTypes;
 use Ucc\Data\Types\Pseudo\PseudoTypes;
 use Ucc\Exception\Data\InvalidDataException;
+use Ucc\Data\Validator\ValidatorInterface;
 
 /**
  * Ucc\Data\Validator\Validator
@@ -13,7 +14,7 @@ use Ucc\Exception\Data\InvalidDataException;
  *
  * @author Kris Rybak <kris@krisrybak.com>
  */
-class Validator
+class Validator implements ValidatorInterface
 {
     /**
      * @var     array   Array of checks to perform
