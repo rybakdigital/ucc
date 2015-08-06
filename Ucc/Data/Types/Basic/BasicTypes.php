@@ -13,6 +13,12 @@ use Ucc\Data\Types\Basic\StringType;
  */
 class BasicTypes
 {
+    public static $knownTypes = array(
+        'int'       => 'checkInteger',
+        'str'       => 'checkString',
+        'string'    => 'checkString',
+    );
+
     /**
      * Checks if value is an integer
      *
