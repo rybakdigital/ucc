@@ -26,7 +26,7 @@ class PathTest extends TestCase
      */
     public function testGetExtensionFailInvalidPath($path)
     {
-        $this->assertTrue(is_string(Path::getExtentsion($path)));
+        $this->assertTrue(is_string(Path::getExtension($path)));
     }
 
     public function pathsProvider()
@@ -43,6 +43,6 @@ class PathTest extends TestCase
      */
     public function testGetExtension($expected, $path)
     {
-        $this->assertSame($expected, Path::getExtentsion($path));
+        $this->assertSame($expected, Path::getExtension($path));
     }
 }

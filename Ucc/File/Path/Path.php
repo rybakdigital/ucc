@@ -18,7 +18,7 @@ class Path
      * @param   string      $path
      * @return  string|null File extension if found, otherwise null
      */
-    public static function getExtentsion($path)
+    public static function getExtension($path)
     {
         if (!is_string($path)) {
             throw new InvalidArgumentException("Path needs to be a string");
