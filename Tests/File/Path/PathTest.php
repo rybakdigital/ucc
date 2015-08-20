@@ -16,7 +16,7 @@ class PathTest extends TestCase
         return array(
             array(123),
             array(array()),
-            array(new \StdClass())
+            array(new \StdClass()),
         );
     }
 
@@ -35,6 +35,8 @@ class PathTest extends TestCase
             array("exe", "file.exe"),
             array("yaml", "some/yaml/file.yaml"),
             array("jpeg", ".files/file.jpeg"),
+            array(null, "../file"),
+            array(null, "./file"),
         );
     }
 

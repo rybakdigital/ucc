@@ -24,14 +24,12 @@ class Path
             throw new InvalidArgumentException("Path needs to be a string");
         }
 
-        // Find position of extension separator
-        $extensionSeparatorPos = strrpos($path, '.');
+        // Match extension
+        $re = "%\\.([a-zA-Z0-9]*)$%i";
+        preg_match($re, $path, $matches);
 
-        // Start point for extension is extensionSeparatorPos + position of . (dot)
-        if (!empty($extensionSeparatorPos)) {
-            $start = $extensionSeparatorPos + 1;
-
-            return substr($path, $start);
+        if (!empty($matches)) {
+            return $matches[1];
         }
 
         return null;
