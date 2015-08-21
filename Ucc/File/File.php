@@ -43,6 +43,6 @@ class File
      */
     public static function load($fileName = null)
     {
-        self::getContent($fileName);
+        return self::getContent($fileName);
     }
 }
