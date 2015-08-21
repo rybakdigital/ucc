@@ -36,4 +36,22 @@ class FileTest extends TestCase
     {
         $this->assertTrue(is_string(File::load()));
     }
+
+    public function filesProvider()
+    {
+        return array(
+            array('Tests/_resources/content.txt', 'abcdefg
+'),
+            array('Tests/_resources/content.json', '{"menu": "property"}
+'),
+        );
+    }
+
+    /**
+     * @dataProvider            filesProvider
+     */
+    public function testGetContent($fileName, $expected)
+    {
+        $this->assertEquals($expected, File::getContent($fileName));
+    }
 }
