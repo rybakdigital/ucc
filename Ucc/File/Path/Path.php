@@ -28,7 +28,7 @@ class Path
         $re = "%\\.([a-zA-Z0-9]*)$%i";
         preg_match($re, $path, $matches);
 
-        if (!empty($matches)) {
+        if (!empty($matches) && isset($matches[1])) {
             return $matches[1];
         }
 
