@@ -8,6 +8,7 @@ use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Data\Sortable\Sort\Sort;
 use Ucc\Data\Format\Display\Display;
 use Ucc\Data\Format\Format\Format;
+use Ucc\Data\Filter\Filter;
 
 class PseudoTypesTest extends TestCase
 {
@@ -22,13 +23,66 @@ class PseudoTypesTest extends TestCase
             ->setType('value')
             ->setValue('12');
 
-        $expected       = array($criterion);
+        $filter = new Filter;
+        $filter->addCriterion($criterion);
+
+        $expected       = $filter;
         $requirements   = array('fields' => array('id'));
         $actual         = PseudoTypes::checkFilter($supplied, $requirements);
 
         // Compare actual and existing params
+        $this->assertInstanceOf(get_class($filter), $actual);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCheckFiltersPass()
+    {
+        $supplied       = array(array('and-id-eq-value-12'), array('and-id-eq-value-12'));
+        $criterion      = new Criterion;
+        $criterion
+            ->setLogic('and')
+            ->setKey('id')
+            ->setOperand('eq')
+            ->setType('value')
+            ->setValue('12');
+
+        $filterA = new Filter;
+        $filterA->addCriterion($criterion);
+
+        $filterB = new Filter;
+        $filterB->addCriterion($criterion);
+
+        $expected       = array($filterA, $filterB);
+        $requirements   = array('fields' => array('id'));
+        $actual         = PseudoTypes::checkFilters($supplied, $requirements);
+
+        // Compare actual and existing params
         $this->assertInternalType('array', $actual);
-        $this->assertInstanceOf(get_class($criterion), $actual[0]);
+        $this->assertInstanceOf(get_class($filterA), $actual[0]);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCheckFiltersWithOneFilterPass()
+    {
+        $supplied       = array('and-id-eq-value-12');
+        $criterion      = new Criterion;
+        $criterion
+            ->setLogic('and')
+            ->setKey('id')
+            ->setOperand('eq')
+            ->setType('value')
+            ->setValue('12');
+
+        $filterA = new Filter;
+        $filterA->addCriterion($criterion);
+
+        $expected       = array($filterA);
+        $requirements   = array('fields' => array('id'));
+        $actual         = PseudoTypes::checkFilters($supplied, $requirements);
+
+        // Compare actual and existing params
+        $this->assertInternalType('array', $actual);
+        $this->assertInstanceOf(get_class($filterA), $actual[0]);
         $this->assertEquals($expected, $actual);
     }
 
