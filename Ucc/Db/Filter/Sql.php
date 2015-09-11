@@ -481,10 +481,15 @@ class Sql
      */
     public static function getFilterSql($filters = array(), $fieldMap = array(), $singleTable = false)
     {
-        $ret            = array('where', 'having');
+        $ret            = array('paramiters' => array());
         $havingFilters  = array();
         $whereFilters   = array();
         $table          = '';
+
+        // Check if filters is a single filter
+        if (is_a($filters, 'Ucc\Data\Filter\Filter')) {
+            $filters = array($filters);
+        }
 
         foreach ($filters as $i => $filter) {
             // get Criterions
@@ -529,10 +534,12 @@ class Sql
 
         if (!empty($whereStatemet) && $whereStatemet != '()') {
             $ret['where'] = 'WHERE ' . $whereStatemet;
+            $ret['paramiters'] = array_merge($ret['paramiters'], $where->getParameters());
         }
 
         if (!empty($havingStatement)) {
             $ret['having'] = 'HAVING ' . $havingStatement;
+            $ret['paramiters'] = array_merge($ret['paramiters'], $having->getParameters());
         }
 
         return $ret;
