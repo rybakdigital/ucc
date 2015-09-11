@@ -33,7 +33,6 @@ class Query extends Clause
         $limit      = false;
         $offset     = false;
 
-
         foreach (self::$defaultOptions as $option) {
             if (!empty($options[$option])) {
                 $optionSettings = $options[$option];
@@ -44,6 +43,9 @@ class Query extends Clause
             $method = 'get' . ucfirst($option) . 'Sql';
             $clauses[$option] = SQL::$method($optionSettings, $fieldMap);
         }
+
+        // Import parameters from filter
+        $query->setParameters(array_merge($query->getParameters(), $clauses['filter']['paramiters']));
 
         // Build LIMIT clause
         // get limit from options
@@ -78,6 +80,8 @@ class Query extends Clause
             $sql .= ' ' . $clauses['limit'];
         }
 
-        return $sql;
+        $query->setStatement($sql);
+
+        return $query;
     }
 }
