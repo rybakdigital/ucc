@@ -7,6 +7,7 @@ use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Exception\Data\InvalidDataTypeException;
 use Ucc\Exception\Data\InvalidDataValueException;
 use Ucc\Exception\Data\InvalidDataException;
+use Ucc\Data\Filter\Filter;
 use \InvalidArgumentException;
 
 /**
@@ -38,7 +39,7 @@ class FilterType implements TypeInterface
      *
      * @param   array   $value          Value to be checked
      * @param   array   $requirements   Additional constraints
-     * @return  array   Cleared value
+     * @return  Filter  Cleared value
      * @throws  InvalidDataTypeException | InvalidDataValueException
      */
     public static function check($value, array $requirements = array())
@@ -56,14 +57,15 @@ class FilterType implements TypeInterface
         }
 
         // reserve space for cleared filters
-        $filters = array();
+        $filter = new Filter;
 
         // Iterate through the list of filters and check each filter individually
-        foreach ($value as $index => $filter) {
-            $filters[] = self::filterToCriterion($filter, $requirements, $index);
+        foreach ($value as $index => $criteria) {
+            $criterion = self::criteriaToCriterion($criteria, $requirements, $index);
+            $filter->addCriterion($criterion);
         }
 
-        return $filters;
+        return $filter;
     }
 
     /**
@@ -86,7 +88,7 @@ class FilterType implements TypeInterface
         return true;
     }
 
-    public static function filterToCriterion($filter, $requirements = array(), $index = 0)
+    public static function criteriaToCriterion($filter, $requirements = array(), $index = 0)
     {
         // Detect filter settings
         if (!is_string($filter)) {
@@ -151,10 +153,10 @@ class FilterType implements TypeInterface
             }
         }
 
-        $filter = new Criterion();
+        $criterion = new Criterion();
 
         try {
-            $filter
+            $criterion
                 ->setLogic($parts[0])
                 ->setKey($parts[1])
                 ->setOperand($parts[2])
@@ -168,6 +170,6 @@ class FilterType implements TypeInterface
             throw new InvalidDataValueException($error);
         }
 
-        return $filter;
+        return $criterion;
     }
 }
