@@ -17,6 +17,7 @@ class PseudoTypes
 {
     public static $knownTypes = array(
         'filter'    => 'checkFilter',
+        'filters'   => 'checkFilters',
         'sort'      => 'checkSort',
         'display'   => 'checkDisplay',
         'format'    => 'checkFormat',
@@ -27,12 +28,38 @@ class PseudoTypes
      *
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints
-     * @return  array       Cleared value
+     * @return  Filter      Cleared value
      * @throws  InvalidDataException        If the value is not a Filter or fails constraints checks
      */
     public static function checkFilter($value, array $requirements)
     {
         return FilterType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a Filter
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints
+     * @return  array       Cleared value
+     * @throws  InvalidDataException        If the value is not a Filter or fails constraints checks
+     */
+    public static function checkFilters($value, array $requirements)
+    {
+        $filters = array();
+
+        if (is_array($value)) {
+            // Check if we are dealing with filters or one Filter
+            if (is_array($value[0])) {
+                foreach ($value as $filter) {
+                    $filters[] = FilterType::check($filter, $requirements);
+                }
+            } else {
+                $filters[] = FilterType::check($value, $requirements);
+            }
+        }
+
+        return $filters;
     }
 
     /**

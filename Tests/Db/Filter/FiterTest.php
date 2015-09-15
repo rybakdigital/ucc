@@ -18,8 +18,8 @@ class FilterTest extends TestCase
 
         $filter     = new Data_Filter();
         $criterions = array(
-            FilterType::filterToCriterion('and-name-eq-value-jane'),
-            FilterType::filterToCriterion('and-surname-inci-value-doe'),
+            FilterType::criteriaToCriterion('and-name-eq-value-jane'),
+            FilterType::criteriaToCriterion('and-surname-inci-value-doe'),
         );
         $sql    = '`name` = CAST(:filter_0 AS CHAR) COLLATE utf8_bin AND `surname` LIKE CONCAT("%", :filter_1, "%") COLLATE utf8_general_ci';
         $params = array('filter_0' => 'jane', 'filter_1' => 'doe');
@@ -33,8 +33,8 @@ class FilterTest extends TestCase
 
         $filter     = new Data_Filter();
         $criterions = array(
-            FilterType::filterToCriterion('and-foo-nei-field-bar'),
-            FilterType::filterToCriterion('or-loo-ne-field-moo'),
+            FilterType::criteriaToCriterion('and-foo-nei-field-bar'),
+            FilterType::criteriaToCriterion('or-loo-ne-field-moo'),
         );
         $sql    = '`foo` != CAST(`bar` AS CHAR) COLLATE utf8_general_ci OR `loo` != CAST(`moo` AS CHAR) COLLATE utf8_bin';
         $clause = new Clause();
@@ -46,9 +46,9 @@ class FilterTest extends TestCase
 
         $filter     = new Data_Filter();
         $criterions = array(
-            FilterType::filterToCriterion('and-isActive-bool-field-true'),
-            FilterType::filterToCriterion('or-size-gt-field-volume'),
-            FilterType::filterToCriterion('and-bar-re-value-^moo$'),
+            FilterType::criteriaToCriterion('and-isActive-bool-field-true'),
+            FilterType::criteriaToCriterion('or-size-gt-field-volume'),
+            FilterType::criteriaToCriterion('and-bar-re-value-^moo$'),
         );
         $sql    = '(`isActive` IS NOT NULL AND `isActive` != "") OR `size` > `volume` AND `bar` REGEXP :filter_2';
         $params = array('filter_2' => '^moo$');
@@ -62,8 +62,8 @@ class FilterTest extends TestCase
 
         $filter     = new Data_Filter();
         $criterions = array(
-            FilterType::filterToCriterion('and-age-in-value-18,19,20,88'),
-            FilterType::filterToCriterion('and-city-nbegins-value-London'),
+            FilterType::criteriaToCriterion('and-age-in-value-18,19,20,88'),
+            FilterType::criteriaToCriterion('and-city-nbegins-value-London'),
         );
         $sql    = '`age` IN (:filter_0_0 COLLATE utf8_bin, :filter_0_1 COLLATE utf8_bin, :filter_0_2 COLLATE utf8_bin, :filter_0_3 COLLATE utf8_bin) AND `city` NOT LIKE CONCAT(:filter_1, "%") COLLATE utf8_bin';
         $params = array('filter_0_0' => '18', 'filter_0_1' => '19', 'filter_0_2' => '20', 'filter_0_3' => '88', 'filter_1' => 'London');
@@ -91,23 +91,23 @@ class FilterTest extends TestCase
     {
         $filterA     = new Data_Filter();
         $criterions = array(
-            FilterType::filterToCriterion('and-isActive-bool-field-true'),
-            FilterType::filterToCriterion('or-size-gt-field-volume'),
-            FilterType::filterToCriterion('and-bar-re-value-^moo$'),
+            FilterType::criteriaToCriterion('and-isActive-bool-field-true'),
+            FilterType::criteriaToCriterion('or-size-gt-field-volume'),
+            FilterType::criteriaToCriterion('and-bar-re-value-^moo$'),
         );
         $filterA->setCriterions($criterions);
 
         $filterB     = new Data_Filter();
         $criterions = array(
-            FilterType::filterToCriterion('and-age-in-value-18,19,20,88'),
-            FilterType::filterToCriterion('and-city-nbegins-value-London'),
+            FilterType::criteriaToCriterion('and-age-in-value-18,19,20,88'),
+            FilterType::criteriaToCriterion('and-city-nbegins-value-London'),
         );
         $filterB->setCriterions($criterions);
 
         $filterC     = new Data_Filter();
         $criterions = array(
-            FilterType::filterToCriterion('and-foo-nei-field-bar'),
-            FilterType::filterToCriterion('or-loo-ne-value-7'),
+            FilterType::criteriaToCriterion('and-foo-nei-field-bar'),
+            FilterType::criteriaToCriterion('or-loo-ne-value-7'),
         );
         $filterC
             ->setCriterions($criterions)
@@ -148,69 +148,69 @@ class FilterTest extends TestCase
         $data = array();
 
         // Bool compare
-        $criterion      = FilterType::filterToCriterion('and-foo-bool-value-1');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-bool-value-1');
         $expectedMethod = 'criterionToBool';
         $data[]         = array($criterion, $expectedMethod);
         $data[]         = array($criterion, $expectedMethod);
 
         // Direct compare
-        $criterion      = FilterType::filterToCriterion('and-foo-nei-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-nei-field-bar');
         $expectedMethod = 'criterionToDirect';
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-ne-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-ne-field-bar');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-eq-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-eq-field-bar');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-eqi-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-eqi-field-bar');
         $data[]         = array($criterion, $expectedMethod);
 
         // Relative compare
-        $criterion      = FilterType::filterToCriterion('and-foo-gt-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-gt-field-bar');
         $expectedMethod = 'criterionToRelative';
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-ge-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-ge-field-bar');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-lt-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-lt-field-bar');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-le-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-le-field-bar');
         $data[]         = array($criterion, $expectedMethod);
 
         // Contains compare
-        $criterion      = FilterType::filterToCriterion('and-foo-inc-value-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-inc-value-1,2,3');
         $expectedMethod = 'criterionToContains';
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-ninc-value-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-ninc-value-1,2,3');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-inci-value-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-inci-value-1,2,3');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-ninci-value-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-ninci-value-1,2,3');
         $data[]         = array($criterion, $expectedMethod);
 
         // Begins with compare
-        $criterion      = FilterType::filterToCriterion('and-foo-begins-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-begins-field-bar');
         $expectedMethod = 'criterionToBegins';
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-nbegins-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-nbegins-field-bar');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-beginsi-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-beginsi-field-bar');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-nbeginsi-field-bar');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-nbeginsi-field-bar');
         $data[]         = array($criterion, $expectedMethod);
 
         // Regex compare
-        $criterion      = FilterType::filterToCriterion('and-foo-re-value-^1');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-re-value-^1');
         $expectedMethod = 'criterionToRegex';
         $data[]         = array($criterion, $expectedMethod);
  
         // In compare
-        $criterion      = FilterType::filterToCriterion('and-foo-in-field-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-in-field-1,2,3');
         $expectedMethod = 'criterionToIn';
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-nin-field-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-nin-field-1,2,3');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-ini-field-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-ini-field-1,2,3');
         $data[]         = array($criterion, $expectedMethod);
-        $criterion      = FilterType::filterToCriterion('and-foo-nini-field-1,2,3');
+        $criterion      = FilterType::criteriaToCriterion('and-foo-nini-field-1,2,3');
         $data[]         = array($criterion, $expectedMethod);
 
         // No method

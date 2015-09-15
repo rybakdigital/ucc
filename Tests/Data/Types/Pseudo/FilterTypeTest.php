@@ -5,6 +5,7 @@ namespace Ucc\Tests\Data\Types\Pseudo;
 use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Types\Pseudo\FilterType;
 use Ucc\Data\Filter\Criterion\Criterion;
+use Ucc\Data\Filter\Filter;
 
 class FilterTypeTest extends TestCase
 {
@@ -24,13 +25,15 @@ class FilterTypeTest extends TestCase
             ->setType('value')
             ->setValue('12');
 
-        $expected       = array($criterion);
+        $filter = new Filter;
+        $filter->addCriterion($criterion);
+
+        $expected       = $filter;
         $requirements   = array('fields' => array('id'));
         $actual         = FilterType::check($supplied, $requirements);
 
         // Compare actual and existing params
-        $this->assertInternalType('array', $actual);
-        $this->assertInstanceOf(get_class($criterion), $actual[0]);
+        $this->assertInstanceOf(get_class($filter), $actual);
         $this->assertEquals($expected, $actual);
     }
 
@@ -145,15 +148,15 @@ class FilterTypeTest extends TestCase
     public function testFilterToCriterionFailWrongBooleanType()
     {
         $filter = 'and-id-bool-value-nottrue';
-        FilterType::filterToCriterion($filter);
+        FilterType::criteriaToCriterion($filter);
     }
 
     public function testFilterToCriterionPassBooleanType()
     {
         $filter = 'and-id-bool-value-true';
-        $this->assertInstanceOf('Ucc\Data\Filter\Criterion\Criterion', FilterType::filterToCriterion($filter));
+        $this->assertInstanceOf('Ucc\Data\Filter\Criterion\Criterion', FilterType::criteriaToCriterion($filter));
 
         $filter = 'and-id-bool-value-false';
-        $this->assertInstanceOf('Ucc\Data\Filter\Criterion\Criterion', FilterType::filterToCriterion($filter));
+        $this->assertInstanceOf('Ucc\Data\Filter\Criterion\Criterion', FilterType::criteriaToCriterion($filter));
     }
 }
