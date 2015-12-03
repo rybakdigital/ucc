@@ -381,7 +381,8 @@ class Connection
             $options    = array();
 
             // Set db name if supplied
-            if (!empty($this->getDbname())) {
+            $dbname = $this->getDbname();
+            if (!empty($dbname)) {
                 $dsn .= ';dbname='.$this->getDbname();
             }
 
