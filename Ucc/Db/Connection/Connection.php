@@ -84,7 +84,7 @@ class Connection
     public function __construct($options = array())
     {
         $this->setType(self::TYPE_PDO);
-        $this->setCharset('utf8');
+        $this->setCharset('UTF8');
         $this->setUnbuffered(false);
         $this->setOptions($options);
     }
