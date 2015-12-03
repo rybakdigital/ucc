@@ -2,6 +2,10 @@
 
 namespace Ucc\Db\Connection;
 
+use Ucc\Exception\Db\DbConnectionException;
+use \PDO;
+use \PDOException;
+
 /**
  * Ucc\Db\Connection\Connection
  *
@@ -68,11 +72,20 @@ class Connection
     private $type;
 
     /**
+     * Unbuffered connection
+     *
+     * @var string
+     */
+    private $unbuffered;
+
+    /**
      * Constructor
      */
     public function __construct($options = array())
     {
         $this->setType(self::TYPE_PDO);
+        $this->setCharset('utf8');
+        $this->setUnbuffered(false);
         $this->setOptions($options);
     }
 
@@ -95,7 +108,7 @@ class Connection
     public function setDriver($driver)
     {
         if (!in_array($driver, self::supportedDrivers())) {
-            throw new \Exception(
+            throw new DbConnectionException(
                 'Chosen database driver "' . $driver . '" is not supported by Ucc\Db\Connection\Connection.'
                 . ' Following drivers are currently supported: '
                 . implode(', ', self::supportedDrivers())
@@ -264,7 +277,7 @@ class Connection
     public function setType($type)
     {
         if (!in_array($type, self::supportedTypes())) {
-            throw new \Exception(
+            throw new DbConnectionException(
                 'Chosen database driver type"' . $type . '" is not supported by Ucc\Db\Connection\Connection.'
                 . ' Following types are currently supported: '
                 . implode(', ', self::supportedTypes())
@@ -274,6 +287,38 @@ class Connection
         $this->type = $type;
 
         return $this;
+    }
+
+    /**
+     * Get unbuffered
+     *
+     * @return  string
+     */
+    public function getUnbuffered()
+    {
+        return $this->unbuffered;
+    }
+
+    /**
+     * Set unbuffered
+     *
+     * @param   string      $unbuffered
+     * @return  Ucc\Db\Connection\Connection
+     */
+    public function setUnbuffered($unbuffered)
+    {
+        $this->unbuffered = $unbuffered;
+
+        return $this;
+    }
+
+    public function isUnbuffered()
+    {
+        if ($this->unbuffered) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -298,6 +343,61 @@ class Connection
         return array(
             self::TYPE_PDO,
         );
+    }
+
+    /**
+     * Attempts to open connection
+     *
+     * @return boolean
+     * @throws DbConnectionException
+     */
+    public function open()
+    {
+        $driverMethod = strtolower($this->getDriver()).'Connect';
+
+        if (method_exists($this, $driverMethod)) {
+            try {
+                return $this->$driverMethod();
+            } catch(DbConnectionException $e) {
+                throw new DbConnectionException($e->getMessage());
+            }
+        }
+
+        throw new DbConnectionException('Could not open connection using ' . $this->getDriver() . ' driver. ' . $this->getDriver() . ' is not supported by Ucc\Db\Connection\Connection.');
+    }
+
+    /**
+     * Attempts to open mysql connection using PDO
+     *
+     * @return boolean
+     * @throws DbConnectionException
+     */
+    private function mysqlConnect()
+    {
+        $dsn        = 'mysql:host=' . $this->getHost(). ';charset=' . $this->getCharset();
+        $user       = $this->getUser();
+        $password   = $this->getPassword();
+        $options    = array();
+
+        // Set db name if supplied
+        if (!empty($this->getDbname())) {
+            $dsn .= ';dbname='.$this->getDbname();
+        }
+
+        // Set unbuffered mode
+        if ($this->isUnbuffered()) {
+            $options[ PDO::MYSQL_ATTR_USE_BUFFERED_QUERY ] = false;
+        }
+
+        try {
+            if(new PDO($dsn, $user, $password, $options)) {
+                return true;
+            }
+        } catch (PDOException $e) {
+            throw new DbConnectionException($e->getMessage());
+        }
+
+        return false;
     }
 
     /**
