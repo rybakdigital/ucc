@@ -374,27 +374,29 @@ class Connection
      */
     private function mysqlConnect()
     {
-        $dsn        = 'mysql:host=' . $this->getHost(). ';charset=' . $this->getCharset();
-        $user       = $this->getUser();
-        $password   = $this->getPassword();
-        $options    = array();
+        if($this->getType() == self::TYPE_PDO) {
+            $dsn        = 'mysql:host=' . $this->getHost(). ';charset=' . $this->getCharset();
+            $user       = $this->getUser();
+            $password   = $this->getPassword();
+            $options    = array();
 
-        // Set db name if supplied
-        if (!empty($this->getDbname())) {
-            $dsn .= ';dbname='.$this->getDbname();
-        }
-
-        // Set unbuffered mode
-        if ($this->isUnbuffered()) {
-            $options[ PDO::MYSQL_ATTR_USE_BUFFERED_QUERY ] = false;
-        }
-
-        try {
-            if(new PDO($dsn, $user, $password, $options)) {
-                return true;
+            // Set db name if supplied
+            if (!empty($this->getDbname())) {
+                $dsn .= ';dbname='.$this->getDbname();
             }
-        } catch (PDOException $e) {
-            throw new DbConnectionException($e->getMessage());
+
+            // Set unbuffered mode
+            if ($this->isUnbuffered()) {
+                $options[ PDO::MYSQL_ATTR_USE_BUFFERED_QUERY ] = false;
+            }
+
+            try {
+                if(new PDO($dsn, $user, $password, $options)) {
+                    return true;
+                }
+            } catch (PDOException $e) {
+                throw new DbConnectionException($e->getMessage());
+            }
         }
 
         return false;
