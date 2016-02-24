@@ -14,6 +14,10 @@ class Result
 
     private $returnType;
 
+    public static $validStatementTypes = array(
+        'PDOStatement',
+    );
+
     /**
      * Gets statement
      */
@@ -27,6 +31,10 @@ class Result
      */
     public function setStatement($statement)
     {
+        if (!in_array(get_class($statement), self::$validStatementTypes)) {
+            throw new \InvalidArgumentException("Invalid Result statement type: '" . get_class($statement) . "' Supported types are: " . implode(', ', self::$validStatementTypes));
+        }
+
         return $this->statement = $statement;
     }
 
@@ -49,10 +57,10 @@ class Result
     /**
      * @param $statement    Executed statment
      */
-    public function __construct($statement)
+    public function __construct($statement, $returnType = \PDO::FETCH_OBJ)
     {
-        $this->statement = $statement;
-        $this->returnType = \PDO::FETCH_OBJ;
+        $this->setStatement($statement);
+        $this->setReturnType($returnType);
     }
 
     /**
@@ -60,7 +68,11 @@ class Result
      */
     public function getAll()
     {
-        return $this->getStatement()->fetchAll($this->getReturnType());
+        if (is_a($this->getStatement(), '\PDOStatement')) {
+            return $this->getStatement()->fetchAll($this->getReturnType());
+        }
+
+        return false;
     }
 
     /**
@@ -68,7 +80,11 @@ class Result
      */
     public function getNext()
     {
-        return $this->getStatement()->fetch($this->getReturnType());
+        if (is_a($this->getStatement(), '\PDOStatement')) {
+            return $this->getStatement()->fetch($this->getReturnType());
+        }
+
+        return false;
     }
 
     /**
@@ -76,6 +92,10 @@ class Result
      */
     public function getRowCount()
     {
-        return $this->getStatement()->rowCount();
+        if (is_a($this->getStatement(), '\PDOStatement')) {
+            return $this->getStatement()->rowCount();
+        }
+
+        return false;
     }
 }
