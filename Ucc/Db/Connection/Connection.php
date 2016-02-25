@@ -3,6 +3,8 @@
 namespace Ucc\Db\Connection;
 
 use Ucc\Exception\Db\DbConnectionException;
+use Ucc\Db\Sql\Query\Query as PDO_Query;
+use Ucc\Db\Result\Result;
 use \PDO;
 use \PDOException;
 
@@ -34,7 +36,7 @@ class Connection
      *
      * @var string
      */
-    private $port;
+    private $port = 3306;
 
     /**
      * Database name to use with this connection
@@ -77,6 +79,11 @@ class Connection
      * @var string
      */
     private $unbuffered;
+
+    /**
+     * DB Handle
+     */
+    private $dbh;
 
     /**
      * Constructor
@@ -322,6 +329,29 @@ class Connection
     }
 
     /**
+     * Get dbh
+     *
+     * @return  dbh
+     */
+    public function getDbh()
+    {
+        return $this->dbh;
+    }
+
+    /**
+     * Set dbh
+     *
+     * @param   dbh      $dbh
+     * @return  Ucc\Db\Connection\Connection
+     */
+    public function setDbh($dbh)
+    {
+        $this->dbh = $dbh;
+
+        return $this;
+    }
+
+    /**
      * Return list of supported database drivers
      *
      * @return  array
@@ -375,7 +405,7 @@ class Connection
     private function mysqlConnect()
     {
         if($this->getType() == self::TYPE_PDO) {
-            $dsn        = 'mysql:host=' . $this->getHost(). ';charset=' . $this->getCharset();
+            $dsn        = 'mysql:host=' . $this->getHost(). ';port=' . $this->getPort() . ';charset=' . $this->getCharset();
             $user       = $this->getUser();
             $password   = $this->getPassword();
             $options    = array();
@@ -392,7 +422,9 @@ class Connection
             }
 
             try {
-                if(new PDO($dsn, $user, $password, $options)) {
+                if($dbh = new PDO($dsn, $user, $password, $options)) {
+                    $this->setDbh($dbh);
+
                     return true;
                 }
             } catch (PDOException $e) {
@@ -401,6 +433,43 @@ class Connection
         }
 
         return false;
+    }
+
+    /**
+     * Runs Query Result
+     *
+     * @param   mixed   $query
+     */
+    public function query($query)
+    {
+        if (is_a($query, 'Ucc\Db\Sql\Query\Query')) {
+            $type = ucfirst(strtolower($this->getType()));
+            $method = 'mysql' . $type . 'Query';
+
+            return $this->$method($query);
+        }
+
+        throw new DbConnectionException('Connection type: "' . $this->getType() . '" is not supported for this Query');
+    }
+
+    /**
+     * Runs MySQL PDO query result
+     *
+     */
+    public function mysqlPdoQuery(PDO_Query $query)
+    {
+        //Enable PDO to throw errors as exceptions
+        $this->getDbh()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        try {
+            if ($sth = $this->dbh->prepare($query->getStatement())) {
+                if ($sth->execute($query->getParameters())) {
+                    return new Result($sth);
+                }
+            }
+        } catch (PDOException $e) {
+            throw new DbConnectionException($e->getMessage());
+        }
     }
 
     /**
