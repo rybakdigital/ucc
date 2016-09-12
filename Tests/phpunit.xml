@@ -16,7 +16,7 @@
          verbose="true"
          bootstrap="bootstrap.php">
   <logging>
-        <log type="coverage-html" target="/var/www/html/test/reports" charset="UTF-8"
+        <log type="coverage-html" target="/var/www/html/tests/ucc/reports" charset="UTF-8"
              yui="true" highlight="false"
              lowUpperBound="35" highLowerBound="70"/>
   </logging>
