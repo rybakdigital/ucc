@@ -3,7 +3,7 @@
 namespace Ucc\Crypt;
 
 /**
- * Ucc\Crypt\Hsh
+ * Ucc\Crypt\Hash
  *
  * This class provides utility methods for encrypting
  *
@@ -166,17 +166,17 @@ class Hash
     /**
      * Generates salt
      *
-     * @param   integer     $lenght     Salt length
+     * @param   integer     $length     Salt length
      * @param   boolean     $useBase64  Whether to use Base64 (true/default) or Base62 (false)
      * @return  string
      */
-    public static function generateSalt($lenght = 64, $useBase64 = true)
+    public static function generateSalt($length = 64, $useBase64 = true)
     {
         $salt   = '';
 
-        // This is to prevent overriding lenght to 0 by passing null
-        if (is_null($lenght)) {
-            $lenght = 64;
+        // This is to prevent overriding length to 0 by passing null
+        if (is_null($length)) {
+            $length = 64;
         }
 
         if ($useBase64) {
@@ -185,7 +185,7 @@ class Hash
             $chars  = self::getBase62();
         }
 
-        for ($i=0; $i < $lenght; $i++) { 
+        for ($i=0; $i < $length; $i++) {
             $salt .= $chars[rand(0, count($chars) - 1)];
         }
 
