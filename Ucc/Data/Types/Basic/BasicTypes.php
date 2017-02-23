@@ -4,6 +4,7 @@ namespace Ucc\Data\Types\Basic;
 
 use Ucc\Data\Types\Basic\IntegerType;
 use Ucc\Data\Types\Basic\StringType;
+use Ucc\Data\Types\Basic\EmailType;
 
 /**
  * Ucc\Data\Types\Basic\BasicTypes
@@ -17,6 +18,7 @@ class BasicTypes
         'int'       => 'checkInteger',
         'str'       => 'checkString',
         'string'    => 'checkString',
+        'email'     => 'checkEmail',
     );
 
     /**
@@ -37,11 +39,24 @@ class BasicTypes
      *
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints (OPTIONAL)
-     * @return  integer     Cleared value
+     * @return  string      Cleared value
      * @throws  InvalidDataException        If the value is not integer or fails constraints checks
      */
     public static function checkString($value, array $requirements = array())
     {
         return StringType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a valid email
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  string      Cleared value
+     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
+     */
+    public static function checkEmail($value, array $requirements = array())
+    {
+        return EmailType::check($value, $requirements);
     }
 }
