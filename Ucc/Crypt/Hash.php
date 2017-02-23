@@ -90,7 +90,7 @@ class Hash
      *
      * @param   string  $password   Password to be hashed
      * @param   string  $salt       Salt to be used with password
-     * @return  StdClass
+     * @return  Hash
      */
     public static function hashPassword($password, $salt = null, $rounds = 0)
     {
@@ -123,7 +123,7 @@ class Hash
      * @param   string  $salt   Salt to be used with object
      * @param   integer $rounds The number of rounds to hash it by
      * @param   string  $algo   Algorythm to use when hashing
-     * @return  StdClass
+     * @return  Hash
      */
     public static function hash($object, $salt = null, $rounds = 0, $algo = null)
     {
@@ -156,7 +156,7 @@ class Hash
      * @param   string  $object hash an object
      * @param   string  $salt   Salt to be used with object
      * @param   integer $rounds The number of rounds to hash it by
-     * @return  StdClass
+     * @return  Hash
      */
     public static function hash256($object, $salt = null, $rounds = 0)
     {
