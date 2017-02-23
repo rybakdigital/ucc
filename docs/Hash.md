@@ -34,7 +34,7 @@ Method signature
 ###Hashing objects (or strings):
 
 Method signature
-`Hash::hashPassword($password, $salt = null, $rounds = 0, $algo = null)`
+`Hash::hash($password, $salt = null, $rounds = 0, $algo = null)`
  * $password - password to be hashed
  * $salt - salt to use with encryption, will be auto generated if not specified
  * $rounds - Commonly known as 'cost'. Number of iterations used during the encryption.
@@ -43,7 +43,7 @@ Method signature
 
 ```php
     $object = new \StdClass();
-    $object->name = "hello worlds";
+    $object->name = "hello world";
 
     $hash = Hash::hash($object);
 
