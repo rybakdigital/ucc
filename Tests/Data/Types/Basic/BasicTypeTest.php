@@ -66,4 +66,40 @@ class BasicTypeTest extends TestCase
         // Compare actual and existing params
         $this->assertSame($expected, $actual);
     }
+
+    public function validEmailProvider()
+    {
+        return array(
+            array('jane.doe@example.com'),
+            array('jane.doe21@example.co.uk'),
+            array('jane.doe.21@example.com'),
+            array('jane-doe.21@example.net'),
+            array('jane.doe.21.savy.and.sassy@hotmail.com'),
+        );
+    }
+
+    public function invalidEmailProvider()
+    {
+        return array(
+            array('jane.doeexample.com'),
+            array('jane.doe21.example.com'),
+        );
+    }
+
+    /**
+     * @dataProvider    validEmailProvider
+     */
+    public function testCheckPass($email)
+    {
+        $this->assertEquals(BasicTypes::checkEmail($email), $email);
+    }
+
+    /**
+     * @dataProvider    invalidEmailProvider
+     * @expectedException Ucc\Exception\Data\InvalidDataTypeException
+     */
+    public function testCheckFail($email)
+    {
+        $this->assertEquals(BasicTypes::checkEmail($email), $email);
+    }
 }
