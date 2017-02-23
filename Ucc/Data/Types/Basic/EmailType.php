@@ -41,7 +41,7 @@ class EmailType implements TypeInterface
             return $value;
         }
 
-        throw new InvalidDataTypeException("value must be a valid email address");
+        throw new InvalidDataTypeException("value must be a valid E-Mail address");
     }
 
     /**
