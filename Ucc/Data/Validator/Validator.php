@@ -302,7 +302,7 @@ class Validator implements ValidatorInterface
             // Check if custom class is called
             } elseif ($type == 'custom' && $check->hasRequirement('class') && $check->hasRequirement('method')) {
                 $method     = $check->getRequirement('method');
-                $callable   = array($check->getRequirement('method'), $method);
+                $callable   = array($check->getRequirement('class'), $method);
             }
         }
 
