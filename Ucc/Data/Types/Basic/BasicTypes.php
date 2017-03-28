@@ -5,6 +5,7 @@ namespace Ucc\Data\Types\Basic;
 use Ucc\Data\Types\Basic\IntegerType;
 use Ucc\Data\Types\Basic\StringType;
 use Ucc\Data\Types\Basic\EmailType;
+use Ucc\Data\Types\Basic\BooleanType;
 
 /**
  * Ucc\Data\Types\Basic\BasicTypes
@@ -15,6 +16,8 @@ use Ucc\Data\Types\Basic\EmailType;
 class BasicTypes
 {
     public static $knownTypes = array(
+        'bool'      => 'checkBoolean',
+        'boolean'   => 'checkBoolean',
         'int'       => 'checkInteger',
         'str'       => 'checkString',
         'string'    => 'checkString',
@@ -58,5 +61,18 @@ class BasicTypes
     public static function checkEmail($value, array $requirements = array())
     {
         return EmailType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a valid boolean
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  string      Cleared value
+     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
+     */
+    public static function checkBoolean($value, array $requirements = array())
+    {
+        return BooleanType::check($value, $requirements);
     }
 }
