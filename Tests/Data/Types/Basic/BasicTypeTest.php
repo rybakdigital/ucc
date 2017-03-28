@@ -102,4 +102,26 @@ class BasicTypeTest extends TestCase
     {
         $this->assertEquals(BasicTypes::checkEmail($email), $email);
     }
+
+    public function validBooleanProvider()
+    {
+        return array(
+            array(true, true),
+            array("true", true),
+            array("TRUE", true),
+            array(1, true),
+            array(false, false),
+            array("false", false),
+            array(0, false),
+            array("0", false),
+        );
+    }
+
+    /**
+     * @dataProvider    validBooleanProvider
+     */
+    public function testCheckBooleanPass($boolean, $expected)
+    {
+        $this->assertEquals(BasicTypes::checkBoolean($boolean), $expected);
+    }
 }
