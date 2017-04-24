@@ -7,6 +7,7 @@ use Ucc\Exception\Data\InvalidDataException\InvalidDataValueException;
 use Ucc\Data\Types\Pseudo\FilterType;
 use Ucc\Data\Filter\Criterion\Criterion;
 use Ucc\Db\Filter\Sql;
+use Ucc\Db\Filter\Dql;
 use Ucc\Data\Filter\Clause\Clause;
 
 /**
@@ -93,6 +94,46 @@ class Filter
         return $sqlClause;
     }
 
+    public static function filtersToDqlClause(array $filters, $qb)
+    {
+        foreach ($filters as $i => $filter) {
+            self::filterToDqlClause($filter, $qb, $i . '_filter');
+        }
+
+        return $qb;
+    }
+
+    public static function filterToDqlClause($filter, $qb, $namespace = 'filter')
+    {
+        $expr = null;
+        $cond = array();
+        $andX = $qb->expr()->andX();
+        $orX  = $qb->expr()->orX();
+
+        // Get filter criterion
+        $criterions = $filter->getCriterions();
+
+        foreach ($criterions as $i => $criterion) {
+            // Placeholder name for query binding
+            $placeHolder = $namespace . '_' . $i;
+
+            // Turn each Criterion into Clause
+            $cond = self::criterionToDqlClause($criterion, $qb, $placeHolder);
+
+            if ($criterion->getLogic() == 'and') {
+                $andX->add($cond);
+            } elseif($criterion->getLogic() == 'or') {
+                $orX->add($cond);
+            }
+        }
+
+        if ($filter->getLogic() == 'and') {
+            $qb->andWhere($andX, $orX);
+        } elseif ($filter->getLogic() == 'or') {
+            $qb->orWhere($andX, $orX);
+        }
+    }
+
     /**
      * Returns Ucc\Data\Filter\Clause\Clause for successful Criterion translations, otherwise false
      *
@@ -104,6 +145,22 @@ class Filter
 
         if (method_exists('Ucc\Db\Filter\Sql', $method)) {
             return Sql::$method($criterion, $placeHolder, $fieldMap);
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns Ucc\Data\Filter\Clause\Clause for successful Criterion translations, otherwise false
+     *
+     * @return Ucc\Data\Filter\Clause\Clause | false
+     */
+    public static function criterionToDqlClause(Criterion $criterion, $qb, $placeHolder = 'filter')
+    {
+        $method = self::criterionOperandToMethod($criterion) . 'Clause';
+
+        if (method_exists('Ucc\Db\Filter\Dql', $method)) {
+            return Dql::$method($criterion, $qb, $placeHolder);
         }
 
         return false;
