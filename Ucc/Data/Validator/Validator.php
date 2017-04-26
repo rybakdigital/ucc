@@ -327,8 +327,11 @@ class Validator implements ValidatorInterface
             try {
                 // Call method to validate data
                 $result = call_user_func_array($callable, $args);
-                $this->addSafeData($key, $result);
-
+                if (isset($requirements['as'])) {
+                    $this->addSafeData($requirements['as'], $result);
+                } else {
+                    $this->addSafeData($key, $result);
+                }
                 return $this;
             } catch (\Exception $e) {
                 $this->setError('Field ' . $key . ' failed validation because ' . $e->getMessage());
