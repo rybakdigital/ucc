@@ -6,6 +6,7 @@ use Ucc\Data\Types\Basic\IntegerType;
 use Ucc\Data\Types\Basic\StringType;
 use Ucc\Data\Types\Basic\EmailType;
 use Ucc\Data\Types\Basic\BooleanType;
+use Ucc\Data\Types\Basic\CountryType;
 
 /**
  * Ucc\Data\Types\Basic\BasicTypes
@@ -22,6 +23,7 @@ class BasicTypes
         'str'       => 'checkString',
         'string'    => 'checkString',
         'email'     => 'checkEmail',
+        'country'   => 'checkCountry',
     );
 
     /**
@@ -74,5 +76,18 @@ class BasicTypes
     public static function checkBoolean($value, array $requirements = array())
     {
         return BooleanType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a valid country
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  string      Cleared value
+     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
+     */
+    public static function checkCountry($value, array $requirements = array())
+    {
+        return CountryType::check($value, $requirements);
     }
 }
