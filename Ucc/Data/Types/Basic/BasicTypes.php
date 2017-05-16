@@ -3,6 +3,7 @@
 namespace Ucc\Data\Types\Basic;
 
 use Ucc\Data\Types\Basic\IntegerType;
+use Ucc\Data\Types\Basic\FloatType;
 use Ucc\Data\Types\Basic\StringType;
 use Ucc\Data\Types\Basic\EmailType;
 use Ucc\Data\Types\Basic\BooleanType;
@@ -20,6 +21,7 @@ class BasicTypes
         'bool'      => 'checkBoolean',
         'boolean'   => 'checkBoolean',
         'int'       => 'checkInteger',
+        'float'     => 'checkFloat',
         'str'       => 'checkString',
         'string'    => 'checkString',
         'email'     => 'checkEmail',
@@ -40,12 +42,25 @@ class BasicTypes
     }
 
     /**
+     * Checks if value is a float
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  float       Cleared value
+     * @throws  InvalidDataException        If the value is not float or fails constraints checks
+     */
+    public static function checkFloat($value, array $requirements = array())
+    {
+        return FloatType::check($value, $requirements);
+    }
+
+    /**
      * Checks if value is a string
      *
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints (OPTIONAL)
      * @return  string      Cleared value
-     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
+     * @throws  InvalidDataException        If the value is not string or fails constraints checks
      */
     public static function checkString($value, array $requirements = array())
     {
@@ -58,7 +73,7 @@ class BasicTypes
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints (OPTIONAL)
      * @return  string      Cleared value
-     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
+     * @throws  InvalidDataException        If the value is not email or fails constraints checks
      */
     public static function checkEmail($value, array $requirements = array())
     {
@@ -71,7 +86,7 @@ class BasicTypes
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints (OPTIONAL)
      * @return  string      Cleared value
-     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
+     * @throws  InvalidDataException        If the value is not boolean or fails constraints checks
      */
     public static function checkBoolean($value, array $requirements = array())
     {
@@ -84,7 +99,7 @@ class BasicTypes
      * @param   mixed       $value          Value to evaluate
      * @param   array       $requirements   Array of constraints (OPTIONAL)
      * @return  string      Cleared value
-     * @throws  InvalidDataException        If the value is not integer or fails constraints checks
+     * @throws  InvalidDataException        If the value is not country or fails constraints checks
      */
     public static function checkCountry($value, array $requirements = array())
     {
