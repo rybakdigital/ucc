@@ -45,6 +45,20 @@ class Validator implements ValidatorInterface
     }
 
     /**
+     * Resets validator
+     */
+    public function reset()
+    {
+        $this
+            ->clearChecks()
+            ->clearInputData()
+            ->clearSafeData()
+            ->clearError();
+
+        return $this;
+    }
+
+    /**
      * Gets list of checks
      *
      * @return  array
@@ -62,7 +76,6 @@ class Validator implements ValidatorInterface
      */
     public function setChecks(array $checks)
     {
-
         foreach ($checks as $key => $check) {
             if (is_a($check, 'Ucc\Data\Validator\Check\Check')) {
                 $this->addCheck($check);
@@ -121,6 +134,18 @@ class Validator implements ValidatorInterface
     public function setError($message)
     {
         $this->error = $message;
+
+        return $this;
+    }
+
+    /**
+     * Clears error.
+     *
+     * @return  Validator
+     */
+    public function clearError()
+    {
+        $this->error = null;
 
         return $this;
     }
@@ -326,7 +351,12 @@ class Validator implements ValidatorInterface
             $args = array($value, $requirements);
             try {
                 // Call method to validate data
-                $result = call_user_func_array($callable, $args);
+                if (isset($requirements['empty']) && ($requirements['empty'] === true) && empty($value)) {
+                    $result = null;
+                } else {
+                    $result = call_user_func_array($callable, $args);
+                }
+
                 if (isset($requirements['as'])) {
                     $this->addSafeData($requirements['as'], $result);
                 } else {
