@@ -280,7 +280,7 @@ class Validator implements ValidatorInterface
         // Loop through the checks and evaluate each field
         foreach ($this->checks as $key => $check) {
             // Check the key exist in inputData
-            if (isset($this->inputData[$key])) {
+            if (array_key_exists($key, $this->inputData)) {
                 if ($check->hasRequirement('type')) {
                     $this->checkInput($this->getInput($key), $check);
                 }
