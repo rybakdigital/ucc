@@ -350,8 +350,15 @@ class Validator implements ValidatorInterface
         if (is_callable($callable)) {
             $args = array($value, $requirements);
             try {
-                // Call method to validate data
-                if (isset($requirements['empty']) && ($requirements['empty'] === true) && (empty($value) && $value !== 0)) {
+                if (
+                    isset($requirements['empty'])
+                    && ($requirements['empty'] === true)
+                    && (
+                        $value === null
+                        || $value === ""
+                        || $value === false
+                        )
+                    ) {
                     $result = null;
                 } else {
                     $result = call_user_func_array($callable, $args);
