@@ -339,6 +339,8 @@ class Validator implements ValidatorInterface
     /**
      * Validates value of the field against requirements
      *
+     * Empty option allows to nullify the data by passing "" (empty string), null, or false value
+     *
      * @param   string  $key            Field name to check
      * @param   mixed   $value          Value to check
      * @param   array   $requirements   Array of requirements
