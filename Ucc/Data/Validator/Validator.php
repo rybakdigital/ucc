@@ -339,6 +339,8 @@ class Validator implements ValidatorInterface
     /**
      * Validates value of the field against requirements
      *
+     * Empty option allows to nullify the data by passing "" (empty string), null, or false value
+     *
      * @param   string  $key            Field name to check
      * @param   mixed   $value          Value to check
      * @param   array   $requirements   Array of requirements
@@ -350,8 +352,15 @@ class Validator implements ValidatorInterface
         if (is_callable($callable)) {
             $args = array($value, $requirements);
             try {
-                // Call method to validate data
-                if (isset($requirements['empty']) && ($requirements['empty'] === true) && (empty($value) && $value !== 0)) {
+                if (
+                    isset($requirements['empty'])
+                    && ($requirements['empty'] === true)
+                    && (
+                        $value === null
+                        || $value === ""
+                        || $value === false
+                        )
+                    ) {
                     $result = null;
                 } else {
                     $result = call_user_func_array($callable, $args);
