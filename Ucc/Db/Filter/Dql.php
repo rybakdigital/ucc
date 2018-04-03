@@ -14,6 +14,10 @@ class Dql
 {
     public static function getExprValue($value, $qb)
     {
+        if ($value instanceof \DateTime) {
+            return $qb->expr()->literal($value->format('Y-m-d H:i:s'));
+        }
+
         if (is_string($value)) {
             return $qb->expr()->literal($value);
         }
@@ -76,16 +80,16 @@ class Dql
         switch($criterion->op())
         {
             case 'gt':
-                $expr = $qb->expr()->gt($criterion->key(), $criterion->value());
+                $expr = $qb->expr()->gt($criterion->key(), self::getExprValue($criterion->value(), $qb));
                 break;
             case 'ge':
-                $expr = $qb->expr()->gte($criterion->key(), $criterion->value());
+                $expr = $qb->expr()->gte($criterion->key(), self::getExprValue($criterion->value(), $qb));
                 break;
             case 'lt':
-                $expr = $qb->expr()->lt($criterion->key(), $criterion->value());
+                $expr = $qb->expr()->lt($criterion->key(), self::getExprValue($criterion->value(), $qb));
                 break;
             case 'le':
-                $expr = $qb->expr()->lte($criterion->key(), $criterion->value());
+                $expr = $qb->expr()->lte($criterion->key(), self::getExprValue($criterion->value(), $qb));
                 break;
         }
 
