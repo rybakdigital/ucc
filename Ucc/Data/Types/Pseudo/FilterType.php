@@ -39,10 +39,11 @@ class FilterType implements TypeInterface
      *
      * @param   array   $value          Value to be checked
      * @param   array   $requirements   Additional constraints
+     * @param   array   $options        Options
      * @return  Filter  Cleared value
      * @throws  InvalidDataTypeException | InvalidDataValueException
      */
-    public static function check($value, array $requirements = array())
+    public static function check($value, array $requirements = array(), $options = array())
     {
         if (!isset($requirements['fields'])) {
             $error = 'allowable list of fields constraint has not been specified for a filter';
@@ -62,6 +63,25 @@ class FilterType implements TypeInterface
         // Iterate through the list of filters and check each filter individually
         foreach ($value as $index => $criteria) {
             $criterion = self::criteriaToCriterion($criteria, $requirements, $index);
+
+            // Check options
+            if (isset($options['checks'][$criterion->getKey()])) {
+                $class  = null;
+                $method = null;
+
+                if (isset($options['checks'][$criterion->getKey()]['class'])) {
+                    $class = $options['checks'][$criterion->getKey()]['class'];
+                }
+
+                if (isset($options['checks'][$criterion->getKey()]['method'])) {
+                    $method = $options['checks'][$criterion->getKey()]['method'];
+                }
+
+                if (is_callable(array($class, $method))) {
+                    $criterion->setValue(call_user_func_array(array($class, $method), array($criterion->getValue())));
+                }
+            }
+
             $filter->addCriterion($criterion);
         }
 
