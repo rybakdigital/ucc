@@ -402,7 +402,7 @@ class Sql
     public static function quote($string)
     {
         if (is_string($string)) {
-            return '`' . str_replace('`', '', $string) . '`';
+            return  str_replace('.', '`.`', '`' . str_replace('`', '', $string) . '`');
         }
 
         return false;
