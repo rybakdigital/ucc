@@ -110,10 +110,10 @@ class QueryTest extends TestCase
         $querySingle    = new Query;
         $querySingle->setStatement($sql);
 
-        $expectedSql = 'SELECT * FROM `orders` WHERE (`id` > :0_w_filter_0 AND `id` >= :0_filter_1) LIMIT 2,100';
+        $expectedSql = 'SELECT * FROM `orders` WHERE (`id` > :0_w_filter_0 AND `id` >= :0_w_filter_1) LIMIT 2,100';
         $expectedParams = array(
             '0_w_filter_0' => '1',
-            '0_filter_1' => '2',
+            '0_w_filter_1' => '2',
         );
 
         $expected   = new Query;
