@@ -520,10 +520,10 @@ class Sql
             $havingCriterions = $havingFilter->getCriterions();
 
             if (!empty($havingCriterions)) {
-                $havingFilters[$i]  = $havingFilter;
+                $havingFilters[$i . '_h']  = $havingFilter;
             }
 
-            $whereFilters[$i]   = $whereFilter;
+            $whereFilters[$i . '_w']   = $whereFilter;
         }
 
         $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap);

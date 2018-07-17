@@ -18,11 +18,11 @@ class QueryTest extends TestCase
 
         $query      = new Query;
         $sql        = 'SELECT * FROM `products` ';
-        $expectedSql = 'SELECT * FROM `products` WHERE (`name` LIKE CONCAT("%", :0_filter_0, "%") COLLATE utf8_general_ci OR `name` LIKE CONCAT("%", :0_filter_1, "%") COLLATE utf8_general_ci AND `price` > :0_filter_2) GROUP BY `name`,`price` ORDER BY `name` ASC,`price` DESC';
+        $expectedSql = 'SELECT * FROM `products` WHERE (`name` LIKE CONCAT("%", :0_w_filter_0, "%") COLLATE utf8_general_ci OR `name` LIKE CONCAT("%", :0_w_filter_1, "%") COLLATE utf8_general_ci AND `price` > :0_w_filter_2) GROUP BY `name`,`price` ORDER BY `name` ASC,`price` DESC';
         $expectedParams = array(
-            '0_filter_0' => 'galaxy',
-            '0_filter_1' => '4s',
-            '0_filter_2' => '100',
+            '0_w_filter_0' => 'galaxy',
+            '0_w_filter_1' => '4s',
+            '0_w_filter_2' => '100',
         );
         $query
             ->setStatement($sql);
@@ -110,10 +110,10 @@ class QueryTest extends TestCase
         $querySingle    = new Query;
         $querySingle->setStatement($sql);
 
-        $expectedSql = 'SELECT * FROM `orders` WHERE (`id` > :0_filter_0 AND `id` >= :0_filter_1) LIMIT 2,100';
+        $expectedSql = 'SELECT * FROM `orders` WHERE (`id` > :0_w_filter_0 AND `id` >= :0_w_filter_1) LIMIT 2,100';
         $expectedParams = array(
-            '0_filter_0' => '1',
-            '0_filter_1' => '2',
+            '0_w_filter_0' => '1',
+            '0_w_filter_1' => '2',
         );
 
         $expected   = new Query;
