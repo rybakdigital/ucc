@@ -425,9 +425,20 @@ class Sql
         // If the field map is populated we can look for a table name.
         if (!empty($fieldMap)) {
             $table = self::getSafeTableName($field, $fieldMap);
+
             // Prepend the table name if it's not empty.
             if (!empty($table)) {
-                $ret = $table . '.' . $ret;
+                // Check if field was already prepended with table name
+                $parts = explode('.', $ret);
+
+                if (count($parts) == 2) {
+                    $fieldName = $parts[1];
+
+                } else {
+                    $fieldName = $parts[0];
+                }
+
+                $ret = $table . '.' . $fieldName;
             }
         }
 
