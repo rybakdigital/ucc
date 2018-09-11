@@ -431,9 +431,8 @@ class Sql
                 // Check if field was already prepended with table name
                 $parts = explode('.', $ret);
 
-                if (count($parts) == 2) {
-                    $fieldName = $parts[1];
-
+                if (count($parts) > 1) {
+                    $fieldName = end($parts);
                 } else {
                     $fieldName = $parts[0];
                 }
