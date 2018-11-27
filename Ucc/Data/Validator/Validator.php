@@ -207,6 +207,21 @@ class Validator implements ValidatorInterface
     }
 
     /**
+     * Gets safe key
+     *
+     * @param   $key    string
+     * @return  array
+     */
+    public function getSafe($key)
+    {
+        if (isset($this->safeData[$key])) {
+            return $this->safeData[$key];
+        }
+
+        return null;
+    }
+
+    /**
      * Gets safeData
      *
      * @return  array
