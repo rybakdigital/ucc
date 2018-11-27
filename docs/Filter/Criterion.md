@@ -1,4 +1,4 @@
-#Criterion
+# Criterion
 
 This class is a storage for filter criteria.
 
@@ -28,7 +28,7 @@ This tells Criterion to look for elemnts where `make` is equal (`eq`) to the val
 Example 3:
 
 {logic}-{key}-{operand}-{type}-{value} : "AND-town-eq-field-city"
-This tells Criterion to look for elemnts where `town` is equal (`eq`) to the value of another property: `city`. In other words town and city must be equal. `OR` means that this is an union of subsets (may match one or more of the conditions: OR Criterion1 OR Criterion2 OR Criterion3, ..., etc.)
+This tells Criterion to look for elemnts where `town` is equal (`eq`) to the value of another property: `city`. In other words town and city must be equal. `AND` means that this is an intersection of subsets (must match all of the conditions: AND Criterion1 AND Criterion2 AND Criterion3, ..., etc.)
 
 ## Properties and methods
 Criterion has following private properties: `logic`, `key`, `operand`, `type` and `value`. All are accessible by their gettersand setters methods. In addition to standrad getters set of shortcut aliases are available: `logic()`, `key()`, `op()`, `type()` and `value()`. For example: `getLogic()` has an alias of `logic()` that returns value of `logic` property.
@@ -55,7 +55,7 @@ Criterion has following private properties: `logic`, `key`, `operand`, `type` an
     `nin`       - Comma delimited list of values to not match (case sensitive).
     `nini`      - Comma delimited list of values to not match (case insensitive).
 
-##Basic usage
+## Basic usage
 ```php
 use Ucc\Data\Filter\Criterion\Criterion;
 
