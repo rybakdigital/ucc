@@ -34,7 +34,7 @@ This tells Criterion to look for elemnts where `town` is equal (`eq`) to the val
 Criterion has following private properties: `logic`, `key`, `operand`, `type` and `value`. All are accessible by their gettersand setters methods. In addition to standrad getters set of shortcut aliases are available: `logic()`, `key()`, `op()`, `type()` and `value()`. For example: `getLogic()` has an alias of `logic()` that returns value of `logic` property.
 
 ## Operands
-    `bool`      - Boolean comparison, e.g. true or false.
+    `bool`      - Boolean comparison, e.g. true or false (is NULL | is not NULL).
     `eq`        - Equals comparison (case sensitive).
     `eqi`       - Equals comparison (case insensitive).
     `ne`        - Not equals comparison (case sensitive).
