@@ -61,7 +61,19 @@ class Dql
         switch($criterion->op())
         {
             case 'bool':
-                $expr = $qb->expr()->eq($criterion->key(), $criterion->value());
+
+                if ($criterion->value() == 'true' || $criterion->value() == 1) {
+                    $expr = $qb->expr()->orX(
+                        $qb->expr()->eq($criterion->key(), $criterion->value()),
+                        $qb->expr()->isNotNull($criterion->key())
+                    );
+                } elseif ($criterion->value() == 'false' || $criterion->value() == 0) {
+                    $expr = $qb->expr()->orX(
+                        $qb->expr()->eq($criterion->key(), $criterion->value()),
+                        $qb->expr()->isNull($criterion->key())
+                    );
+                }
+
                 break;
         }
 
