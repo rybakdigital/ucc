@@ -9,6 +9,8 @@ namespace Ucc\Data\Validator;
  */
 interface ValidatorInterface
 {
+    const UNKNOWN_CHECK_TYPE = 4005555;
+
     /**
      * Gets checks
      * Return list of checks for Validation

@@ -36,6 +36,11 @@ class Validator implements ValidatorInterface
      */
     private $safeData;
 
+    /**
+     * @var     int   Error Code
+     */
+    private $errorCode;
+
     public function __construct()
     {
         $this->checks       = array();
@@ -146,6 +151,29 @@ class Validator implements ValidatorInterface
     public function clearError()
     {
         $this->error = null;
+
+        return $this;
+    }
+
+    /**
+     * Get ErrorCode code
+     *
+     * @return  int
+     */
+    public function getErrorCode()
+    {
+        return $this->errorCode;
+    }
+
+    /**
+     * Set ErrorCode code
+     *
+     * @param   $code   int
+     * @return  Validator
+     */
+    public function setErrorCode($code)
+    {
+        $this->errorCode = $code;
 
         return $this;
     }
@@ -389,9 +417,11 @@ class Validator implements ValidatorInterface
                 return $this;
             } catch (\Exception $e) {
                 $this->setError('Field ' . $key . ' failed validation because ' . $e->getMessage());
+                $this->setErrorCode($e->getCode());
             }
         } else {
-            $this->setError('Unkown check type for field ' . $key);
+            $this->setError('Unknown check type for field ' . $key);
+            $this->setErrorCode(self::UNKNOWN_CHECK_TYPE);
         }
 
         return false;
