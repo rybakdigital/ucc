@@ -389,7 +389,7 @@ class ValidatorTest extends TestCase
         // validate data
         $validator->validate();
         $this->assertFalse($validator->validate());
-        $error = 'Unkown check type for field phone';
+        $error = 'Unknown check type for field phone';
         $this->assertEquals($error, $validator->getError());
     }
 
