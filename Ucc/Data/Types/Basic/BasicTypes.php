@@ -8,6 +8,7 @@ use Ucc\Data\Types\Basic\StringType;
 use Ucc\Data\Types\Basic\EmailType;
 use Ucc\Data\Types\Basic\BooleanType;
 use Ucc\Data\Types\Basic\CountryType;
+use Ucc\Data\Types\Basic\ArrayType;
 
 /**
  * Ucc\Data\Types\Basic\BasicTypes
@@ -26,6 +27,8 @@ class BasicTypes
         'string'    => 'checkString',
         'email'     => 'checkEmail',
         'country'   => 'checkCountry',
+        'array'     => 'checkArray',
+        'list'      => 'checkArray',
     );
 
     /**
@@ -104,5 +107,18 @@ class BasicTypes
     public static function checkCountry($value, array $requirements = array())
     {
         return CountryType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a valid array
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  string      Cleared value
+     * @throws  InvalidDataException        If the value is not country or fails constraints checks
+     */
+    public static function checkArray($value, array $requirements = array())
+    {
+        return ArrayType::check($value, $requirements);
     }
 }
