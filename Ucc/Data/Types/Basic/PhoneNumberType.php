@@ -111,7 +111,7 @@ class PhoneNumberType implements TypeInterface
         return true;
     }
 
-    public function checkInternationalNumber($value)
+    public static function checkInternationalNumber($value)
     {
         // Array of country codes and the regex pattern
         // Ensure they are in order of longest country codes first.
@@ -155,8 +155,7 @@ class PhoneNumberType implements TypeInterface
                 . ' Length Min:11 Max:11',
         );
 
-        foreach( $countryNumberPlanRegexArray as $countryCode => $regexPattern )
-        {
+        foreach($countryNumberPlanRegexArray as $countryCode => $regexPattern) {
             if (substr($value, 1, strlen($countryCode)) == $countryCode) {
                 if (!preg_match($regexPattern , $value)) {
                     // Number plan validation failed
