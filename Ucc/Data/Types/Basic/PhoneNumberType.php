@@ -86,7 +86,7 @@ class PhoneNumberType implements TypeInterface
             }
         }
 
-        $value = self::checkInternationalNumber($value);
+        $value = self::checkInternationalNumber($value, true);
 
         return $value;
     }
@@ -111,8 +111,14 @@ class PhoneNumberType implements TypeInterface
         return true;
     }
 
-    public static function checkInternationalNumber($value)
+    public static function checkInternationalNumber($value, $plusPrefix = false)
     {
+        if ($plusPrefix) {
+            if (substr(trim($value), 0, 2) == '00') {
+                $value = substr_replace($value, '+', 0, 2);
+            }
+        }
+
         // Array of country codes and the regex pattern
         // Ensure they are in order of longest country codes first.
         $countryNumberPlanRegexArray = array
