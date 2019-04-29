@@ -9,6 +9,7 @@ use Ucc\Data\Types\Basic\EmailType;
 use Ucc\Data\Types\Basic\BooleanType;
 use Ucc\Data\Types\Basic\CountryType;
 use Ucc\Data\Types\Basic\ArrayType;
+use Ucc\Data\Types\Basic\PhoneNumberType;
 
 /**
  * Ucc\Data\Types\Basic\BasicTypes
@@ -29,6 +30,7 @@ class BasicTypes
         'country'   => 'checkCountry',
         'array'     => 'checkArray',
         'list'      => 'checkArray',
+        'phone'     => 'checkPhoneNumber',
     );
 
     /**
@@ -120,5 +122,18 @@ class BasicTypes
     public static function checkArray($value, array $requirements = array())
     {
         return ArrayType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a valid phone number
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  string      Cleared value
+     * @throws  InvalidDataException        If the value is not country or fails constraints checks
+     */
+    public static function checkPhoneNumber($value, array $requirements = array())
+    {
+        return PhoneNumberType::check($value, $requirements);
     }
 }
