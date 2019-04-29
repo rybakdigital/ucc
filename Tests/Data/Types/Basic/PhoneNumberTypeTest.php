@@ -16,7 +16,9 @@ class PhoneNumberTypeTest extends TestCase
     {
         return array(
             array('+447877775529'),
-            array('00447877775529', '++447877775529'),
+            array('00447877775529', '+447877775529'),
+            array('+1555296540', '+1555296540'),
+            array('001555296540', '+1555296540'),
         );
     }
 
@@ -51,7 +53,7 @@ class PhoneNumberTypeTest extends TestCase
 
     /**
      * @dataProvider    invalidPhoneNumberProvider
-     * @expectedException Ucc\Exception\Data\InvalidDataTypeException
+     * @expectedException Ucc\Exception\Data\InvalidDataValueException
      */
     public function testCheckFail($phone)
     {
