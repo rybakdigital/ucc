@@ -2,7 +2,7 @@
 
 namespace Ucc\Tests\Data\Types\Basic;
 
-use PHPUnit\Framework\TestCase;
+use \PHPUnit_Framework_TestCase as TestCase;
 use Ucc\Data\Types\Basic\PhoneNumberType;
 
 class PhoneNumberTypeTest extends TestCase
@@ -35,6 +35,9 @@ class PhoneNumberTypeTest extends TestCase
             array('+6622345'),
             array('+6612234556'),
             array('+6622345678948'),
+            array('+4407877552287'),
+            array('+44787755228899'),
+            array('+447877'),
         );
     }
 
