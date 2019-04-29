@@ -5,7 +5,7 @@ namespace Ucc\Tests\Data\Types\Basic;
 use PHPUnit\Framework\TestCase;
 use Ucc\Data\Types\Basic\PhoneNumberType;
 
-class EmailTypeTest extends TestCase
+class PhoneNumberTypeTest extends TestCase
 {
     public function testGetRequirementsOptions()
     {
