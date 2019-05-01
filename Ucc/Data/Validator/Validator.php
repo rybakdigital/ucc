@@ -420,8 +420,8 @@ class Validator implements ValidatorInterface
                 return $this;
             } catch (\Exception $e) {
                 $this->setError('Field ' . $key . ' failed validation because ' . $e->getMessage());
-                if ($check->hasRequirement('error-code-value')) {
-                    $this->setErrorCode($check->getRequirement('error-code-value'));
+                if (isset($requirements['error-code-value'])) {
+                    $this->setErrorCode($requirements['error-code-value']);
                 } else {
                     $this->setErrorCode($e->getCode());
                 }
