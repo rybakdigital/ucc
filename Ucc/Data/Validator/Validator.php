@@ -331,6 +331,9 @@ class Validator implements ValidatorInterface
                 // Check if field is optional
                 if (!$check->hasRequirement('opt') || $check->getRequirement('opt') == false) {
                     $this->setError('Required parameter "' . $key . '" missing');
+                    if ($check->hasRequirement('error-code-opt')) {
+                        $this->setErrorCode($check->getRequirement('error-code-opt'));
+                    }
                     break;
                 } else {
                     // Set default value if provided
@@ -417,7 +420,11 @@ class Validator implements ValidatorInterface
                 return $this;
             } catch (\Exception $e) {
                 $this->setError('Field ' . $key . ' failed validation because ' . $e->getMessage());
-                $this->setErrorCode($e->getCode());
+                if (isset($requirements['error-code-value'])) {
+                    $this->setErrorCode($requirements['error-code-value']);
+                } else {
+                    $this->setErrorCode($e->getCode());
+                }
             }
         } else {
             $this->setError('Unknown check type for field ' . $key);
