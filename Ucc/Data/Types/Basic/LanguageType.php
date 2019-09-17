@@ -30,11 +30,11 @@ class LanguageType implements TypeInterface
         return self::$requirementsOptions;
     }
 
-    public static function countryCodeTypes()
+    public static function languageCodeTypes()
     {
         return array(
-            // 'alpha2',
-            // 'alpha3',
+            'alpha2',
+            'alpha3',
             'iso3166',
         );
     }
