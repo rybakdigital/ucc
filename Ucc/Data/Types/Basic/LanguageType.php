@@ -52,17 +52,17 @@ class LanguageType implements TypeInterface
     {
         $languages  = self::getLanguages();
 
-        if (isset($requirements['code'])) {
-            if (!in_array($requirements['code'], self::languageCodeTypes())) {
+        if (isset($requirements['type'])) {
+            if (!in_array($requirements['type'], self::languageCodeTypes())) {
                 throw new InvalidDataException("supported code types are " . implode(', ', self::languageCodeTypes()));
             }
 
-            if (!array_key_exists($value, self::getLanguages($requirements['code']))) {
-                throw new InvalidDataTypeException("value must be a valid language code type " . $requirements['code']);
+            if (!array_key_exists($value, self::getLanguages($requirements['type']))) {
+                throw new InvalidDataTypeException("value must be a valid language code type " . $requirements['type']);
             }
         } else {
             $type = 'name';
-            if (!in_array($value, $countries)) {
+            if (!in_array($value, $languages)) {
                 throw new InvalidDataTypeException("value must be a valid language name");
             }
         }

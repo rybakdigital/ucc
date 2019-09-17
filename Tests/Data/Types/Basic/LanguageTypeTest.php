@@ -25,9 +25,13 @@ class LanguageTypeTest extends TestCase
     /**
      * @dataProvider    validLanguageProvider
      */
-    public function testCheckPass($code, $name)
+    public function testCheckPass($code, $name, $type = null)
     {
-        $this->assertEquals(LanguageType::check($code), $code);
+        $requirements = array(
+            'type' => $type
+        );
+
+        $this->assertEquals(LanguageType::check($code, $requirements), $code);
     }
 
     /**
