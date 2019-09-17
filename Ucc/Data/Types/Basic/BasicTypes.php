@@ -8,6 +8,7 @@ use Ucc\Data\Types\Basic\StringType;
 use Ucc\Data\Types\Basic\EmailType;
 use Ucc\Data\Types\Basic\BooleanType;
 use Ucc\Data\Types\Basic\CountryType;
+use Ucc\Data\Types\Basic\LanguageType;
 use Ucc\Data\Types\Basic\ArrayType;
 use Ucc\Data\Types\Basic\PhoneNumberType;
 
@@ -28,6 +29,7 @@ class BasicTypes
         'string'    => 'checkString',
         'email'     => 'checkEmail',
         'country'   => 'checkCountry',
+        'language'  => 'checkLanguage',
         'array'     => 'checkArray',
         'list'      => 'checkArray',
         'phone'     => 'checkPhoneNumber',
@@ -109,6 +111,19 @@ class BasicTypes
     public static function checkCountry($value, array $requirements = array())
     {
         return CountryType::check($value, $requirements);
+    }
+
+    /**
+     * Checks if value is a valid language
+     *
+     * @param   mixed       $value          Value to evaluate
+     * @param   array       $requirements   Array of constraints (OPTIONAL)
+     * @return  string      Cleared value
+     * @throws  InvalidDataException        If the value is not language or fails constraints checks
+     */
+    public static function checkLanguage($value, array $requirements = array())
+    {
+        return LanguageType::check($value, $requirements);
     }
 
     /**
