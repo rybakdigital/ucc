@@ -131,6 +131,7 @@ class PhoneNumberType implements TypeInterface
             '420'   => '/^\+420[1-7][0-9]{8}$/',
             '39'    => '/^\+39[0-9]{6,11}$/',
             '385'   => '/^\+385[1-9][0-9]{5,9}$/',
+            '372'   => '/^\+372[3-9][0-9]{6,7}$/',
             '359'   => '/^\+359[1-9][0-9]{5,8}$/',
             '357'   => '/^\+357[2,9][0-9]{7}$/',
             '34'    => '/^\+34[1-9][0-9]{2,8}$/',
@@ -158,7 +159,7 @@ class PhoneNumberType implements TypeInterface
                 . ' +43, followed by the phone number with the leading 0 removed.'
                 . ' Length Min:6 Max:13',
             '420' => 'the Czech international numbering plan starts +420, followed'
-                . ' by a digit 1 or 7 and any 8 other digits'
+                . ' by a digit 1 or 7 and any 8 other digits.'
                 . ' Length Min:12 Max:12',
             '39' => 'the Italian international numbering plan starts +39, followed'
                 . ' by the phone number.'
@@ -166,11 +167,14 @@ class PhoneNumberType implements TypeInterface
             '385' => 'the Croatian international numbering plan starts +385, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:9 Max:13',
+            '372' => 'the Estonian international numbering plan starts +372, followed'
+                . ' by a digit between 3 and 9 and 6 or 7 other digits.'
+                . ' Length Min:9 Max:11',
             '359' => 'the Bulgarian international numbering plan starts +359, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:9 Max:12',
             '357' => 'the Cypriot international numbering plan starts +357, followed'
-                . ' by a digit 2 or 9 and any 7 other digits'
+                . ' by a digit 2 or 9 and any 7 other digits.'
                 . ' Length Min:11 Max:11',
             '34' => 'the Spanish international numbering plan starts +34, followed'
                 . ' by the phone number with the leading 0 removed.'
