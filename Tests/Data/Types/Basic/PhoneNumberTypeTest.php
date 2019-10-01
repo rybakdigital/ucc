@@ -39,6 +39,8 @@ class PhoneNumberTypeTest extends TestCase
             array('00302123456789', '+302123456789'),
             array('00366123456789', '+366123456789'),
             array('00361234567', '+361234567'),
+            array('003546121234', '+3546121234'),
+            array('0035431212317', '+35431212317'),
         );
     }
 
@@ -83,6 +85,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+3661234567891'),
             array('+36123456'),
             array('+3602345678'),
+            array('+354612123'),
+            array('+352612123'),
         );
     }
 
