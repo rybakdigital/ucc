@@ -30,6 +30,7 @@ class PhoneNumberTypeTest extends TestCase
             array('0035792654789', '+35792654789'),
             array('00420522336655', '+420522336655'),
             array('00420602888999', '+420602888999'),
+            array('004520998877', '+4520998877'),
         );
     }
 
@@ -59,6 +60,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+42052233665'),
             array('+4205223366551'),
             array('+420922336655'),
+            array('+452099887'),
+            array('+45209988778'),
         );
     }
 
