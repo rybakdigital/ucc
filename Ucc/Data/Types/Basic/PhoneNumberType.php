@@ -123,14 +123,18 @@ class PhoneNumberType implements TypeInterface
         // Ensure they are in order of longest country codes first.
         $countryNumberPlanRegexArray = array
         (
-            '66' => '/^\+66[2-9][0-9]{7,8}$/',
-            '49' => '/^\+49[1-9][0-9]{2,11}$/',
-            '44' => '/^\+44[1-9][0-9]{6,10}$/',
-            '39' => '/^\+39[0-9]{6,11}$/',
-            '34' => '/^\+34[1-9][0-9]{2,8}$/',
-            '33' => '/^\+33[1-9][0-9]{8}$/',
-            '31' => '/^\+31[1-9][0-9]{8}$/',
-            '1'  => '/^\+1[2-9][0-9]{9}$/',
+            '66'    => '/^\+66[2-9][0-9]{7,8}$/',
+            '49'    => '/^\+49[1-9][0-9]{2,11}$/',
+            '44'    => '/^\+44[1-9][0-9]{6,12}$/',
+            '43'    => '/^\+43[1-7][0-9]{3,12}$/',
+            '39'    => '/^\+39[0-9]{6,11}$/',
+            '385'   => '/^\+385[1-9][0-9]{5,9}$/',
+            '359'   => '/^\+359[1-9][0-9]{5,8}$/',
+            '34'    => '/^\+34[1-9][0-9]{2,8}$/',
+            '33'    => '/^\+33[1-9][0-9]{8}$/',
+            '32'    => '/^\+32[1-9][0-9]{7,12}$/',
+            '31'    => '/^\+31[1-9][0-9]{8}$/',
+            '1'     => '/^\+1[2-9][0-9]{9}$/',
         );
 
         $countryNumberPlanFormatDesc = array
@@ -144,15 +148,27 @@ class PhoneNumberType implements TypeInterface
             '44' => 'the UK international numbering plan should start with a'
                 . ' +44, followed by the phone number with the leading 0 removed.'
                 . ' Length Min:7 Max:13',
+            '43' => 'the Austrian international numbering plan should start with a'
+                . ' +43, followed by the phone number with the leading 0 removed.'
+                . ' Length Min:4 Max:13',
             '39' => 'the Italian international numbering plan starts +39, followed'
                 . ' by the phone number.'
                 . ' Length Min:8 Max:13',
+            '385' => 'the Croatian international numbering plan starts +385, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:13',
+            '359' => 'the Bulgarian international numbering plan starts +359, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:12',
             '34' => 'the Spanish international numbering plan starts +34, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:5 Max:11',
             '33' => 'the French international numbering plan starts +33, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
+            '32' => 'the Belgian international numbering plan starts +32, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:10 Max:14',
             '31' => 'the Dutch international numbering plan starts +31, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
