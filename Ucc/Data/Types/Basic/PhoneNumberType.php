@@ -128,11 +128,12 @@ class PhoneNumberType implements TypeInterface
             '45'    => '/^\+45[1-9][0-9]{7}$/',
             '44'    => '/^\+44[1-9][0-9]{6,10}$/',
             '43'    => '/^\+43[1-7][0-9]{3,10}$/',
+            '423'   => '/^\+423[1-7][0-9]{6}$/',
             '420'   => '/^\+420[1-7][0-9]{8}$/',
             '39'    => '/^\+39[0-9]{6,11}$/',
             '385'   => '/^\+385[1-9][0-9]{5,9}$/',
             '372'   => '/^\+372[3-9][0-9]{6,7}$/',
-            '371'   => '/^\+372[2-7][0-9]{7}$/',
+            '371'   => '/^\+371[2-7][0-9]{7}$/',
             '36'    => '/^\+36[1-9][0-9]{6,9}$/',
             '359'   => '/^\+359[1-9][0-9]{5,8}$/',
             '358'   => '/^\+358[0-9]{6,9}$/',
@@ -165,6 +166,9 @@ class PhoneNumberType implements TypeInterface
             '43' => 'the Austrian international numbering plan should start with a'
                 . ' +43, followed by the phone number with the leading 0 removed.'
                 . ' Length Min:6 Max:13',
+            '423' => 'the Liechtenstein international numbering plan starts +423, followed'
+                . ' by a digit 1 or 7 and any 6 other digits.'
+                . ' Length Min:10 Max:10',
             '420' => 'the Czech international numbering plan starts +420, followed'
                 . ' by a digit 1 or 7 and any 8 other digits.'
                 . ' Length Min:12 Max:12',
