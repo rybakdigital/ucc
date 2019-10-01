@@ -47,6 +47,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+3351659897'),
             array('+328796541'),
             array('+321234567898741'),
+            array('+32 12 34 56 78 98'),
+            array('+32(0)123-4567 898'),
         );
     }
 
