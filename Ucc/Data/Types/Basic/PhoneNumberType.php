@@ -134,6 +134,7 @@ class PhoneNumberType implements TypeInterface
             '385'   => '/^\+385[1-9][0-9]{5,9}$/',
             '372'   => '/^\+372[3-9][0-9]{6,7}$/',
             '371'   => '/^\+371[2-7][0-9]{7}$/',
+            '370'   => '/^\+370[1-9][0-9]{7}$/',
             '36'    => '/^\+36[1-9][0-9]{6,9}$/',
             '359'   => '/^\+359[1-9][0-9]{5,8}$/',
             '358'   => '/^\+358[0-9]{6,9}$/',
@@ -183,6 +184,9 @@ class PhoneNumberType implements TypeInterface
                 . ' Length Min:9 Max:11',
             '371' => 'the Latvian international numbering plan starts +371, followed'
                 . ' by a digit between 2 and 7 and 7 other digits.'
+                . ' Length Min:11 Max:11',
+            '370' => 'the Lithuanian international numbering plan starts +370, followed'
+                . ' by a digit between 1 and 9 and 7 other digits.'
                 . ' Length Min:11 Max:11',
             '36' => 'the Hungarian international numbering plan starts +36, followed'
                 . ' by the phone number with the leading 0 removed.'
