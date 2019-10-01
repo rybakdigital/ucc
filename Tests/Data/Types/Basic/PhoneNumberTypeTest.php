@@ -44,7 +44,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+44787755228899'),
             array('+447877'),
             array('+335165989744'),
-            array('+3287965412'),
+            array('+3351659897'),
+            array('+328796541'),
             array('+321234567898741'),
         );
     }
