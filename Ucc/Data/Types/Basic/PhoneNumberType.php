@@ -140,6 +140,7 @@ class PhoneNumberType implements TypeInterface
             '33'    => '/^\+33[1-9][0-9]{8}$/',
             '32'    => '/^\+32[1-9][0-9]{7,11}$/',
             '31'    => '/^\+31[1-9][0-9]{8}$/',
+            '30'    => '/^\+30[1-7][0-9]{8}$/',
             '1'     => '/^\+1[2-9][0-9]{9}$/',
         );
 
@@ -194,6 +195,9 @@ class PhoneNumberType implements TypeInterface
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:14',
             '31' => 'the Dutch international numbering plan starts +31, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:11',
+            '30' => 'the Greek international numbering plan starts +30, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
             '1'  => 'the US international numbering plan starts +1, followed'
