@@ -141,6 +141,7 @@ class PhoneNumberType implements TypeInterface
             '357'   => '/^\+357[2,9][0-9]{7}$/',
             '354'   => '/^\+354[3-8][0-9]{6,7}$/',
             '353'   => '/^\+353[1,2,4-9][0-9]{7,8}$/',
+            '352'   => '/^\+352[1-9]{5,8}$/',
             '350'   => '/^\+350[0-9]{8}$/',
             '34'    => '/^\+34[1-9][0-9]{2,8}$/',
             '33'    => '/^\+33[1-9][0-9]{8}$/',
@@ -206,6 +207,9 @@ class PhoneNumberType implements TypeInterface
             '353' => 'the Irish international numbering plan starts +353, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:12',
+            '352' => 'the Luxembourg international numbering plan starts +352, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:12',
             '350' => 'the Gibraltar international numbering plan starts +350, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
