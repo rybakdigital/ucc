@@ -125,14 +125,14 @@ class PhoneNumberType implements TypeInterface
         (
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
-            '44'    => '/^\+44[1-9][0-9]{6,12}$/',
-            '43'    => '/^\+43[1-7][0-9]{3,12}$/',
+            '44'    => '/^\+44[1-9][0-9]{6,10}$/',
+            '43'    => '/^\+43[1-7][0-9]{3,10}$/',
             '39'    => '/^\+39[0-9]{6,11}$/',
             '385'   => '/^\+385[1-9][0-9]{5,9}$/',
             '359'   => '/^\+359[1-9][0-9]{5,8}$/',
             '34'    => '/^\+34[1-9][0-9]{2,8}$/',
             '33'    => '/^\+33[1-9][0-9]{8}$/',
-            '32'    => '/^\+32[1-9][0-9]{7,12}$/',
+            '32'    => '/^\+32[1-9][0-9]{7,11}$/',
             '31'    => '/^\+31[1-9][0-9]{8}$/',
             '1'     => '/^\+1[2-9][0-9]{9}$/',
         );
@@ -150,7 +150,7 @@ class PhoneNumberType implements TypeInterface
                 . ' Length Min:7 Max:13',
             '43' => 'the Austrian international numbering plan should start with a'
                 . ' +43, followed by the phone number with the leading 0 removed.'
-                . ' Length Min:4 Max:13',
+                . ' Length Min:6 Max:13',
             '39' => 'the Italian international numbering plan starts +39, followed'
                 . ' by the phone number.'
                 . ' Length Min:8 Max:13',
