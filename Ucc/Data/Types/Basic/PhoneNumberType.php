@@ -139,6 +139,7 @@ class PhoneNumberType implements TypeInterface
             '359'   => '/^\+359[1-9][0-9]{5,8}$/',
             '358'   => '/^\+358[0-9]{6,9}$/',
             '357'   => '/^\+357[2,9][0-9]{7}$/',
+            '356'   => '/^\+356[1-9][0-9]{7}$/',
             '354'   => '/^\+354[3-8][0-9]{6,7}$/',
             '353'   => '/^\+353[1,2,4-9][0-9]{7,8}$/',
             '352'   => '/^\+352[1-9]{5,8}$/',
@@ -200,6 +201,9 @@ class PhoneNumberType implements TypeInterface
                 . ' Length Min:9 Max:12',
             '357' => 'the Cypriot international numbering plan starts +357, followed'
                 . ' by a digit 2 or 9 and any 7 other digits.'
+                . ' Length Min:11 Max:11',
+            '356' => 'the Maltese international numbering plan starts +356, followed'
+                . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
             '354' => 'the Icelandic international numbering plan starts +354, followed'
                 . ' by the phone number with the leading 0 removed.'
