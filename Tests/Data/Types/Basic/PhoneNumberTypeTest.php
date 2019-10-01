@@ -33,6 +33,8 @@ class PhoneNumberTypeTest extends TestCase
             array('004520998877', '+4520998877'),
             array('003727992222', '+3727992222'),
             array('0037279922222', '+37279922222'),
+            array('00358471234567', '+358471234567'),
+            array('00358501235', '+358501235'),
         );
     }
 
@@ -67,6 +69,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+372799222'),
             array('+372799222222'),
             array('+3721992222'),
+            array('+3584712345678'),
+            array('+35850123'),
         );
     }
 
