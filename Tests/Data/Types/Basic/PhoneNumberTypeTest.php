@@ -54,6 +54,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+48121231212'),
             array('00351912123123', '+351912123123'),
             array('+351912123123'),
+            array('0040123456789', '+40123456789'),
+            array('+40123456789'),
         );
     }
 
@@ -119,6 +121,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+481212312112'),
             array('+35191212312'),
             array('+3519121231234'),
+            array('+4012345678'),
+            array('+401234567812'),
         );
     }
 
