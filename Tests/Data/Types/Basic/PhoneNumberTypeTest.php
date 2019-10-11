@@ -48,6 +48,8 @@ class PhoneNumberTypeTest extends TestCase
             array('0037052102222', '+37052102222'),
             array('00352412312', '+352412312'),
             array('+352691000700'),
+            array('004791212123', '+4791212123'),
+            array('0047591123123123', '+47591123123123'),
         );
     }
 
@@ -105,6 +107,10 @@ class PhoneNumberTypeTest extends TestCase
             array('+370521022222'),
             array('+35241231'),
             array('+3526910007001'),
+            array('+479121212'),
+            array('+475911231231231'),
+            array('+47191123123123'),
+            array('+47491123123123'),
         );
     }
 
