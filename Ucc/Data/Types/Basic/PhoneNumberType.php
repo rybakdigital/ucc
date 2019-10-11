@@ -134,6 +134,7 @@ class PhoneNumberType implements TypeInterface
             '423'   => '/^\+423[1-7][0-9]{6}$/',
             '421'   => '/^\+421[1-7][0-9]{8}$/',
             '420'   => '/^\+420[1-7][0-9]{8}$/',
+            '41'    => '/^\+41[1-9][0-9]{8}$/',
             '40'    => '/^\+40[1-9][0-9]{8}$/',
             '39'    => '/^\+39[0-9]{6,11}$/',
             '386'   => '/^\+386[1-9][0-9]{7}$/',
@@ -194,6 +195,9 @@ class PhoneNumberType implements TypeInterface
             '420' => 'the Czech international numbering plan starts +420, followed'
                 . ' by a digit 1 or 7 and any 8 other digits.'
                 . ' Length Min:12 Max:12',
+            '41' => 'the Swiss international numbering plan starts +41, followed'
+                . ' by the phone number.'
+                . ' Length Min:11 Max:11',
             '40' => 'the Romanian international numbering plan starts +40, followed'
                 . ' by the phone number.'
                 . ' Length Min:11 Max:11',
