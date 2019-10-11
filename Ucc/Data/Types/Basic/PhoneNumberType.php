@@ -127,6 +127,7 @@ class PhoneNumberType implements TypeInterface
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
             '48'    => '/^\+48[1-9][0-9]{8}$/',
             '47'    => '/^\+47[2-3,5-9][0-9]{7,11}$/',
+            '46'    => '/^\+46[1-9][0-9]{6,12}$/',
             '45'    => '/^\+45[1-9][0-9]{7}$/',
             '44'    => '/^\+44[1-9][0-9]{6,10}$/',
             '43'    => '/^\+43[1-7][0-9]{3,10}$/',
@@ -172,6 +173,9 @@ class PhoneNumberType implements TypeInterface
             '47' => 'the Norwegian international numbering plan should start with a'
                 . ' +47, followed by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:14',
+            '46' => 'the Swedish international numbering plan should start with a'
+                . ' +46, followed by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:15',
             '45' => 'the Danish international numbering plan should start with a'
                 . ' +45, followed by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:10',
