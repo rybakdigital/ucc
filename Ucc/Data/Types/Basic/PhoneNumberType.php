@@ -135,6 +135,7 @@ class PhoneNumberType implements TypeInterface
             '420'   => '/^\+420[1-7][0-9]{8}$/',
             '40'    => '/^\+40[1-9][0-9]{8}$/',
             '39'    => '/^\+39[0-9]{6,11}$/',
+            '386'   => '/^\+386[1-9][0-9]{7}$/',
             '385'   => '/^\+385[1-9][0-9]{5,9}$/',
             '372'   => '/^\+372[3-9][0-9]{6,7}$/',
             '371'   => '/^\+371[2-7][0-9]{7}$/',
@@ -195,6 +196,9 @@ class PhoneNumberType implements TypeInterface
             '39' => 'the Italian international numbering plan starts +39, followed'
                 . ' by the phone number.'
                 . ' Length Min:8 Max:13',
+            '386' => 'the Slovenian international numbering plan starts +386, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:11',
             '385' => 'the Croatian international numbering plan starts +385, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:9 Max:13',
