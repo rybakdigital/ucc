@@ -125,12 +125,19 @@ class PhoneNumberType implements TypeInterface
         (
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
+            '48'    => '/^\+48[1-9][0-9]{8}$/',
+            '47'    => '/^\+47[2-3,5-9][0-9]{7,11}$/',
+            '46'    => '/^\+46[1-9][0-9]{6,12}$/',
             '45'    => '/^\+45[1-9][0-9]{7}$/',
             '44'    => '/^\+44[1-9][0-9]{6,10}$/',
             '43'    => '/^\+43[1-7][0-9]{3,10}$/',
             '423'   => '/^\+423[1-7][0-9]{6}$/',
+            '421'   => '/^\+421[1-7][0-9]{8}$/',
             '420'   => '/^\+420[1-7][0-9]{8}$/',
+            '41'    => '/^\+41[1-9][0-9]{8}$/',
+            '40'    => '/^\+40[1-9][0-9]{8}$/',
             '39'    => '/^\+39[0-9]{6,11}$/',
+            '386'   => '/^\+386[1-9][0-9]{7}$/',
             '385'   => '/^\+385[1-9][0-9]{5,9}$/',
             '372'   => '/^\+372[3-9][0-9]{6,7}$/',
             '371'   => '/^\+371[2-7][0-9]{7}$/',
@@ -143,6 +150,7 @@ class PhoneNumberType implements TypeInterface
             '354'   => '/^\+354[3-8][0-9]{6,7}$/',
             '353'   => '/^\+353[1,2,4-9][0-9]{7,8}$/',
             '352'   => '/^\+352[1-9][0-9]{5,8}$/',
+            '351'   => '/^\+351[1-9][0-9]{8}$/',
             '350'   => '/^\+350[0-9]{8}$/',
             '34'    => '/^\+34[1-9][0-9]{2,8}$/',
             '33'    => '/^\+33[1-9][0-9]{8}$/',
@@ -160,6 +168,15 @@ class PhoneNumberType implements TypeInterface
             '49' => 'the German international numbering plan starts +49, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:5 Max:14',
+            '48' => 'the Polish international numbering plan starts +48, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:11',
+            '47' => 'the Norwegian international numbering plan should start with a'
+                . ' +47, followed by the phone number with the leading 0 removed.'
+                . ' Length Min:10 Max:14',
+            '46' => 'the Swedish international numbering plan should start with a'
+                . ' +46, followed by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:15',
             '45' => 'the Danish international numbering plan should start with a'
                 . ' +45, followed by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:10',
@@ -172,12 +189,24 @@ class PhoneNumberType implements TypeInterface
             '423' => 'the Liechtenstein international numbering plan starts +423, followed'
                 . ' by a digit 1 or 7 and any 6 other digits.'
                 . ' Length Min:10 Max:10',
+            '421' => 'the Slovakian international numbering plan starts +421, followed'
+                . ' by a digit 1 or 7 and any 8 other digits.'
+                . ' Length Min:12 Max:12',
             '420' => 'the Czech international numbering plan starts +420, followed'
                 . ' by a digit 1 or 7 and any 8 other digits.'
                 . ' Length Min:12 Max:12',
+            '41' => 'the Swiss international numbering plan starts +41, followed'
+                . ' by the phone number.'
+                . ' Length Min:11 Max:11',
+            '40' => 'the Romanian international numbering plan starts +40, followed'
+                . ' by the phone number.'
+                . ' Length Min:11 Max:11',
             '39' => 'the Italian international numbering plan starts +39, followed'
                 . ' by the phone number.'
                 . ' Length Min:8 Max:13',
+            '386' => 'the Slovenian international numbering plan starts +386, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:11',
             '385' => 'the Croatian international numbering plan starts +385, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:9 Max:13',
@@ -214,6 +243,9 @@ class PhoneNumberType implements TypeInterface
             '352' => 'the Luxembourg international numbering plan starts +352, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:9 Max:12',
+            '351' => 'the Portuguese international numbering plan starts +351, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:12 Max:12',
             '350' => 'the Gibraltar international numbering plan starts +350, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
