@@ -106,7 +106,7 @@ class Filter
             unset($this->criterions[$key]);
         }
 
-        return self;
+        return $this;
     }
 
     /**
