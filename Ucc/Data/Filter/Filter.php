@@ -102,7 +102,7 @@ class Filter
     {
         $key = array_search($criterion, $this->criterions);
 
-        if ($key) {
+        if ($key !== false) {
             unset($this->criterions[$key]);
         }
 
