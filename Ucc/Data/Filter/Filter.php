@@ -80,7 +80,7 @@ class Filter
     }
 
     /**
-     * Set criterions
+     * Add criterion
      *
      * @param   Criterion   $criterion
      * @return  Filter
@@ -90,6 +90,23 @@ class Filter
         $this->criterions[] = $criterion;
 
         return $this;
+    }
+
+    /**
+     * Removes existing criterion from the filter
+     *
+     * @param   Criterion   $criterion
+     * @return  Filter
+     */
+    public function removeCriterion(Criterion $criterion)
+    {
+        $key = array_search($criterion, $this->criterions);
+
+        if ($key) {
+            unset($this->criterions[$key]);
+        }
+
+        return self;
     }
 
     /**
