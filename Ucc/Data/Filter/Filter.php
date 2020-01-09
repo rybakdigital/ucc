@@ -27,6 +27,8 @@ class Filter
 {
     const FILTER_LOGIC_INTERSCTION   = 'and';    // Logic Intersection (AND A AND B AND C ...)
     const FILTER_LOGIC_UNION         = 'or';     // Logic Union (OR A OR B OR C ...)
+    const FILTER_FIND_PROPERTY_KEY   = 'key';
+    const FILTER_FIND_PROPERTY_VALUE = 'value';
 
     public static $filterLogic = array(
         self::FILTER_LOGIC_INTERSCTION,
@@ -80,7 +82,7 @@ class Filter
     }
 
     /**
-     * Set criterions
+     * Add criterion
      *
      * @param   Criterion   $criterion
      * @return  Filter
@@ -88,6 +90,23 @@ class Filter
     public function addCriterion(Criterion $criterion)
     {
         $this->criterions[] = $criterion;
+
+        return $this;
+    }
+
+    /**
+     * Removes existing criterion from the filter
+     *
+     * @param   Criterion   $criterion
+     * @return  Filter
+     */
+    public function removeCriterion(Criterion $criterion)
+    {
+        $key = array_search($criterion, $this->criterions);
+
+        if ($key !== false) {
+            unset($this->criterions[$key]);
+        }
 
         return $this;
     }
@@ -134,5 +153,78 @@ class Filter
         $this->logic = $logic;
 
         return $this;
+    }
+
+    /**
+     * Finds first Criterion matching search conditions and returns it
+     *
+     * @param   mixed     $haystack     Needle or Haystack to search for, string, number, array
+     * @param   string    $property     Property of Criterion to scan
+     * @param   bool      $findAll      Whether to return first result or all
+     * @return  mixed                   First matched element if found, otherwise null
+     */
+    public function findCriterion($haystack, $property = self::FILTER_FIND_PROPERTY_KEY, $findAll = false)
+    {
+        $keys = array();
+
+        foreach ($this->criterions as $key => $criterion) {
+            $method = 'get' . ucfirst($property);
+
+            if (!method_exists($criterion, $method)) {
+                throw new InvalidArgumentException(
+                    "Argument 2 passed to Filter->findCriterion() must be one of: "
+                    . self::FILTER_FIND_PROPERTY_KEY . " or "
+                    . self::FILTER_FIND_PROPERTY_VALUE . ". Got '" . $property . "' instead."
+                    );
+            }
+
+            $needle = $criterion->$method();
+
+            if (is_array($haystack)) {
+                if (in_array($needle, $haystack)) {
+                    $keys[$key] = $criterion;
+                }
+            } elseif (is_numeric($haystack) || is_string($haystack)) {
+                if ($needle == $haystack) {
+                    $keys[$key] = $criterion;
+                }
+            } elseif (is_bool($haystack)) {
+                if (in_array($needle, [true, false, 0, 1, 'true', 'false'], true)) {
+                    $keys[$key] = $criterion;
+                }
+            } else {
+                if ($needle === $haystack) {
+                    $keys[$key] = $criterion;
+                }
+            }
+        }
+
+        if (!empty($keys)) {
+            if ($findAll) {
+                return $keys;
+            }
+
+            return reset($keys);
+        }
+
+        return null;
+    }
+
+    /**
+     * Finds all Criterions matching search conditions and returns them as a list
+     *
+     * @param   mixed     $haystack     Needle or Haystack to search for, string, number, array
+     * @param   string    $property     Property of Criterion to scan
+     * @return  mixed                   Matched elements if found, otherwise []
+     */
+    public function findCriterions($haystack, $property = self::FILTER_FIND_PROPERTY_KEY)
+    {
+        $keys = $this->findCriterion($haystack, $property, true);
+
+        if (!is_null($keys)) {
+            return $keys;
+        }
+
+        return [];
     }
 }
