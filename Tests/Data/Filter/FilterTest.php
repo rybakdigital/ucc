@@ -54,4 +54,27 @@ class FilterTest extends TestCase
         $filter = new Filter();
         $this->assertInstanceOf(get_class($filter), $filter->setCriterions($criterions));
     }
+
+    public function removeCriterionProvider()
+    {
+        $criterion1 = new Criterion();
+        $criterion2 = new Criterion();
+        $criterion3 = new Criterion();
+        $criterion4 = new Criterion();
+
+        return array(
+            array(array($criterion1, $criterion2), $criterion1),
+        );
+    }
+
+    /**
+     * @dataProvider removeCriterionProvider
+     */
+    public function testRemoveCriterion($criterions, $toBeRemoved)
+    {
+        $filter     = new Filter();
+        $this->assertInstanceOf(get_class($filter), $filter->setCriterions($criterions));
+        $this->assertInstanceOf(get_class($filter), $filter->removeCriterion($toBeRemoved));
+        $this->assertFalse(in_array($toBeRemoved, $filter->getCriterions()));
+    }
 }
