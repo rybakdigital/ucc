@@ -124,10 +124,16 @@ class PhoneNumberType implements TypeInterface
         $countryNumberPlanRegexArray = array
         (
             '996'   => '/^\+996[3-7][0-9]{8}$/',
+            '98'    => '/^\+98[1-9][0-9]{9}$/',
+            '971'   => '/^\+971[1-7,9][0-9]{7,8}$/',
+            '966'   => '/^\+966[1-9][0-9]{8}$/',
             '94'    => '/^\+94[0-9]{9}$/',
+            '92'    => '/^\+92[1-9][0-9]{9}$/',
             '91'    => '/^\+91[1-9][0-9]{9}$/',
             '90'    => '/^\+90[2-5][0-9]{9}$/',
+            '880'   => '/^\+880[1-9][0-9]{9}$/',
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
+            '65'    => '/^\+65[1-9][0-9]{7}$/',
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
             '48'    => '/^\+48[1-9][0-9]{8}$/',
             '47'    => '/^\+47[2-3,5-9][0-9]{7,11}$/',
@@ -161,6 +167,9 @@ class PhoneNumberType implements TypeInterface
             '32'    => '/^\+32[1-9][0-9]{7,11}$/',
             '31'    => '/^\+31[1-9][0-9]{8}$/',
             '30'    => '/^\+30[1-7][0-9]{8,9}$/',
+            '249'   => '/^\+249[1,9][0-9]{8}$/',
+            '234'   => '/^\+234[1-9][0-9]{7,9}$/',
+            '20'    => '/^\+20[1-9][0-9]{9}$/',
             '1'     => '/^\+1[2-9][0-9]{9}$/',
         );
 
@@ -169,18 +178,36 @@ class PhoneNumberType implements TypeInterface
             '996'  => 'the Kyrgyzstani international numbering plan starts +996, followed'
                 . ' by a digit between 3 and 7 and 8 other digits.'
                 . ' Length Min:12 Max:12',
+            '98'  => 'the Iranian international numbering plan starts +98, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:12 Max:12',
+            '971'  => 'the United Arabic Emirates international numbering plan starts +971, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:11',
+            '966'  => 'the Saudi Arabia international numbering plan starts +966, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:12 Max:12',
             '94'  => 'the Sri Lankan international numbering plan starts +94, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
+            '92'  => 'the Pakistani international numbering plan starts +92, followed'
+                . ' by a digit between 1 and 9 and 9 other digits.'
+                . ' Length Min:12 Max:12',
             '91'  => 'the Indian international numbering plan starts +91, followed'
                 . ' by a digit between 2 and 9 and 9 other digits.'
                 . ' Length Min:12 Max:12',
             '90'  => 'the Turkish international numbering plan starts +90, followed'
                 . ' by a digit between 2 and 5 and 9 other digits.'
                 . ' Length Min:12 Max:12',
+            '880'  => 'the 	Bangladeshi international numbering plan starts +880, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:13 Max:13',
             '66'  => 'the Thai international numbering plan starts +66, followed'
                 . ' by a digit between 2 and 9.'
                 . ' Length Min:10 Max:11',
+            '65'  => 'the Singapore international numbering plan starts +65, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:10 Max:10',
             '49' => 'the German international numbering plan starts +49, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:5 Max:14',
@@ -280,6 +307,15 @@ class PhoneNumberType implements TypeInterface
             '30' => 'the Greek international numbering plan starts +30, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
+            '249'  => 'the Sudan international numbering plan starts +249, followed'
+                . ' by 1 or 9 and 8 other digits.'
+                . ' Length Min:12 Max:12',
+            '234'  => 'the Nigeria international numbering plan starts +234, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:13',
+            '20'  => 'the Egyptian international numbering plan starts +20, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:12 Max:12',
             '1'  => 'the US international numbering plan starts +1, followed'
                 . ' by a digit between 2 and 9.'
                 . ' Length Min:11 Max:11',
