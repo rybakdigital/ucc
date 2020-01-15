@@ -85,6 +85,8 @@ class PhoneNumberTypeTest extends TestCase
             array('008801799007996', '+8801799007996'),
             array('+6597268955'),
             array('006597268955', '+6597268955'),
+            array('+249912570643'),
+            array('00249912570643', '+249912570643'),
         );
     }
 
@@ -180,6 +182,9 @@ class PhoneNumberTypeTest extends TestCase
             array('+88018295375'),
             array('+65972689550'),
             array('+659726895'),
+            array('+2499125706433'),
+            array('+24991257064'),
+            array('+249812570643'),
         );
     }
 

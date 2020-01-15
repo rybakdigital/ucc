@@ -167,6 +167,7 @@ class PhoneNumberType implements TypeInterface
             '32'    => '/^\+32[1-9][0-9]{7,11}$/',
             '31'    => '/^\+31[1-9][0-9]{8}$/',
             '30'    => '/^\+30[1-7][0-9]{8,9}$/',
+            '249'   => '/^\+249[1,9][0-9]{8}$/',
             '1'     => '/^\+1[2-9][0-9]{9}$/',
         );
 
@@ -304,6 +305,9 @@ class PhoneNumberType implements TypeInterface
             '30' => 'the Greek international numbering plan starts +30, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
+            '249'  => 'the Sudan international numbering plan starts +249, followed'
+                . ' by 1 or 9 and 8 other digits.'
+                . ' Length Min:12 Max:12',
             '1'  => 'the US international numbering plan starts +1, followed'
                 . ' by a digit between 2 and 9.'
                 . ' Length Min:11 Max:11',
