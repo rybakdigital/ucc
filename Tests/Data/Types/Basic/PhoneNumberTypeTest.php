@@ -74,6 +74,9 @@ class PhoneNumberTypeTest extends TestCase
             array('00919600017826', '+919600017826'),
             array('+971552539371'),
             array('00971552539371', '+971552539371'),
+            array('+923139646714'),
+            array('+923332216990'),
+            array('00923139646714', '+923139646714'),
         );
     }
 
@@ -160,6 +163,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+9718525393'),
             array('+971852539371'),
             array('+9718525393712'),
+            array('+9233322169902'),
+            array('+92333221699'),
         );
     }
 
