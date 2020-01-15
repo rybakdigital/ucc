@@ -79,6 +79,8 @@ class PhoneNumberTypeTest extends TestCase
             array('00923139646714', '+923139646714'),
             array('+966503425899'),
             array('00966503425899', '+966503425899'),
+            array('+982126109946'),
+            array('00982126109946', '+982126109946'),
         );
     }
 
@@ -169,6 +171,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+92333221699'),
             array('+9665034258989'),
             array('+96650342589'),
+            array('+9821261099468'),
+            array('+98212610994'),
         );
     }
 

@@ -124,6 +124,7 @@ class PhoneNumberType implements TypeInterface
         $countryNumberPlanRegexArray = array
         (
             '996'   => '/^\+996[3-7][0-9]{8}$/',
+            '98'    => '/^\+98[1-9][0-9]{9}$/',
             '971'   => '/^\+971[1-7,9][0-9]{7,8}$/',
             '966'   => '/^\+966[1-9][0-9]{8}$/',
             '94'    => '/^\+94[0-9]{9}$/',
@@ -171,6 +172,9 @@ class PhoneNumberType implements TypeInterface
         (
             '996'  => 'the Kyrgyzstani international numbering plan starts +996, followed'
                 . ' by a digit between 3 and 7 and 8 other digits.'
+                . ' Length Min:12 Max:12',
+            '98'  => 'the Iranian international numbering plan starts +98, followed'
+                . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:12 Max:12',
             '971'  => 'the United Arabic Emirates international numbering plan starts +971, followed'
                 . ' by the phone number with the leading 0 removed.'
