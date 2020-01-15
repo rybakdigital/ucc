@@ -90,6 +90,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+23411234569'),
             array('+2348033812199'),
             array('002348033812199', '+2348033812199'),
+            array('+201002592204'),
+            array('00201227729272', '+201227729272'),
         );
     }
 
@@ -190,6 +192,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+249812570643'),
             array('+23480338121999'),
             array('+2341123456'),
+            array('+2010025922041'),
+            array('+20100259220'),
         );
     }
 
