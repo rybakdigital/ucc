@@ -102,6 +102,8 @@ class PhoneNumberTypeTest extends TestCase
             array('009747111111', '+9747111111'),
             array('+97455210036'),
             array('0097455210036', '+97455210036'),
+            array('+21676226708'),
+            array('0021676226708', '+21676226708'),
         );
     }
 
@@ -210,6 +212,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+2641212312'),
             array('+974552100364'),
             array('+97455'),
+            array('+216762267084'),
+            array('+216762267'),
         );
     }
 

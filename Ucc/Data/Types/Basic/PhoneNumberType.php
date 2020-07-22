@@ -172,6 +172,7 @@ class PhoneNumberType implements TypeInterface
             '264'   => '/^\+264[1-9][0-9]{7,8}$/',
             '249'   => '/^\+249[1,9][0-9]{8}$/',
             '234'   => '/^\+234[1-9][0-9]{7,9}$/',
+            '216'   => '/^\+216[1-9][0-9]{7}$/',
             '20'    => '/^\+20[1-9][0-9]{9}$/',
             '1'     => '/^\+1[2-9][0-9]{9}$/',
         );
@@ -325,6 +326,9 @@ class PhoneNumberType implements TypeInterface
             '234'  => 'the Nigeria international numbering plan starts +234, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:13',
+            '216'  => 'the Tunisia international numbering plan starts +216, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:11',
             '20'  => 'the Egyptian international numbering plan starts +20, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:12 Max:12',
