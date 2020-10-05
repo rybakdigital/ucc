@@ -134,6 +134,7 @@ class PhoneNumberType implements TypeInterface
             '90'    => '/^\+90[2-5][0-9]{9}$/',
             '880'   => '/^\+880[1-9][0-9]{9}$/',
             '86'    => '/^\+86[1-9][0-9]{8,10}$/',
+            '853'   => '/^\+853[1-9][0-9]{7}$/',
             '852'   => '/^\+852[1-9][0-9]{7}$/',
             '84'    => '/^\+84[1-9][0-9]{7,10}$/',
             '82'    => '/^\+82[1-9][0-9]{7,9}$/',
@@ -217,6 +218,9 @@ class PhoneNumberType implements TypeInterface
             '86'  => 'the Chinese (Mainland) international numbering plan starts +86, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:12 Max:13',
+            '853' => 'the Macau international numbering plan starts +853, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:11',
             '852' => 'the Hong Kong international numbering plan starts +852, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
