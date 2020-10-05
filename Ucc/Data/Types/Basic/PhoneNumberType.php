@@ -132,6 +132,7 @@ class PhoneNumberType implements TypeInterface
             '92'    => '/^\+92[1-9][0-9]{9}$/',
             '91'    => '/^\+91[1-9][0-9]{9}$/',
             '90'    => '/^\+90[2-5][0-9]{9}$/',
+            '886'   => '/^\+886[1-9][0-9]{7,8}$/',
             '880'   => '/^\+880[1-9][0-9]{9}$/',
             '86'    => '/^\+86[1-9][0-9]{8,10}$/',
             '856'   => '/^\+856[1-9][0-9]{7}$/',
@@ -214,7 +215,10 @@ class PhoneNumberType implements TypeInterface
             '90'  => 'the Turkish international numbering plan starts +90, followed'
                 . ' by a digit between 2 and 5 and 9 other digits.'
                 . ' Length Min:12 Max:12',
-            '880'  => 'the 	Bangladeshi international numbering plan starts +880, followed'
+            '886'  => 'the Taiwanese international numbering plan starts +886, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:12',
+            '880'  => 'the Bangladeshi international numbering plan starts +880, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:13 Max:13',
             '86'  => 'the Chinese (Mainland) international numbering plan starts +86, followed'
