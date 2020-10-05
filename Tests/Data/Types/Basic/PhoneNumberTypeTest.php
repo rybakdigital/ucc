@@ -134,6 +134,8 @@ class PhoneNumberTypeTest extends TestCase
             array('0085570561642', '+85570561642'),
             array('+855121234567'),
             array('00855121234567', '+855121234567'),
+            array('+85621222238'),
+            array('0085621222238', '+85621222238'),
         );
     }
 
@@ -259,6 +261,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+853123412345'),
             array('+8557056164'),
             array('+8557056164234'),
+            array('+8562122223'),
+            array('+856212222389'),
         );
     }
 
