@@ -257,7 +257,7 @@ class PhoneNumberTypeTest extends TestCase
             array('+82502123345123'),
             array('+84123123456781'),
             array('+848694213'),
-            array('+86123123123'),
+            array('+8612312312'),
             array('+86123123123456'),
             array('+852580318145'),
             array('+8525803181'),
