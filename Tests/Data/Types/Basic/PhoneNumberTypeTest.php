@@ -224,7 +224,7 @@ class PhoneNumberTypeTest extends TestCase
             array('+97455'),
             array('+216762267084'),
             array('+216762267'),
-            array('+81901790135'),
+            array('+8190179013'),
             array('+81901790135123'),
             array('+810017901351'),
             array('+8250212334'),
