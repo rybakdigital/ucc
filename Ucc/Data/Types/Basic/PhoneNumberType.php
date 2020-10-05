@@ -133,6 +133,7 @@ class PhoneNumberType implements TypeInterface
             '91'    => '/^\+91[1-9][0-9]{9}$/',
             '90'    => '/^\+90[2-5][0-9]{9}$/',
             '880'   => '/^\+880[1-9][0-9]{9}$/',
+            '86'    => '/^\+86[1-9][0-9]{8,10}$/',
             '84'    => '/^\+84[1-9][0-9]{7,10}$/',
             '82'    => '/^\+82[1-9][0-9]{7,9}$/',
             '81'    => '/^\+81[1-9][0-9]{8,9}$/',
@@ -212,6 +213,9 @@ class PhoneNumberType implements TypeInterface
             '880'  => 'the 	Bangladeshi international numbering plan starts +880, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:13 Max:13',
+            '86'  => 'the Chinese (Mainland) international numbering plan starts +86, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:12 Max:13',
             '84'  => 'the Vietnamese international numbering plan starts +84, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:13',
