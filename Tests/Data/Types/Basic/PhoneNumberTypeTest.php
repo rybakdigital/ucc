@@ -104,6 +104,10 @@ class PhoneNumberTypeTest extends TestCase
             array('0097455210036', '+97455210036'),
             array('+21676226708'),
             array('0021676226708', '+21676226708'),
+            array('+81744541234'),
+            array('0081744541234', '+81744541234'),
+            array('+819017901351'),
+            array('00819017901351', '+819017901351'),
         );
     }
 
@@ -214,6 +218,9 @@ class PhoneNumberTypeTest extends TestCase
             array('+97455'),
             array('+216762267084'),
             array('+216762267'),
+            array('+81901790135'),
+            array('+81901790135123'),
+            array('+810017901351'),
         );
     }
 
