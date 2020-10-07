@@ -135,7 +135,7 @@ class PhoneNumberType implements TypeInterface
             '886'   => '/^\+886[1-9][0-9]{7,8}$/',
             '880'   => '/^\+880[1-9][0-9]{9}$/',
             '86'    => '/^\+86[1-9][0-9]{8,10}$/',
-            '856'   => '/^\+856[1-9][0-9]{7}$/',
+            '856'   => '/^\+856[1-9][0-9]{7,9}$/',
             '855'   => '/^\+855[1-9][0-9]{7,8}$/',
             '853'   => '/^\+853[1-9][0-9]{7}$/',
             '852'   => '/^\+852[1-9][0-9]{7}$/',
@@ -226,7 +226,7 @@ class PhoneNumberType implements TypeInterface
                 . ' Length Min:12 Max:13',
             '856' => 'the Laotian international numbering plan starts +856, followed'
                 . ' by the phone number with the leading 0 removed.'
-                . ' Length Min:11 Max:11',
+                . ' Length Min:11 Max:13',
             '855' => 'the Cambodian international numbering plan starts +855, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:12',
