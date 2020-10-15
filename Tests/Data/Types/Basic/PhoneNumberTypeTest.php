@@ -146,6 +146,10 @@ class PhoneNumberTypeTest extends TestCase
             array('0093790000541', '+93790000541'),
             array('+9379123123'),
             array('009379123123', '+9379123123'),
+            array('+95644014'),
+            array('0095644014', '+95644014'),
+            array('+959255524423'),
+            array('00959255524423', '+959255524423'),
         );
     }
 
@@ -277,6 +281,9 @@ class PhoneNumberTypeTest extends TestCase
             array('+8868989132921'),
             array('+937912312'),
             array('+937900005411'),
+            array('+9592555244231'),
+            array('+9564401'),
+            array('+959 564 5330'),
         );
     }
 
