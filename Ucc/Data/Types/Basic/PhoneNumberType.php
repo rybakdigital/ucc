@@ -129,6 +129,7 @@ class PhoneNumberType implements TypeInterface
             '971'   => '/^\+971[1-7,9][0-9]{7,8}$/',
             '966'   => '/^\+966[1-9][0-9]{8}$/',
             '94'    => '/^\+94[0-9]{9}$/',
+            '93'    => '/^\+93[1-9][0-9]{7,8}$/',
             '92'    => '/^\+92[1-9][0-9]{9}$/',
             '91'    => '/^\+91[1-9][0-9]{9}$/',
             '90'    => '/^\+90[2-5][0-9]{9}$/',
@@ -206,6 +207,9 @@ class PhoneNumberType implements TypeInterface
             '94'  => 'the Sri Lankan international numbering plan starts +94, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
+            '93'  => 'the Afghan international numbering plan starts +93, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:10 Max:11',
             '92'  => 'the Pakistani international numbering plan starts +92, followed'
                 . ' by a digit between 1 and 9 and 9 other digits.'
                 . ' Length Min:12 Max:12',
