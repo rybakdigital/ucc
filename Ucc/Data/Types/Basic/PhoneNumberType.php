@@ -128,6 +128,7 @@ class PhoneNumberType implements TypeInterface
             '974'   => '/^\+974[1-9][0-9]{2,7}$/',
             '971'   => '/^\+971[1-7,9][0-9]{7,8}$/',
             '966'   => '/^\+966[1-9][0-9]{8}$/',
+            '965'   => '/^\+965[1-9][0-9]{6,7}$/',
             '964'   => '/^\+964[1-9][0-9]{8,9}$/',
             '963'   => '/^\+963[1-9][0-9]{6,8}$/',
             '962'   => '/^\+962[1-9][0-9]{7,8}$/',
@@ -210,6 +211,9 @@ class PhoneNumberType implements TypeInterface
             '966'  => 'the Saudi Arabia international numbering plan starts +966, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:12 Max:12',
+            '965'  => 'the Kuwaiti international numbering plan starts +965, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:10 Max:11',
             '964'  => 'the Iraqi international numbering plan starts +964, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:12 Max:13',
