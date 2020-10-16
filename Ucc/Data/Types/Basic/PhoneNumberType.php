@@ -123,6 +123,7 @@ class PhoneNumberType implements TypeInterface
         // Ensure they are in order of longest country codes first.
         $countryNumberPlanRegexArray = array
         (
+            '998'   => '/^\+998[1-9][0-9]{8}$/',
             '996'   => '/^\+996[3-7][0-9]{8}$/',
             '995'   => '/^\+995[1-9][0-9]{8}$/',
             '994'   => '/^\+994[1-9][0-9]{8}$/',
@@ -209,6 +210,9 @@ class PhoneNumberType implements TypeInterface
 
         $countryNumberPlanFormatDesc = array
         (
+            '998'  => 'the Uzbek international numbering plan starts +998, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:12 Max:12',
             '996'  => 'the Kyrgyzstani international numbering plan starts +996, followed'
                 . ' by a digit between 3 and 7 and 8 other digits.'
                 . ' Length Min:12 Max:12',
