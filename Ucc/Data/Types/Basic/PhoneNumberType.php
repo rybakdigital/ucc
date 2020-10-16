@@ -126,6 +126,7 @@ class PhoneNumberType implements TypeInterface
             '996'   => '/^\+996[3-7][0-9]{8}$/',
             '98'    => '/^\+98[1-9][0-9]{9}$/',
             '974'   => '/^\+974[1-9][0-9]{2,7}$/',
+            '973'   => '/^\+973[1-9][0-9]{7}$/',
             '972'   => '/^\+972[1-9][0-9]{7,8}$/',
             '971'   => '/^\+971[1-7,9][0-9]{7,8}$/',
             '970'   => '/^\+970[1-9][0-9]{7,8}$/',
@@ -209,6 +210,9 @@ class PhoneNumberType implements TypeInterface
             '974'  => 'the Qatar international numbering plan starts +974, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:6 Max:11',
+            '973'  => 'the Bahraini international numbering plan starts +973, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:11',
             '972'  => 'the Israeli international numbering plan starts +972, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:12',

@@ -186,6 +186,8 @@ class PhoneNumberTypeTest extends TestCase
             array('0097246937176', '+97246937176'),
             array('+972559661631'),
             array('00972559661631', '+972559661631'),
+            array('+97317713000'),
+            array('0097317713000', '+97317713000'),
         );
     }
 
@@ -338,6 +340,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+9705912312345'),
             array('+9724693717'),
             array('+9725112312341'),
+            array('+9737777001'),
+            array('+973777700112'),
         );
     }
 
