@@ -152,6 +152,10 @@ class PhoneNumberTypeTest extends TestCase
             array('00959255524423', '+959255524423'),
             array('+9607820454'),
             array('009607820454', '+9607820454'),
+            array('+96179178175'),
+            array('0096179178175', '+96179178175'),
+            array('+9611972000'),
+            array('009611972000', '+9611972000'),
         );
     }
 
@@ -288,6 +292,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+959 564 5330'),
             array('+96078204541'),
             array('+960782045'),
+            array('+961197200'),
+            array('+961197200012'),
         );
     }
 
