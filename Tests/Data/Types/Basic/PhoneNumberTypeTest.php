@@ -192,6 +192,8 @@ class PhoneNumberTypeTest extends TestCase
             array('009752336699', '+9752336699'),
             array('+97577420997'),
             array('0097577420997', '+97577420997'),
+            array('+97699479636'),
+            array('0097699479636', '+97699479636'),
         );
     }
 
@@ -348,6 +350,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+973777700112'),
             array('+975233669'),
             array('+975774209971'),
+            array('+9769947963'),
+            array('+976994796361'),
         );
     }
 
