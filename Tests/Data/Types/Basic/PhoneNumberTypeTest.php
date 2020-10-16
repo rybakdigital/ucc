@@ -198,6 +198,8 @@ class PhoneNumberTypeTest extends TestCase
             array('0097714123123', '+97714123123'),
             array('+9779852672008'),
             array('009779852672008', '+9779852672008'),
+            array('+992902709339'),
+            array('00992902709339', '+992902709339'),
         );
     }
 
@@ -358,6 +360,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+976994796361'),
             array('+9771412312'),
             array('+97798526720081'),
+            array('+99293827505'),
+            array('+9929382750501'),
         );
     }
 
