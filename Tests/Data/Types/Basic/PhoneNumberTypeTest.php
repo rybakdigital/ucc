@@ -204,6 +204,8 @@ class PhoneNumberTypeTest extends TestCase
             array('0099365555512', '+99365555512'),
             array('+994506149985'),
             array('00994506149985', '+994506149985'),
+            array('+995591403096'),
+            array('00995591403096', '+995591403096'),
         );
     }
 
@@ -370,6 +372,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+993431227271'),
             array('+99450614998'),
             array('+9945061499851'),
+            array('+99559140309'),
+            array('+9955914030961'),
         );
     }
 
