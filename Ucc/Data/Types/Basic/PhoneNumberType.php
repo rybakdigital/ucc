@@ -162,6 +162,7 @@ class PhoneNumberType implements TypeInterface
             '84'    => '/^\+84[1-9][0-9]{7,10}$/',
             '82'    => '/^\+82[1-9][0-9]{7,9}$/',
             '81'    => '/^\+81[1-9][0-9]{8,9}$/',
+            '77'    => '/^\+77[0-9]{9}$/',
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
             '65'    => '/^\+65[1-9][0-9]{7}$/',
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
@@ -325,6 +326,9 @@ class PhoneNumberType implements TypeInterface
             '81'  => 'the Japanese international numbering plan starts +81, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:12',
+            '77'  => 'the Kazakhstani international numbering plan starts +77, followed'
+                . ' by a digit between 0 and 9.'
+                . ' Length Min:11 Max:11',
             '66'  => 'the Thai international numbering plan starts +66, followed'
                 . ' by a digit between 2 and 9.'
                 . ' Length Min:10 Max:11',
