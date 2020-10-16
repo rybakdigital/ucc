@@ -178,6 +178,10 @@ class PhoneNumberTypeTest extends TestCase
             array('00967733089354', '+967733089354'),
             array('+96824231970'),
             array('0096824231970', '+96824231970'),
+            array('+97082854947'),
+            array('0097082854947', '+97082854947'),
+            array('+970591231234'),
+            array('00970591231234', '+970591231234'),
         );
     }
 
@@ -326,6 +330,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+967751254'),
             array('+9677330893541'),
             array('+968244869571'),
+            array('+9708285494'),
+            array('+9705912312345'),
         );
     }
 

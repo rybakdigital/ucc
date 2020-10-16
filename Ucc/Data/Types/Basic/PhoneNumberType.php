@@ -127,6 +127,7 @@ class PhoneNumberType implements TypeInterface
             '98'    => '/^\+98[1-9][0-9]{9}$/',
             '974'   => '/^\+974[1-9][0-9]{2,7}$/',
             '971'   => '/^\+971[1-7,9][0-9]{7,8}$/',
+            '970'   => '/^\+970[1-9][0-9]{7,8}$/',
             '968'   => '/^\+968[1-9][0-9]{7}$/',
             '967'   => '/^\+967[1-9][0-9]{6,8}$/',
             '966'   => '/^\+966[1-9][0-9]{8}$/',
@@ -210,6 +211,9 @@ class PhoneNumberType implements TypeInterface
             '971'  => 'the United Arabic Emirates international numbering plan starts +971, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:9 Max:11',
+            '970'  => 'the Palestinian international numbering plan starts +970, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:11 Max:12',
             '968'  => 'the Omani international numbering plan starts +968, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:11 Max:11',
