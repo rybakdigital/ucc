@@ -125,6 +125,7 @@ class PhoneNumberType implements TypeInterface
         (
             '996'   => '/^\+996[3-7][0-9]{8}$/',
             '98'    => '/^\+98[1-9][0-9]{9}$/',
+            '976'   => '/^\+976[1-9][0-9]{7}$/',
             '975'   => '/^\+975[1-9][0-9]{6,7}$/',
             '974'   => '/^\+974[1-9][0-9]{2,7}$/',
             '973'   => '/^\+973[1-9][0-9]{7}$/',
@@ -206,6 +207,9 @@ class PhoneNumberType implements TypeInterface
                 . ' by a digit between 3 and 7 and 8 other digits.'
                 . ' Length Min:12 Max:12',
             '98'  => 'the Iranian international numbering plan starts +98, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:12 Max:12',
+            '976'  => 'the Mongolian international numbering plan starts +976, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:12 Max:12',
             '975'  => 'the Bhutanese international numbering plan starts +975, followed'
