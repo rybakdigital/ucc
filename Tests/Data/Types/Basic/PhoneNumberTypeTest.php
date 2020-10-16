@@ -168,6 +168,10 @@ class PhoneNumberTypeTest extends TestCase
             array('009647811575763', '+9647811575763'),
             array('+964781157576'),
             array('00964781157576', '+964781157576'),
+            array('+9651888666'),
+            array('009651888666', '+9651888666'),
+            array('+96523983824'),
+            array('0096523983824', '+96523983824'),
         );
     }
 
@@ -311,6 +315,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+963655555'),
             array('+9631422201234'),
             array('+96479033168601'),
+            array('+965239838241'),
+            array('+965188866'),
         );
     }
 
