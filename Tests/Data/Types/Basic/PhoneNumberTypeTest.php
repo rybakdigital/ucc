@@ -236,6 +236,8 @@ class PhoneNumberTypeTest extends TestCase
             array('0050422306636', '+50422306636'),
             array('+50557428034'),
             array('0050557428034', '+50557428034'),
+            array('+50622966165'),
+            array('0050622966165', '+50622966165'),
         );
     }
 
@@ -433,6 +435,8 @@ class PhoneNumberTypeTest extends TestCase
             array('+503748375311'),
             array('+505574280341'),
             array('+5055742803'),
+            array('+506869723221'),
+            array('+5068697232'),
         );
     }
 
