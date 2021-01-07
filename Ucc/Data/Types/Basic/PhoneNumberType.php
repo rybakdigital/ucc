@@ -166,6 +166,7 @@ class PhoneNumberType implements TypeInterface
             '77'    => '/^\+77[0-9]{9}$/',
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
             '65'    => '/^\+65[1-9][0-9]{7}$/',
+            '595'   => '/^\+595[1-9][0-9]{4,9}$/',
             '594'   => '/^\+594[1-9][0-9]{7,8}$/',
             '593'   => '/^\+593[1-9][0-9]{7,8}$/',
             '592'   => '/^\+592[1-9][0-9]{6}$/',
@@ -362,6 +363,9 @@ class PhoneNumberType implements TypeInterface
             '65'  => 'the Singapore international numbering plan starts +65, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:10',
+            '595' => 'the Paraguayan international numbering plan starts +595, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:5 Max:10',
             '594' => 'the Guianan international numbering plan starts +594, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:8 Max:9',
