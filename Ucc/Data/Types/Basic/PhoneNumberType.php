@@ -166,6 +166,7 @@ class PhoneNumberType implements TypeInterface
             '77'    => '/^\+77[0-9]{9}$/',
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
             '65'    => '/^\+65[1-9][0-9]{7}$/',
+            '53'    => '/^\+53[1-9][0-9]{4,10}$/',
             '52'    => '/^\+52[1-9][0-9]{5,9}$/',
             '51'    => '/^\+51[1-9][0-9]{6,10}$/',
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
@@ -341,6 +342,9 @@ class PhoneNumberType implements TypeInterface
             '65'  => 'the Singapore international numbering plan starts +65, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:10',
+            '53' => 'the Cuban international numbering plan starts +53, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:5 Max:11',
             '52' => 'the Mexican international numbering plan starts +52, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:6 Max:10',
