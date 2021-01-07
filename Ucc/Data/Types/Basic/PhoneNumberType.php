@@ -174,6 +174,7 @@ class PhoneNumberType implements TypeInterface
             '53'    => '/^\+53[1-9][0-9]{4,10}$/',
             '52'    => '/^\+52[1-9][0-9]{5,9}$/',
             '51'    => '/^\+51[1-9][0-9]{6,10}$/',
+            '502'   => '/^\+502[1-9][0-9]{7}$/',
             '501'   => '/^\+501[1-9][0-9]{6}$/',
             '500'   => '/^\+500[1-9][0-9]{4}$/',
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
@@ -373,6 +374,9 @@ class PhoneNumberType implements TypeInterface
             '51' => 'the Peruvian international numbering plan starts +51, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:7 Max:11',
+            '502' => 'the Guatemalan international numbering plan starts +502, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
             '501' => 'the Belizean international numbering plan starts +501, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:7 Max:7',
