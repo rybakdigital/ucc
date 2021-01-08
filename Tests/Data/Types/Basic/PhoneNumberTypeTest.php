@@ -436,7 +436,7 @@ class PhoneNumberTypeTest extends TestCase
             array('+99861444220'),
             array('+9986144422031'),
             array('+5112345'),
-            array('+5196068816155'),
+            array('+51960688161551'),
             array('+5280046'),
             array('+5255526530001'),
             array('+53534286121235'),
