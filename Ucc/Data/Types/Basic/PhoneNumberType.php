@@ -166,6 +166,34 @@ class PhoneNumberType implements TypeInterface
             '77'    => '/^\+77[0-9]{9}$/',
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
             '65'    => '/^\+65[1-9][0-9]{7}$/',
+            '599'   => '/^\+599[1-9][0-9]{6,7}$/',
+            '598'   => '/^\+598[1-9][0-9]{7}$/',
+            '597'   => '/^\+597[1-9][0-9]{5,6}$/',
+            '596'   => '/^\+596[1-9][0-9]{8}$/',
+            '595'   => '/^\+595[1-9][0-9]{4,9}$/',
+            '594'   => '/^\+594[1-9][0-9]{7,8}$/',
+            '593'   => '/^\+593[1-9][0-9]{7,8}$/',
+            '592'   => '/^\+592[1-9][0-9]{6}$/',
+            '591'   => '/^\+591[1-9][0-9]{7}$/',
+            '590'   => '/^\+590[1-9][0-9]{8}$/',
+            '58'    => '/^\+58[1-9][0-9]{9}$/',
+            '57'    => '/^\+57[1-9][0-9]{5,11}$/',
+            '56'    => '/^\+56[1-9][0-9]{7,9}$/',
+            '55'    => '/^\+55[1-9][0-9]{9,10}$/',
+            '54'    => '/^\+54[1-9][0-9]{6,11}$/',
+            '53'    => '/^\+53[1-9][0-9]{4,10}$/',
+            '52'    => '/^\+52[1-9][0-9]{5,9}$/',
+            '51'    => '/^\+51[1-9][0-9]{6,10}$/',
+            '509'   => '/^\+509[1-9][0-9]{7}$/',
+            '508'   => '/^\+508[1-9][0-9]{5}$/',
+            '507'   => '/^\+507[1-9][0-9]{6,7}$/',
+            '506'   => '/^\+506[1-9][0-9]{7}$/',
+            '505'   => '/^\+505[1-9][0-9]{7}$/',
+            '504'   => '/^\+504[1-9][0-9]{6,7}$/',
+            '503'   => '/^\+503[1-9][0-9]{7}$/',
+            '502'   => '/^\+502[1-9][0-9]{7}$/',
+            '501'   => '/^\+501[1-9][0-9]{6}$/',
+            '500'   => '/^\+500[1-9][0-9]{4}$/',
             '49'    => '/^\+49[1-9][0-9]{2,11}$/',
             '48'    => '/^\+48[1-9][0-9]{8}$/',
             '47'    => '/^\+47[2-3,5-9][0-9]{7,11}$/',
@@ -339,6 +367,90 @@ class PhoneNumberType implements TypeInterface
             '65'  => 'the Singapore international numbering plan starts +65, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:10',
+            '599' => 'the Curacao and the Caribbean Netherlands international numbering plan starts +599, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:8',
+            '598' => 'the Uruguayan international numbering plan starts +598, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
+            '597' => 'the Surinamese international numbering plan starts +597, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:6 Max:7',
+            '596' => 'the Martinican international numbering plan starts +596, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:9',
+            '595' => 'the Paraguayan international numbering plan starts +595, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:5 Max:10',
+            '594' => 'the Guianan international numbering plan starts +594, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:9',
+            '593' => 'the Ecuadorian international numbering plan starts +593, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:9',
+            '592' => 'the Guyanese international numbering plan starts +592, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:7',
+            '591' => 'the Bolivian international numbering plan starts +591, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
+            '590' => 'the international numbering plan for Guadeloupe, Saint-Barthélemy and Saint-Martin starts +590, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:9',
+            '58' => 'the Venezuelan international numbering plan starts +58, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:10 Max:10',
+            '57' => 'the Colombian international numbering plan starts +57, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:6 Max:12',
+            '56' => 'the Chilean international numbering plan starts +56, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:10',
+            '55' => 'the Brazilian international numbering plan starts +55, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:10 Max:11',
+            '54' => 'the Argentinian international numbering plan starts +54, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:12',
+            '53' => 'the Cuban international numbering plan starts +53, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:5 Max:11',
+            '52' => 'the Mexican international numbering plan starts +52, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:6 Max:10',
+            '51' => 'the Peruvian international numbering plan starts +51, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:11',
+            '509' => 'the Haitian international numbering plan starts +509, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
+            '508' => 'the Saint-Pierrais international numbering plan starts +508, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:6 Max:6',
+            '507' => 'the Panamanian international numbering plan starts +507, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:8',
+            '506' => 'the Costa Rican international numbering plan starts +506, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
+            '505' => 'the Nicaraguan international numbering plan starts +505, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
+            '504' => 'the Honduran international numbering plan starts +504, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:8',
+            '503' => 'the Salvadorian international numbering plan starts +503, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
+            '502' => 'the Guatemalan international numbering plan starts +502, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:8 Max:8',
+            '501' => 'the Belizean international numbering plan starts +501, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:7',
+            '500' => 'the Falkland Islands international numbering plan starts +500, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:5 Max:5',
             '49' => 'the German international numbering plan starts +49, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:5 Max:14',
