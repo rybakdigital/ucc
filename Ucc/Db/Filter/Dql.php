@@ -65,7 +65,10 @@ class Dql
                 if ($criterion->value() == 'true' || $criterion->value() == 1) {
                     $expr = $qb->expr()->orX(
                         $qb->expr()->eq($criterion->key(), $criterion->value()),
-                        $qb->expr()->isNotNull($criterion->key())
+                        $expr = $qb->expr()->andX(
+                            $qb->expr()->isNotNull($criterion->key()),
+                            $qb->expr()->neq($criterion->key(), 0) // not NULL and not 0
+                        )
                     );
                 } elseif ($criterion->value() == 'false' || $criterion->value() == 0) {
                     $expr = $qb->expr()->orX(
