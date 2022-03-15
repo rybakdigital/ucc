@@ -175,19 +175,19 @@ class Sql
         {
             case 'inc': // includes
                 $op         = 'LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'ninc': // does not include
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'inci': // includes (case insensitive)
                 $op         = 'LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
             case 'ninci': // does not include (case insensitive)
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
         }
 
@@ -231,19 +231,19 @@ class Sql
         {
             case 'begins': // begins with
                 $op         = 'LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'nbegins': // does not begin with
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'beginsi': // begins with (case insensitive)
                 $op         = 'LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
             case 'nbeginsi': // does not begin with (case insensitive)
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
         }
 
@@ -316,19 +316,19 @@ class Sql
         {
             case 'in':
                 $op         = 'IN';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'nin':
                 $op         = 'NOT IN';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'ini':
                 $op         = 'IN';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
             case 'nini':
                 $op         = 'NOT IN';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
         }
 
