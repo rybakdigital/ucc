@@ -76,7 +76,7 @@ class Filter
         $params     = array();
 
         foreach ($filters as $i => $filter) {
-            $clause = self::filterToSqlClause($filter, $fieldMap = array(), $i . '_filter');
+            $clause = self::filterToSqlClause($filter, $fieldMap, $i . '_filter');
 
             if (!empty($sql)) {
                 $sql .= ' ' . strtoupper($filter->getLogic()) . ' ';
