@@ -520,7 +520,7 @@ class Sql
      * @param boolean   $singleTable    Marker to indicate single table queries.
      * @return  string
      */
-    public static function getFilterSql($filters = array(), $fieldMap = array(), $singleTable = false)
+    public static function getFilterSql($filters = array(), $fieldMap = array(), $singleTable = false, $collation = NULL)
     {
         $ret            = array('paramiters' => array());
         $havingFilters  = array();
@@ -567,8 +567,8 @@ class Sql
             $whereFilters[$i . '_w']   = $whereFilter;
         }
 
-        $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap);
-        $having = Filter::filtersToSqlClause($havingFilters, $fieldMap);
+        $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap, $collation);
+        $having = Filter::filtersToSqlClause($havingFilters, $fieldMap, $collation);
 
         $whereStatemet      = $where->getStatement();
         $havingStatement    = $having->getStatement();
