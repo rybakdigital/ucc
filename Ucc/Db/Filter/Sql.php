@@ -15,6 +15,17 @@ use \InvalidArgumentException;
  */
 class Sql
 {
+    public const COLLATION_UTF8_BIN             = 'utf8_bin';
+    public const COLLATION_UTF8_GENERAL_CI      = 'utf8_general_ci';
+    public const COLLATION_UTF8MB4_BIN          = 'utf8mb4_bin';
+    public const COLLATION_UTF8MB4_GENERAL_CI   = 'utf8mb4_general_ci';
+
+    public const COLLATION_TYPE_UTF8            = 'utf8';
+    public const COLLATION_TYPE_UTF8MB4         = 'utf8mb4';
+
+    public const COLLATION_TYPE_CHARSET_BIN     = 'bin';
+    public const COLLATION_TYPE_CHARSET_CI      = 'general_ci';
+
     /**
      * Turns Criterion into Sql Clause
      */
@@ -58,19 +69,19 @@ class Sql
         {
             case 'eq':
                 $op         = '=';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'ne':
                 $op         = '!=';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN);
                 break;
             case 'eqi':
                 $op         = '=';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
             case 'nei':
                 $op         = '!=';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI);
                 break;
         }
 
@@ -628,4 +639,35 @@ class Sql
         return $ret;
     }
 
+    /**
+     * Get collation based on db collation type
+     *
+     * @param string $charSet   Preferred char set
+     * @param string $type      Database collation type
+     * @return string Collation charset
+     */
+    public static function getCollationCharset(string $charSet, string $type = NULL)
+    {
+        switch ($charSet) {
+            case self::COLLATION_TYPE_CHARSET_BIN:
+                if ($type == self::COLLATION_TYPE_UTF8MB4) {
+                    return self::COLLATION_UTF8MB4_BIN;
+                }
+
+                return self::COLLATION_UTF8_BIN;
+                break;
+
+            case self::COLLATION_TYPE_CHARSET_CI:
+                if ($type == self::COLLATION_TYPE_UTF8MB4) {
+                    return self::COLLATION_UTF8MB4_GENERAL_CI;
+                }
+
+                return self::COLLATION_UTF8_GENERAL_CI;
+                break;
+
+            default:
+                return self::COLLATION_UTF8_BIN;
+                break;
+        }
+    }
 }
