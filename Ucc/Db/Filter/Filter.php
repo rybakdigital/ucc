@@ -25,7 +25,7 @@ class Filter
      * @param string    $namespace  Prefix for query placeholders
      * @return Ucc\Data\Filter\Clause\Clause
      */
-    public static function filterToSqlClause($filter, $fieldMap = array(), $namespace = 'filter')
+    public static function filterToSqlClause($filter, $fieldMap = array(), $namespace = 'filter', $collation = NULL)
     {
         // Default return values
         $sqlClause  = new Clause;
@@ -38,7 +38,7 @@ class Filter
             $placeHolder = $namespace . '_' . $i;
 
             // Turn each Criterion into Clause
-            $clause = self::criterionToSqlClause($criterion, $placeHolder, $fieldMap);
+            $clause = self::criterionToSqlClause($criterion, $placeHolder, $fieldMap, $collation);
 
             // Remove logic operand for first statement
             if (empty($sql)) {
@@ -68,7 +68,7 @@ class Filter
      * @param string    $namespace  Prefix for query placeholders
      * @return Ucc\Data\Filter\Clause\Clause
      */
-    public static function filtersToSqlClause(array $filters, $fieldMap = array())
+    public static function filtersToSqlClause(array $filters, $fieldMap = array(), $collation = NULL)
     {
         // Default return values
         $sqlClause  = new Clause;
@@ -76,7 +76,7 @@ class Filter
         $params     = array();
 
         foreach ($filters as $i => $filter) {
-            $clause = self::filterToSqlClause($filter, $fieldMap, $i . '_filter');
+            $clause = self::filterToSqlClause($filter, $fieldMap, $i . '_filter', $collation);
 
             if (!empty($sql)) {
                 $sql .= ' ' . strtoupper($filter->getLogic()) . ' ';
@@ -139,12 +139,16 @@ class Filter
      *
      * @return Ucc\Data\Filter\Clause\Clause | false
      */
-    public static function criterionToSqlClause(Criterion $criterion, $placeHolder = 'filter', $fieldMap = array())
-    {
+    public static function criterionToSqlClause(
+        Criterion $criterion,
+        $placeHolder = 'filter',
+        $fieldMap = array(),
+        $collation = NULL
+    ) {
         $method = self::criterionOperandToMethod($criterion) . 'Clause';
 
         if (method_exists('Ucc\Db\Filter\Sql', $method)) {
-            return Sql::$method($criterion, $placeHolder, $fieldMap);
+            return Sql::$method($criterion, $placeHolder, $fieldMap, $collation);
         }
 
         return false;

@@ -15,6 +15,17 @@ use \InvalidArgumentException;
  */
 class Sql
 {
+    public const COLLATION_UTF8_BIN             = 'utf8_bin';
+    public const COLLATION_UTF8_GENERAL_CI      = 'utf8_general_ci';
+    public const COLLATION_UTF8MB4_BIN          = 'utf8mb4_bin';
+    public const COLLATION_UTF8MB4_GENERAL_CI   = 'utf8mb4_general_ci';
+
+    public const COLLATION_TYPE_UTF8            = 'utf8';
+    public const COLLATION_TYPE_UTF8MB4         = 'utf8mb4';
+
+    public const COLLATION_TYPE_CHARSET_BIN     = 'bin';
+    public const COLLATION_TYPE_CHARSET_CI      = 'general_ci';
+
     /**
      * Turns Criterion into Sql Clause
      */
@@ -46,9 +57,14 @@ class Sql
      * @param   Criterion   $criterion      Criterion to process
      * @param   string      $placeHolder    Placeholder for parameter name
      * @param   array       $fieldMap       Array representing field map
+     * @param   string      $collationType  Collation type. Either utf8 or utf8mb4. Default: utf8
      */
-    public static function criterionToDirectClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
-    {
+    public static function criterionToDirectClause(
+        Criterion $criterion,
+        $placeHolder = 'filter_0',
+        $fieldMap = array(),
+        $collationType = self::COLLATION_TYPE_UTF8
+    ) {
         // Create local operand and collate
         $op         = false;
         $collate    = false;
@@ -58,19 +74,19 @@ class Sql
         {
             case 'eq':
                 $op         = '=';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'ne':
                 $op         = '!=';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'eqi':
                 $op         = '=';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
             case 'nei':
                 $op         = '!=';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
         }
 
@@ -152,9 +168,14 @@ class Sql
      * @param   Criterion   $criterion      Criterion to process
      * @param   string      $placeHolder    Placeholder for parameter name
      * @param   array       $fieldMap       Array representing field map
+     * @param   string      $collationType  Collation type. Either utf8 or utf8mb4. Default: utf8
      */
-    public static function criterionToContainsClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
-    {
+    public static function criterionToContainsClause(
+        Criterion $criterion,
+        $placeHolder = 'filter_0',
+        $fieldMap = array(),
+        $collationType = self::COLLATION_TYPE_UTF8
+    ) {
         // Create local operand and collate
         $op         = false;
         $collate    = false;
@@ -164,19 +185,19 @@ class Sql
         {
             case 'inc': // includes
                 $op         = 'LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'ninc': // does not include
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'inci': // includes (case insensitive)
                 $op         = 'LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
             case 'ninci': // does not include (case insensitive)
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
         }
 
@@ -208,9 +229,14 @@ class Sql
      * @param   Criterion   $criterion      Criterion to process
      * @param   string      $placeHolder    Placeholder for parameter name
      * @param   array       $fieldMap       Array representing field map
+     * @param   string      $collationType  Collation type. Either utf8 or utf8mb4. Default: utf8
      */
-    public static function criterionToBeginsClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
-    {
+    public static function criterionToBeginsClause(
+        Criterion $criterion,
+        $placeHolder = 'filter_0',
+        $fieldMap = array(),
+        $collationType = self::COLLATION_TYPE_UTF8
+    ) {
         // Create local operand and collate
         $op         = false;
         $collate    = false;
@@ -220,19 +246,19 @@ class Sql
         {
             case 'begins': // begins with
                 $op         = 'LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'nbegins': // does not begin with
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'beginsi': // begins with (case insensitive)
                 $op         = 'LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
             case 'nbeginsi': // does not begin with (case insensitive)
                 $op         = 'NOT LIKE';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
         }
 
@@ -293,9 +319,14 @@ class Sql
      * @param   Criterion   $criterion      Criterion to process
      * @param   string      $placeHolder    Placeholder for parameter name
      * @param   array       $fieldMap       Array representing field map
+     * @param   string      $collationType  Collation type. Either utf8 or utf8mb4. Default: utf8
      */
-    public static function criterionToInClause(Criterion $criterion, $placeHolder = 'filter_0', $fieldMap = array())
-    {
+    public static function criterionToInClause(
+        Criterion $criterion,
+        $placeHolder = 'filter_0',
+        $fieldMap = array(),
+        $collationType = self::COLLATION_TYPE_UTF8
+    ) {
         // Create local operand and collate
         $op         = false;
         $collate    = false;
@@ -305,19 +336,19 @@ class Sql
         {
             case 'in':
                 $op         = 'IN';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'nin':
                 $op         = 'NOT IN';
-                $collate    = 'utf8_bin';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_BIN, $collationType);
                 break;
             case 'ini':
                 $op         = 'IN';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
             case 'nini':
                 $op         = 'NOT IN';
-                $collate    = 'utf8_general_ci';
+                $collate    = self::getCollationCharset(self::COLLATION_TYPE_CHARSET_CI, $collationType);
                 break;
         }
 
@@ -489,7 +520,7 @@ class Sql
      * @param boolean   $singleTable    Marker to indicate single table queries.
      * @return  string
      */
-    public static function getFilterSql($filters = array(), $fieldMap = array(), $singleTable = false)
+    public static function getFilterSql($filters = array(), $fieldMap = array(), $singleTable = false, $collation = NULL)
     {
         $ret            = array('paramiters' => array());
         $havingFilters  = array();
@@ -536,8 +567,8 @@ class Sql
             $whereFilters[$i . '_w']   = $whereFilter;
         }
 
-        $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap);
-        $having = Filter::filtersToSqlClause($havingFilters, $fieldMap);
+        $where  = Filter::filtersToSqlClause($whereFilters, $fieldMap, $collation);
+        $having = Filter::filtersToSqlClause($havingFilters, $fieldMap, $collation);
 
         $whereStatemet      = $where->getStatement();
         $havingStatement    = $having->getStatement();
@@ -628,4 +659,35 @@ class Sql
         return $ret;
     }
 
+    /**
+     * Get collation based on db collation type
+     *
+     * @param string $charSet   Preferred char set
+     * @param string $type      Database collation type
+     * @return string Collation charset
+     */
+    public static function getCollationCharset(string $charSet, string $type = NULL)
+    {
+        switch ($charSet) {
+            case self::COLLATION_TYPE_CHARSET_BIN:
+                if ($type == self::COLLATION_TYPE_UTF8MB4) {
+                    return self::COLLATION_UTF8MB4_BIN;
+                }
+
+                return self::COLLATION_UTF8_BIN;
+                break;
+
+            case self::COLLATION_TYPE_CHARSET_CI:
+                if ($type == self::COLLATION_TYPE_UTF8MB4) {
+                    return self::COLLATION_UTF8MB4_GENERAL_CI;
+                }
+
+                return self::COLLATION_UTF8_GENERAL_CI;
+                break;
+
+            default:
+                return self::COLLATION_UTF8_BIN;
+                break;
+        }
+    }
 }

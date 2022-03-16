@@ -22,8 +22,9 @@ class Query extends Clause
      *                                          query to work.
      * @param   array               $options    Array of options to pass to query.
      * @param   array               $fieldMap   Field map to use when building the query.
+     * @param   string              $collation  DB collation. Either utf8 or utf8mb4. Default: utf8
      */
-    public static function expandSimpleQuery(Query $query, $options = array(), $fieldMap = array())
+    public static function expandSimpleQuery(Query $query, $options = array(), $fieldMap = array(), $collation = NULL)
     {
         // Get SQL statement, we will work arround it
         // Remove white space from SQL
@@ -41,7 +42,7 @@ class Query extends Clause
             }
 
             $method = 'get' . ucfirst($option) . 'Sql';
-            $clauses[$option] = SQL::$method($optionSettings, $fieldMap);
+            $clauses[$option] = SQL::$method($optionSettings, $fieldMap, false, $collation);
         }
 
         // Import parameters from filter
