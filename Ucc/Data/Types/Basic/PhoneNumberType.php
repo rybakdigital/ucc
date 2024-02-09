@@ -123,7 +123,6 @@ class PhoneNumberType implements TypeInterface
         // Ensure they are in order of longest country codes first.
         $countryNumberPlanRegexArray = array
         (
-            '62'   => '/^\+62[1-9][0-9]{6,12}$/',
             '998'   => '/^\+998[1-9][0-9]{8}$/',
             '996'   => '/^\+996[3-7][0-9]{8}$/',
             '995'   => '/^\+995[1-9][0-9]{8}$/',
@@ -167,6 +166,8 @@ class PhoneNumberType implements TypeInterface
             '77'    => '/^\+77[0-9]{9}$/',
             '66'    => '/^\+66[2-9][0-9]{7,8}$/',
             '65'    => '/^\+65[1-9][0-9]{7}$/',
+            '62'   => '/^\+62[1-9][0-9]{6,12}$/',
+            '60'   => '/^\+60[0-9]{9,10}$/',
             '599'   => '/^\+599[1-9][0-9]{6,7}$/',
             '598'   => '/^\+598[1-9][0-9]{7}$/',
             '597'   => '/^\+597[1-9][0-9]{5,6}$/',
@@ -239,9 +240,6 @@ class PhoneNumberType implements TypeInterface
 
         $countryNumberPlanFormatDesc = array
         (
-            '62'  => 'the Indonesian international numbering plan starts +62, followed'
-                . ' by the phone number with the leading 0 removed.'
-                . ' Length Min:7 Max:13',
             '998'  => 'the Uzbek international numbering plan starts +998, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:12 Max:12',
@@ -371,6 +369,12 @@ class PhoneNumberType implements TypeInterface
             '65'  => 'the Singapore international numbering plan starts +65, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:10 Max:10',
+            '62'  => 'the Indonesian international numbering plan starts +62, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:7 Max:13',
+            '60'  => 'the Malaysian international numbering plan starts +60, followed'
+                . ' by the phone number with the leading 0 removed.'
+                . ' Length Min:9 Max:10',
             '599' => 'the Curacao and the Caribbean Netherlands international numbering plan starts +599, followed'
                 . ' by the phone number with the leading 0 removed.'
                 . ' Length Min:7 Max:8',
